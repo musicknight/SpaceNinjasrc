@@ -292,6 +292,7 @@ public class UltimoBoss extends Boss {
 		if(_counter4 == 165) {
 			_yvelocity = 0;
 			_counter3 = 0;
+			_y = 125;
 			_attack1 = false;
 			_rate2 = 3;
 		}
@@ -330,6 +331,7 @@ public class UltimoBoss extends Boss {
 		if(_counter4 >= 98 && _x >= 645){
 			_x = 645;
 			_rate2 = 3;
+			_y = 125;
 			_xvelocity = 0;
 			_attack2 = false;
 			_counter3 = 0;
@@ -385,6 +387,7 @@ public class UltimoBoss extends Boss {
 			_gattack1 = false;
 			_gatk1count = 0;
 			_counter3 = 0;
+			_y = 125;
 			_rate2 = 3;
 		}
 	}
@@ -438,6 +441,7 @@ public class UltimoBoss extends Boss {
 		if(_counter4 == 100) {
 			_stunned = false;
 			TheGame._character1.setCanAct(true);	
+			_y = 125;
 			_gattack2 = false;
 			_counter3 = 0;
 			_rate2 = 3;
@@ -726,6 +730,7 @@ public class UltimoBoss extends Boss {
 			_rate2 = 3;
 		}
 		if(_counter4 == 400) {
+			_y = 125;
 			_counter3 = 0;
 			_yattack2 = false;
 		}
