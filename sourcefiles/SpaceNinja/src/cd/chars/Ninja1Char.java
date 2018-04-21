@@ -89,6 +89,7 @@ public class Ninja1Char extends CDCharacter {
 		if(_skin.equals("skull") && _lives == 1) {
 			_starcd = 15;
 		}
+		
 	}
 
 	@Override

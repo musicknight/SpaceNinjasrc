@@ -22,6 +22,7 @@ public class TootBoss extends Boss {
 		_staticimage = new Image("tootboss/1.png");
 		_counter2 = -20;
 		_immune = true;
+		
 	}
 	
 	public void render(GraphicsContext gc) {

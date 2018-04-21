@@ -35,6 +35,7 @@ import cd.bosses.SkullBoss;
 import cd.bosses.SpikeBoss;
 import cd.bosses.SpikeBoss2;
 import cd.bosses.TootBoss;
+import cd.bosses.TootBoss2;
 import cd.bosses.TwinsBoss;
 import cd.bosses.UltimoBoss;
 import cd.chars.Ninja1Char;
@@ -110,7 +111,7 @@ public class TheGame extends Application {
 	public static CDCharacter _character1;
 	private String _skin;
 	public static Boss _boss;
-	private boolean _bossspawned;
+	public static boolean _bossspawned;
 	public static Place _place;
 	private static Canvas _canvas = new Canvas(900, 600);
 	
@@ -125,7 +126,7 @@ public class TheGame extends Application {
 	public static List<Platform> _platforms = new ArrayList<Platform>();
 	public static List<Backdrop> _backdrops = new ArrayList<Backdrop>();
 	public static List<Backdrop> _frontdrops = new ArrayList<Backdrop>();
-	private Image _scroll = new Image("scroll/space.png");
+	private static Image _scroll = new Image("scroll/space.png");
 	private int _scrollc = 0;
 	private boolean _charpicked = false;
 	private boolean _bosspicked = false;
@@ -175,17 +176,17 @@ public class TheGame extends Application {
 	
 	private Button _ultimo = new Button("fight");
 	
-	private String _beattoot;
-	private String _beatswurli;
-	private String _beatcrush;
-	private String _beatspiball;
-	private String _beatlaser;
-	private String _beatcrunch;
-	private String _beatdroth;
-	private String _beatcranius;
-	private String _beatcandm;
-	private String _beatspiball2;
-	private String _beatnero;
+	private static String _beattoot;
+	private static String _beatswurli;
+	private static String _beatcrush;
+	private static String _beatspiball;
+	private static String _beatlaser;
+	private static String _beatcrunch;
+	private static String _beatdroth;
+	private static String _beatcranius;
+	private static String _beatcandm;
+	private static String _beatspiball2;
+	private static String _beatnero;
 	public static  String _1stultimo;
 	public static String _beatultimo;
 	
@@ -242,6 +243,7 @@ public class TheGame extends Application {
 			_beatspiball2 = read(reader);
 			_beatnero = read(reader);
 			_1stultimo = read(reader);
+			_beatultimo = read(reader);
 			reader.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -280,7 +282,13 @@ public class TheGame extends Application {
 		if(_beatnero == null) {
 			_beatnero = "f";
 		}
-		
+		if(_1stultimo == null) {
+			_1stultimo = "f";
+		}
+		if(_beatultimo == null) {
+			_beatultimo = "f";
+		}
+		writeData();
 		// character selection screen
 
 		// _player1picked = true;
@@ -744,7 +752,7 @@ if(!_beatcandm.equals("t")){
 				} else {
 					_gc.drawImage(new Image("text/lose.png"), 297, 215);
 				}
-				if(_boss.getHealth() == 0) {
+				if(_boss.getHealth() == 0 && !_boss.getID().equals("ultimoboss") && !_boss.getID().equals("tootboss2")) {
 					_gc.drawImage(new Image("text/win.png"), 284, 215);
 				}
 				String bosshealth = ("" + _boss.getHealth());
@@ -868,6 +876,7 @@ public void handleKeyRelease(KeyEvent event) {
 		_charpicked = false;
 		_bosspicked = false;
 		_character1 = null;
+		_scroll = new Image("scroll/space.png");
 		if(_boss.isDead()){
 		if(_boss.getID().equals("tootboss")){
 			if(_beattoot.equals("f")){
@@ -982,6 +991,7 @@ public void handleKeyRelease(KeyEvent event) {
 			write(writer, _beatspiball2);
 			write(writer, _beatnero);
 			write(writer, _1stultimo);
+			write(writer, _beatultimo);
 			writer.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -1187,13 +1197,18 @@ public void handleButtonPress(MouseEvent click) {
 		playStageSong("/songs/nero.mp3");
 	}
 	if(click.getSource().equals(_ultimo)) {
+		if(!_beatultimo.equals("t")){
 		_boss = new UltimoBoss(_1stultimo);
-		_bosspicked = true;
 		if(_1stultimo.equals("f")){
-		playStageSong("/songs/ultimointro.mp3");
+			playStageSong("/songs/ultimointro.mp3");
+			} else {
+			playStageSong("/songs/ultimo.mp3");
+			}
 		} else {
-		playStageSong("/songs/ultimo.mp3");
+		_boss = new TootBoss2();
 		}
+		_bosspicked = true;
+		
 	}
 	
 	
@@ -1213,6 +1228,7 @@ public void handleButtonPress(MouseEvent click) {
 		_charpicked = false;
 		_bosspicked = false;
 		_character1 = null;
+		_scroll = new Image("scroll/space.png");
 		try {
 			_player.stop();
 		} catch (BasicPlayerException e1) {
@@ -1335,6 +1351,7 @@ public void handleButtonPress(MouseEvent click) {
 			write(writer, _beatspiball2);
 			write(writer, _beatnero);
 			write(writer, _1stultimo);
+			write(writer, _beatultimo);
 			writer.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -1370,7 +1387,7 @@ public static void clearHitboxes(String ID, Entity c) {
 	}
 }
 
-public void write(BufferedWriter writer, String s) 
+public static void write(BufferedWriter writer, String s) 
 		  throws IOException {
 		    
 		    writer.write(s);
@@ -1392,6 +1409,34 @@ public String read(BufferedReader reader)throws IOException {
 
 public static void endUDialogue() {
 	_1stultimo = "t";
+}
+
+public static void setScroll(Image i) {
+	_scroll = i;
+}
+
+public static void writeData() {
+	BufferedWriter writer = null;
+	try {
+		writer = new BufferedWriter(new FileWriter("data.txt"));
+		write(writer, _beattoot);
+		write(writer, _beatswurli);
+		write(writer, _beatcrush);
+		write(writer, _beatspiball);
+		write(writer, _beatlaser);
+		write(writer, _beatcrunch);
+		write(writer, _beatdroth);
+		write(writer, _beatcranius);
+		write(writer, _beatcandm);
+		write(writer, _beatspiball2);
+		write(writer, _beatnero);
+		write(writer, _1stultimo);
+		write(writer, _beatultimo);
+		writer.close();
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 }
 
 }

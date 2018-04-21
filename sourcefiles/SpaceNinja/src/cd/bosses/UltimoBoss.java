@@ -46,6 +46,8 @@ public class UltimoBoss extends Boss {
 	private boolean _yattack2;
 	private boolean _1sttime;
 	private int _text = 1;
+	private boolean _over;
+	private boolean _songstopped;
 	
 	public UltimoBoss(String b) {
 		super(900, 600, "ultimoboss");
@@ -117,7 +119,7 @@ public class UltimoBoss extends Boss {
 			_counter2 = -20;
 			}
 		}
-		if(_counter2 == 0 && !_dead && !_1sttime) {
+		if(_counter2 == 0 && !_dead && !_1sttime && !_over) {
 			if(_spawning) {
 				TheGame.setText(new Image("ultimoboss/text/s10.png"));
 			} else if(!_dead) {
@@ -127,7 +129,7 @@ public class UltimoBoss extends Boss {
 			} 
 			
 		}
-		if(_counter2 == 150 && !_1sttime) {
+		if(_counter2 == 150 && !_1sttime && !_over) {
 			TheGame.stopText();
 			_counter2 = -500;
 		}
@@ -185,9 +187,31 @@ public class UltimoBoss extends Boss {
 		if(_yattack2) {
 			executeYAttack2();
 		}
+		if(_over) {
+			TheGame._character1.setImmune(true);
+			TheGame._character1.setXVelocity(0);
+			TheGame._character1.setCanAct(false);
+		}
 		
 		if(!_attack1 && !_attack2 && !_attack3 && !_attack4 && !_attack5 && !_gattack1 && !_gattack2 && !_rattack1 && !_rattack2 &&
 				!_yattack1 && !_yattack2 && !_dead && !_changeform0 && !_changeform1 && !_changeform2 && !_changeform3 && !_changeform4) {
+		if(_over) {
+				executeOver();
+				if(!_songstopped) {
+					try {
+						TheGame._player.stop();
+					} catch (BasicPlayerException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					_counter2 = 0;
+					TheGame.stopText();
+					_songstopped = true;
+				}
+				
+				
+		}
+		if(!_over) {
 		if(_counter1 < 29) {
 			_yvelocity = 0;
 			if(_counter % 3 == 0){
@@ -200,10 +224,11 @@ public class UltimoBoss extends Boss {
 		} else {
 			_counter1 = 0;
 		}
+		}
 		if(_won) {
 			TheGame.setText(new Image("ultimoboss/text/won.png"));
 		}
-		if(_counter3 == 90 && !_won && !_1sttime) {
+		if(_counter3 == 90 && !_won && !_1sttime && !_over) {
 			Random r = new Random();
 			int i = r.nextInt(3);
 			_counter3 = 0;
@@ -764,6 +789,7 @@ public class UltimoBoss extends Boss {
 			_balls.add(new Image("ultimoboss/balls1/18.png"));
 			_balls.add(new Image("ultimoboss/balls1/19.png"));
 			_balls.add(new Image("ultimoboss/balls1/20.png"));
+			TheGame.setScroll(new Image("scroll/space.png"));
 		}
 		if(_counter4 == 25) {
 			TheGame._frontdrops.remove(_flash);
@@ -807,6 +833,7 @@ public class UltimoBoss extends Boss {
 			_balls.add(new Image("ultimoboss/balls4/18.png"));
 			_balls.add(new Image("ultimoboss/balls4/19.png"));
 			_balls.add(new Image("ultimoboss/balls4/20.png"));
+			TheGame.setScroll(new Image("scroll/yellowspace.png"));
 		}
 		if(_counter4 == 25) {
 			TheGame._frontdrops.remove(_flash);
@@ -849,6 +876,7 @@ public class UltimoBoss extends Boss {
 			_balls.add(new Image("ultimoboss/balls3/18.png"));
 			_balls.add(new Image("ultimoboss/balls3/19.png"));
 			_balls.add(new Image("ultimoboss/balls3/20.png"));
+			TheGame.setScroll(new Image("scroll/redspace.png"));
 		}
 		if(_counter4 == 25) {
 			TheGame._frontdrops.remove(_flash);
@@ -891,6 +919,7 @@ public class UltimoBoss extends Boss {
 			_balls.add(new Image("ultimoboss/balls2/18.png"));
 			_balls.add(new Image("ultimoboss/balls2/19.png"));
 			_balls.add(new Image("ultimoboss/balls2/20.png"));
+			TheGame.setScroll(new Image("scroll/greenspace.png"));
 		}
 		if(_counter4 == 25) {
 			TheGame._frontdrops.remove(_flash);
@@ -966,9 +995,60 @@ public class UltimoBoss extends Boss {
 	@Override
 	public void hit(Hitbox h) {
 		super.hit(h);
-		//if(_health <= 0) {
-		//	_health = 1;
-		//}
+		if(_health <= 0 && !_over) {
+			_health = 1;
+			_over = true;
+			_immune = true;
+			TheGame._character1.setXVelocity(0);
+			TheGame._character1.setImmune(true);
+			TheGame._character1.setCanAct(false);
+			
+		}
+	}
+	
+	public void executeOver() {
+		if(_health == 0) {
+			_yvelocity = 5;
+		}
+		if(_counter2 == 3) {
+			TheGame.setText(new Image("ultimoboss/text/end1.png"));
+		}
+		if(_counter2 == 240) {
+			TheGame.stopText();
+		}
+		if(_counter2 == 260) {
+			TheGame.setText(new Image("ultimoboss/text/end2.png"));
+		}
+		if(_counter2 == 500) {
+			TheGame.stopText();
+		}
+		if(_counter2 == 520) {
+			TheGame.setText(new Image("ultimoboss/text/end3.png"));
+			_immune = false;
+		}
+		if(_counter2 == 740) {
+			Hitbox a = new HitboxImpl("shot", TheGame._character1, false, 899, _y+40, 20, 20, -7, 0, 0, 1, new Image("tootboss/shot.png"));
+			a.setCircle(true);
+			TheGame._attacks.add(a);
+			TheGame.playSound("/tootboss/sounds/shot.wav");
+		}
+		if(_counter2 == 760) {
+			TheGame.stopText();
+		}
+		if(_counter2 == 780) {
+			TheGame.setText(new Image("ultimoboss/text/end4.png"));
+		}
+		if(_counter2 == 1020) {
+			TheGame.stopText();
+		}
+		if(_counter2 == 1040) {
+			TheGame.setText(new Image("ultimoboss/text/end5.png"));
+			TheGame._boss = new TootBoss2();
+			TheGame._bossspawned = false;
+		}
+		if(_counter2 == 1280) {
+			TheGame.stopText();
+		}
 	}
 
 }
