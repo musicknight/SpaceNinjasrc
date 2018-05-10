@@ -19,10 +19,16 @@ public class Ninja1Char extends CDCharacter {
 	private int _cd1;
 	private int _cd2;
 	private boolean _attack1;
-	private boolean _attack2;
 	private String _skin;
 	private int _starcd;
 	private Hitbox _star;
+	private List<Image> _balls = new ArrayList<Image>();
+	private double _rate2 = 1;
+	private int _spriteindex2;
+	private boolean _pressingj;
+	private boolean _pressingd;
+	private boolean _pressingu;
+	private int _atk1count;
 	
 	public Ninja1Char(String ID, String s) {
 	super(ID);
@@ -69,7 +75,29 @@ public class Ninja1Char extends CDCharacter {
 	if(_skin.equals("spike2")) {
 		_starcd = 10;
 	}
-	
+	if(_skin.equals("ult")) {
+		_balls.add(new Image("ultimoboss/balls1/1.png"));
+		_balls.add(new Image("ultimoboss/balls1/2.png"));
+		_balls.add(new Image("ultimoboss/balls1/3.png"));
+		_balls.add(new Image("ultimoboss/balls1/4.png"));
+		_balls.add(new Image("ultimoboss/balls1/5.png"));
+		_balls.add(new Image("ultimoboss/balls1/6.png"));
+		_balls.add(new Image("ultimoboss/balls1/7.png"));
+		_balls.add(new Image("ultimoboss/balls1/8.png"));
+		_balls.add(new Image("ultimoboss/balls1/9.png"));
+		_balls.add(new Image("ultimoboss/balls1/10.png"));
+		_balls.add(new Image("ultimoboss/balls1/11.png"));
+		_balls.add(new Image("ultimoboss/balls1/12.png"));
+		_balls.add(new Image("ultimoboss/balls1/13.png"));
+		_balls.add(new Image("ultimoboss/balls1/14.png"));
+		_balls.add(new Image("ultimoboss/balls1/15.png"));
+		_balls.add(new Image("ultimoboss/balls1/16.png"));
+		_balls.add(new Image("ultimoboss/balls1/17.png"));
+		_balls.add(new Image("ultimoboss/balls1/18.png"));
+		_balls.add(new Image("ultimoboss/balls1/19.png"));
+		_balls.add(new Image("ultimoboss/balls1/20.png"));
+		_gravity = false;
+	}
 	
 	
 	}
@@ -88,6 +116,41 @@ public class Ninja1Char extends CDCharacter {
 		}
 		if(_skin.equals("skull") && _lives == 1) {
 			_starcd = 15;
+		}
+		if(_skin.equals("ult")){
+			_immune = true;
+			Image bd = _balls.get(_spriteindex2);
+			if(_counter % _rate2  == 0) {
+				if(_spriteindex2 < _balls.size() -1) {
+					_spriteindex2++;
+				} else {
+					_spriteindex2 = 0;
+				}
+			}
+			TheGame._gc.drawImage(bd, _x - 37, _y-37, 125, 125);
+			if(_pressingu && !_pressingd && _canact) {
+				_yvelocity = -6 * _speedfactor;
+			}
+			if(_pressingd && !_pressingu && _canact) {
+				_yvelocity = 6 * _speedfactor;
+			}
+			if(_counter3 % 5 == 0) {
+				String s;
+				if(_atk1count == 0) {
+					s = "r";
+					_atk1count = 1;
+				} else if(_atk1count == 1) {
+					s = "g";
+					_atk1count = 2;
+				} else {
+					s = "y";
+					_atk1count = 0;
+				}
+				Image i = new Image("ultimoboss/shots/" + s + ".png");
+				Hitbox a = new HitboxImpl("uball", this, false, _x+56, _y+13, 24, 24, 15, 0, 0, 50, i);
+				a.setCircle(true);
+				TheGame._attacks.add(a);
+			}
 		}
 		
 	}
@@ -330,5 +393,55 @@ public void executeAttackBoost() {
 		}
 	}
 
+
+
+@Override
+public void pressDown() {
+	if(!_skin.equals("ult")){
+		super.pressDown();
+	} else {
+	_pressingd = true;
+	if(_pressingj && _canact) {
+		_yvelocity = 6;
+	}
+	}
+}
+@Override
+public void releaseDown() {
+	if(!_skin.equals("ult")){
+		super.releaseDown();
+	} else {
+	_pressingd = false;
+	if(!_pressingj && !_pressingu &&  _canact) {
+		_yvelocity = 0;
+	}
+	}
+}
+
+
+@Override
+public void pressUp() {
+	
+	if(!_skin.equals("ult")){
+		super.pressUp();
+	} else {
+		_pressingu = true;
+	if(_pressingd && _canact) {
+		_yvelocity = -6;
+	}
+	}
+}
+
+@Override
+public void releaseUp() {
+	if(!_skin.equals("ult")){
+		super.releaseUp();
+	} else {
+	_pressingu = false;
+	if(!_pressingd &&  _canact) {
+		_yvelocity = 0;
+	}
+	}
+}
 	
 }

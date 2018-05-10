@@ -5,6 +5,7 @@ import cd.HitboxImpl;
 import cd.TheGame;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javazoom.jlgui.basicplayer.BasicPlayerException;
 
 public class TootBoss extends Boss {
 
@@ -80,11 +81,18 @@ public class TootBoss extends Boss {
 		}
 		if(_counter2 == 240 && _text == 12) {
 			TheGame.stopText();
+			if(TheGame._beattoot2.equals("f")){
 			attack1();
 			_text++;
+			} else {
+				attack2();
+			}
 		}
 		if(_attack1) {
 			executeAttack1();
+		}
+		if(_attack2) {
+			executeAttack2();
 		}
 	}
 
@@ -141,6 +149,55 @@ public class TootBoss extends Boss {
 			TheGame.stopText();
 			
 		}
+	}
+	
+	public void attack2() {
+		_attack2 = true;
+		_counter4 = 0;
+		_yvelocity = 5;
+		TheGame.playSound("/tootboss/sounds/drop.wav");
+	}
+	
+	public void executeAttack2() {
+		if(_counter4 == 30) {
+			_yvelocity = 0;
+		}
+		if(_counter4 > 45 && _counter % 5 == 0 && _counter4 < 600) {
+			Hitbox a = new HitboxImpl("shot", this, false, _x, _y+40, 20, 20, -7, 0, 0, 1, new Image("tootboss/shot.png"));
+			a.setCircle(true);
+			TheGame._attacks.add(a);
+			TheGame.playSound("/tootboss/sounds/shot.wav");
+		}
+		if(_counter4 > 650 && _counter % 5 == 0 && _counter4 < 800 && !(TheGame._character1.getLives()<=0)) {
+			Hitbox a = new HitboxImpl("shot", this, false, _x+_width, _y+40, 20, 20, 7, 0, 0, 1, new Image("tootboss/shot.png"));
+			a.setCircle(true);
+			TheGame._attacks.add(a);
+			TheGame.playSound("/tootboss/sounds/shot.wav");
+		}
+		if(TheGame._character1.getLives()<=0) {
+			_staticimage = new Image("tootboss/dead.png");
+		}
+		if(_counter4 == 500 && !(TheGame._character1.getLives()<=0)) {
+			_staticimage = new Image("tootboss/mad.png");
+		}
+		if(_counter4 == 850 && !(TheGame._character1.getLives()<=0)) {
+			TheGame.setText(new Image("tootboss/text/end.png"));
+		}
+		if(_counter4 == 980 && !(TheGame._character1.getLives()<=0)) {
+			TheGame._beattoot3 = "t";
+			TheGame.writeData();
+			TheGame._closed = true;
+			try {
+				TheGame._player.stop();
+				
+			} catch (BasicPlayerException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			TheGame._stage.close();
+		}
+		
 	}
 
 }

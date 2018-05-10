@@ -383,7 +383,7 @@ public class DragonBoss extends Boss {
 		if(_counter1 == 140) {
 			_xvelocity = 15;
 		}
-		if(_counter1 > 170 && _x >= 506) {
+		if(_counter1 > 140 && _x >= 506) {
 			
 			_x = 506;
 			_xvelocity = 0;
@@ -393,7 +393,7 @@ public class DragonBoss extends Boss {
 				_yvelocity = 15;
 			}
 		}
-		if(_counter1 > 170 && _y <= 110) {
+		if(_counter1 > 140 && _y <= 110) {
 			_y=110;
 			_x = 506;
 			_yvelocity = 0;

@@ -333,7 +333,7 @@ public class BotBoss extends Boss {
 				TheGame._gc.drawImage(new Image("botboss/lasers/hpre.png"), 0, _y+65,900, 22);
 				TheGame._gc.drawImage(new Image("botboss/lasers/hpre.png"), 0, _y+115, 900, 22);
 				TheGame._gc.drawImage(new Image("botboss/lasers/hpre.png"), 0, _y+165, 900, 22);
-				if(_counter4 == 185){
+				if(_counter4 == 186){
 					TheGame.playSound("/botboss/sounds/charge.wav");
 					}
 		}

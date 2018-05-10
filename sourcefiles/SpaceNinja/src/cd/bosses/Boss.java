@@ -49,7 +49,7 @@ abstract public class Boss extends EntityImpl {
 
 	@Override
 	public void render(GraphicsContext gc) {
-		if(_staticimage == null) {
+		if(_staticimage == null && !_sprites.isEmpty()) {
 		_image = _sprites.get(_ratecounter);
 		//_counter++;
 		if(_counter % _rate == 0) {

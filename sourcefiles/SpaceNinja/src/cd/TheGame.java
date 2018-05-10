@@ -29,6 +29,7 @@ import cd.bosses.CometBoss;
 import cd.bosses.DemonBoss;
 import cd.bosses.DragonBoss;
 import cd.bosses.GhostBoss;
+import cd.bosses.NullBoss;
 import cd.bosses.RockBoss;
 import cd.bosses.RockBoss2;
 import cd.bosses.SkullBoss;
@@ -36,6 +37,8 @@ import cd.bosses.SpikeBoss;
 import cd.bosses.SpikeBoss2;
 import cd.bosses.TootBoss;
 import cd.bosses.TootBoss2;
+import cd.bosses.TootBoss3;
+import cd.bosses.TootBoss4;
 import cd.bosses.TwinsBoss;
 import cd.bosses.UltimoBoss;
 import cd.chars.Ninja1Char;
@@ -110,27 +113,31 @@ public class TheGame extends Application {
 
 	public static CDCharacter _character1;
 	private String _skin;
-	public static Boss _boss;
+	public static Boss _boss = null;
 	public static boolean _bossspawned;
 	public static Place _place;
 	private static Canvas _canvas = new Canvas(900, 600);
+	
+	
 	
 	private boolean _songplaying;
 	private boolean _vsongplaying;
 	public static GraphicsContext _gc = _canvas.getGraphicsContext2D();
 	public static GraphicsContext _gc2 = _canvas.getGraphicsContext2D();
-	private Stage _stage;
+	public static Stage _stage;
 	private Scene _scene;
 	private AnimationTimer _animationTimer;
 	public static Set<Hitbox> _attacks = new HashSet<Hitbox>();
 	public static List<Platform> _platforms = new ArrayList<Platform>();
 	public static List<Backdrop> _backdrops = new ArrayList<Backdrop>();
 	public static List<Backdrop> _frontdrops = new ArrayList<Backdrop>();
-	private static Image _scroll = new Image("scroll/space.png");
-	private int _scrollc = 0;
+	public static Image _scroll = new Image("scroll/space.png");
+	public static int _scrollc;
+	public static int _scrollr = 10;
 	private boolean _charpicked = false;
 	private boolean _bosspicked = false;
-	private static boolean _closed = false;
+	public static boolean _closed = false;
+	private boolean _buttonsremoved;
 	
 	//game start button
 	private Button _start = new Button("start");
@@ -138,8 +145,9 @@ public class TheGame extends Application {
 	private Button _return = new Button("back to main menu");
 	
 	private Button _continue = new Button("continue");
+	private static Button _reset = new Button("reset");
 	//next/prev page button
-	private Group _root1 = new Group();
+	private static Group _root1 = new Group();
 	public static boolean _rendering = true;
 	private int _page = 1;
 	private boolean _menusongstarted= false;
@@ -160,6 +168,7 @@ public class TheGame extends Application {
 	private Button _twins = new Button("select");
 	private Button _spike2 = new Button("select");
 	private Button _demon = new Button("select");
+	private Button _ult = new Button("select");
 	
 	private Button _toot = new Button("fight!");
 	private Button _crush = new Button("fight!");
@@ -189,6 +198,11 @@ public class TheGame extends Application {
 	private static String _beatnero;
 	public static  String _1stultimo;
 	public static String _beatultimo;
+	public static String _beattoot2;
+	public static String _beattoot3;
+	public static String _beattoot4;
+	public static String _beatultimo2;
+	public static String _beattoot5;
 	
 	private static Image _text;
 	
@@ -196,6 +210,10 @@ public class TheGame extends Application {
 	private boolean _gotpower;
 	private String _power;
 	private String _newskin;
+	private int _savedx;
+	private int _savedy = 400;
+	
+	public static boolean _vertscroll;
 
 	public static double _gravity = 0.8;
 	
@@ -207,8 +225,10 @@ public class TheGame extends Application {
 		 loader.setController(this);
 		
 		stage1.setTitle("SpaceNinja");
+		
 		_stage = stage1;
 		TheGame m = this;
+		_reset.setOnMousePressed(m::handleButtonPress);
 		//_stage.setOnCloseRequest(m::closeWindow);
 		_root1 = new Group();
 		_scene = new Scene(_root1);
@@ -216,7 +236,7 @@ public class TheGame extends Application {
 		stage1.setScene(_scene);
 		_stage.setOnCloseRequest(m::closeWindow);
 		_root1.getChildren().add(_canvas);
-		Platform p = new PlatformImpl(0, 442, 900, 158);
+		Platform p = new PlatformImpl(-100, 442, 1000, 158);
 		p.setImage(new Image("clear.png"));
 		_platforms.add(p);
 		String file ="data.txt";
@@ -244,6 +264,11 @@ public class TheGame extends Application {
 			_beatnero = read(reader);
 			_1stultimo = read(reader);
 			_beatultimo = read(reader);
+			_beattoot2 = read(reader);
+			_beattoot3 = read(reader);
+			_beattoot4 = read(reader);
+			_beatultimo2 = read(reader);
+			_beattoot5 = read(reader);
 			reader.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -288,7 +313,25 @@ public class TheGame extends Application {
 		if(_beatultimo == null) {
 			_beatultimo = "f";
 		}
+		if(_beattoot2 == null) {
+			_beattoot2 = "f";
+		}
+		if(_beattoot3 == null) {
+			_beattoot3 = "f";
+		}
+		if(_beattoot4 == null) {
+			_beattoot4 = "f";
+		}
+		if(_beatultimo2 == null) {
+			_beatultimo2 = "f";
+		}
+		if(_beattoot5 == null) {
+			_beattoot5 = "f";
+		}
 		writeData();
+		if(_beattoot3.equals("t") && _beattoot4.equals("f")){
+			_stage.setTitle("Toot");
+		}
 		// character selection screen
 
 		// _player1picked = true;
@@ -306,6 +349,8 @@ public class TheGame extends Application {
 		_animationTimer = new AnimationTimer() {
 
 			private long _last = 0;
+			
+			
 
 			public void handle(long currentNanoTime) {
 				long t = (currentNanoTime - _last);
@@ -330,11 +375,27 @@ public class TheGame extends Application {
 					playStageSong("/songs/theme.mp3");
 					_songplaying = true;
 					}
+					if(_beatultimo2.equals("f") || _beattoot5.equals("t")){
 					_gc.drawImage(new Image("text/charscreen.png"), 0, 0);
+					} else {
+						_gc.drawImage(new Image("text/charscreen2.png"), 0, 0);
+					}
 					int x = 900;
 					int y = 77;
 					int x1 = 0;
 					int y1 = 600;
+if((_beattoot2.equals("t") && _beattoot3.equals("f") || _beattoot4.equals("t")) || _beattoot5.equals("t")){
+	x = 220;
+	y = 77;
+	x1 = 0;
+	y1 = 185;
+}
+if(_beatultimo2.equals("t") && _beattoot5.equals("f")) {
+	x = 900;
+	y = 600;
+	x1 = 900;
+	y1 = 600;
+}
 if(_beatnero.equals("f")){
 	y1 = 185;
 if(_beatspiball2.equals("f")){
@@ -368,8 +429,10 @@ if(_beatcandm.equals("f")){
 }
 }
 }
+
 					_gc.drawImage(new Image("text/black.png"), x, y);
 					_gc.drawImage(new Image("text/black.png"), x1, y1);
+					if(_beatultimo2.equals("f") || _beattoot5.equals("t")){
 					if (!_root1.getChildren().contains(_white)) {
 						_white.setMinWidth(45);
 						_white.setMinHeight(12);
@@ -397,6 +460,9 @@ if(_beatcandm.equals("f")){
 
 						_green.setOnMousePressed(m::handleButtonPress);
 					}
+					}
+					if((_beattoot2.equals("f") || _beattoot3.equals("t")) && _beattoot4.equals("f")){
+						
 					if (!_root1.getChildren().contains(_yellow) && _beattoot.equals("t")) {
 						_yellow.setMinWidth(45);
 						_yellow.setMinHeight(12);
@@ -448,7 +514,6 @@ if(_beatcandm.equals("f")){
 						_rock2.setLayoutX(537);
 						_rock2.setLayoutY(151);
 						_root1.getChildren().add(_rock2);
-
 						_rock2.setOnMousePressed(m::handleButtonPress);
 					}
 					if (!_root1.getChildren().contains(_dragon) && _beatdroth.equals("t")) {
@@ -496,9 +561,23 @@ if(_beatcandm.equals("f")){
 
 						_demon.setOnMousePressed(m::handleButtonPress);
 					}
+					}
+					if (!_root1.getChildren().contains(_ult) && _beatultimo2.equals("t") && _beattoot5.equals("f")) {
+						_ult.setMinWidth(295);
+						_ult.setMinHeight(75);
+						_ult.setLayoutX(286);
+						_ult.setLayoutY(443);
+						_root1.getChildren().add(_ult);
+
+						_ult.setOnMousePressed(m::handleButtonPress);
+					}
 					
 				} else if(!_bosspicked) {
+					if(_beattoot3.equals("f") || _beattoot4.equals("t")){
 					_gc.drawImage(new Image("text/bossscreen.png"), 0, 0);
+					} else {
+						_gc.drawImage(new Image("text/bossscreent.png"), 0, 0);	
+					}
 					List<Node> remove = new ArrayList<Node>();
 					for(Node b : _root1.getChildren()) {
 						if(b.getClass().toString().equals("class javafx.scene.control.Button")) {
@@ -513,6 +592,13 @@ if(_beatcandm.equals("f")){
 					int x1 = 900;
 					int y1 = 600;
 
+
+if(_beattoot2.equals("t") && _beattoot3.equals("f") || _beattoot5.equals("t")){
+	x = 130;
+	y = 77;
+	x1 = 0;
+	y1 = 183;
+}
 if(!_beatnero.equals("t")){
 	x1 = 475;
 	y1 = 183;
@@ -552,6 +638,8 @@ if(!_beatcandm.equals("t")){
 	}
 }
 }
+
+					
 					_gc.drawImage(new Image("text/black.png"), x, y);
 					_gc.drawImage(new Image("text/black.png"), x1, y1);
 					if (!_root1.getChildren().contains(_toot)) {
@@ -563,6 +651,8 @@ if(!_beatcandm.equals("t")){
 
 						_toot.setOnMousePressed(m::handleButtonPress);
 					}
+					
+					if(_beattoot2.equals("f") || _beattoot3.equals("t") && _beattoot5.equals("f")){
 					if (!_root1.getChildren().contains(_swurli) && _beattoot.equals("t")) {
 						_swurli.setMinWidth(60);
 						_swurli.setMinHeight(25);
@@ -662,8 +752,9 @@ if(!_beatcandm.equals("t")){
 
 						_ultimo.setOnMousePressed(m::handleButtonPress);
 					}
-					
+					}
 				} else {
+					if(!_buttonsremoved){
 					List<Node> remove = new ArrayList<Node>();
 					for(Node b : _root1.getChildren()) {
 						if(b.getClass().toString().equals("class javafx.scene.control.Button")) {
@@ -673,17 +764,29 @@ if(!_beatcandm.equals("t")){
 					for(Node b : remove) {
 						_root1.getChildren().remove(b);
 					}
+					_buttonsremoved = true;
+					}
 				if(_character1 == null) {
-					_character1 = new Ninja1Char("one", _skin);
+					
 				}
 				
 				
 				
+				
+				if(!_vertscroll){
 				_gc.drawImage(_scroll, _scrollc, 60);
 				if(_scrollc > -1800) {
-				_scrollc = _scrollc - 10;
+				_scrollc = _scrollc - _scrollr;
 				} else {
 					_scrollc = 0;
+				}
+				} else {
+					_gc.drawImage(_scroll, 0, _scrollc+60);
+					if(_scrollc < 0) {
+						_scrollc = _scrollc + _scrollr;
+						} else if(_scrollc == 0) {
+							_scrollc = -2310;
+						}
 				}
 				if(!_bossspawned) {
 					_boss.spawn();
@@ -752,7 +855,7 @@ if(!_beatcandm.equals("t")){
 				} else {
 					_gc.drawImage(new Image("text/lose.png"), 297, 215);
 				}
-				if(_boss.getHealth() == 0 && !_boss.getID().equals("ultimoboss") && !_boss.getID().equals("tootboss2")) {
+				if(_boss.getHealth() == 0 && (!_boss.getID().equals("ultimoboss") || _beattoot4.equals("t")) && !_boss.getID().equals("tootboss2") && !_boss.getID().equals("null")) {
 					_gc.drawImage(new Image("text/win.png"), 284, 215);
 				}
 				String bosshealth = ("" + _boss.getHealth());
@@ -766,7 +869,7 @@ if(!_beatcandm.equals("t")){
 				}
 				if(_boss.isDead() || _boss.isWon()){
 					_character1.setImmune(true);
-					if(_boss.isDead() && !_vsongplaying) {
+					if(_boss.isDead() && !_vsongplaying && !_boss.getID().equals("tootboss2")) {
 						playStageSong("/songs/victory.mp3");
 						_vsongplaying = true;
 					}
@@ -863,6 +966,10 @@ public void handleKeyRelease(KeyEvent event) {
 		// System.out.println("moving left");
 	}
 	if (event.getCode().toString().equals("ESCAPE")) {
+		if(_character1.getLives() > 0){
+		_savedx = _character1.getX();
+		_savedy = _character1.getY();
+		}
 		if(_bosspicked) {
 		try {
 			_player.stop();
@@ -870,6 +977,7 @@ public void handleKeyRelease(KeyEvent event) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		_buttonsremoved = false;
 		_backdrops.clear();
 		_songplaying = false;
 		_vsongplaying = false;
@@ -966,6 +1074,15 @@ public void handleKeyRelease(KeyEvent event) {
 			}
 			_beatnero = "t";
 		}
+		if(_boss.getID().equals("ultimoboss")){
+			if(_beattoot4.equals("t") && _beatultimo2.equals("f")){
+				_gotpower = true;
+				_power = "ultimo";
+				_newskin = "ult";
+				_beatultimo2 = "t";
+			}
+			
+		}
 		if(_gotpower) {
 			try {
 				_player.stop();
@@ -992,14 +1109,23 @@ public void handleKeyRelease(KeyEvent event) {
 			write(writer, _beatnero);
 			write(writer, _1stultimo);
 			write(writer, _beatultimo);
+			write(writer, _beattoot2);
+			write(writer, _beattoot3);
+			write(writer, _beattoot4);
+			write(writer, _beatultimo2);
+			write(writer, _beattoot5);
 			writer.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		_boss = null;
-		_attacks.clear();
-		_bossspawned = false;
+		
+		if((!_boss.getID().equals("tootboss3") && !_boss.getID().equals("tootboss4"))){
+			_attacks.clear();
+			_bossspawned = false;
+			_boss = null;
+		} 
+		
 		stopText();
 		_root1.getChildren().remove(_return);
 		}
@@ -1071,6 +1197,63 @@ public static synchronized void playSound(final String url) {
 }
 
 public void handleButtonPress(MouseEvent click) {
+	if(click.getSource().equals(_reset)) {
+		BufferedWriter writer = null;
+		try {
+			writer = new BufferedWriter(new FileWriter("data.txt"));
+			write(writer, "f");
+			write(writer, "f");
+			write(writer, "f");
+			write(writer, "f");
+			write(writer, "f");
+			write(writer, "f");
+			write(writer, "f");
+			write(writer, "f");
+			write(writer, "f");
+			write(writer, "f");
+			write(writer, "f");
+			write(writer, "f");
+			write(writer, "f");
+			write(writer, "f");
+			write(writer, "f");
+			write(writer, "f");
+			write(writer, "f");
+			write(writer, "f");
+			writer.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			_player.stop();
+			
+		} catch (BasicPlayerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		_closed = true;
+		_stage.close();
+	}
+	if(_beattoot3.equals("t") && _charpicked && _beattoot4.equals("f")) {
+		
+		if(_boss == null){
+		_boss = new TootBoss3();
+		
+		_character1.setX(5);
+		_character1.setY(400);
+		} else {
+			_character1.setX(_savedx);
+			_character1.setY(_savedy);
+		}
+		
+		playStageSong("/songs/toot3.mp3");
+		_bosspicked = true;
+		return;
+	}
+	
+	
+	
 	if(click.getSource().equals(_white)) {
 		_skin = "sprites";
 		_charpicked = true;
@@ -1127,8 +1310,14 @@ public void handleButtonPress(MouseEvent click) {
 		_skin = "demon";
 		_charpicked = true;
 	}
+	if(click.getSource().equals(_ult)) {
+		_skin = "ult";
+		_charpicked = true;
+	}
 	
-	
+	if(_character1 == null) {
+		_character1 = new Ninja1Char("one", _skin);
+	}
 	
 	
 	// bosses
@@ -1141,9 +1330,26 @@ public void handleButtonPress(MouseEvent click) {
 		}
 	}
 	if(click.getSource().equals(_toot)) {
+		if(_beattoot4.equals("f")){
 		_boss = new TootBoss();
 		_bosspicked = true;
 		playStageSong("/songs/toot.mp3");
+		} else if(_beattoot5.equals("f")){
+			_boss = new TootBoss4();
+			playStageSong("/songs/toot3.mp3");
+			_bosspicked = true;
+			_character1.setX(400);
+		} else {
+			_boss = new NullBoss();
+			try {
+				_player.stop();
+			} catch (BasicPlayerException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			_bosspicked = true;
+			_bossspawned = true;
+		}
 		
 	}
 	if(click.getSource().equals(_swurli)) {
@@ -1197,7 +1403,7 @@ public void handleButtonPress(MouseEvent click) {
 		playStageSong("/songs/nero.mp3");
 	}
 	if(click.getSource().equals(_ultimo)) {
-		if(!_beatultimo.equals("t")){
+		if(!_beatultimo.equals("t") || _beattoot4.equals("t")){
 		_boss = new UltimoBoss(_1stultimo);
 		if(_1stultimo.equals("f")){
 			playStageSong("/songs/ultimointro.mp3");
@@ -1206,10 +1412,13 @@ public void handleButtonPress(MouseEvent click) {
 			}
 		} else {
 		_boss = new TootBoss2();
+		playStageSong("/songs/toot2.mp3");
 		}
 		_bosspicked = true;
 		
 	}
+	
+	
 	
 	
 	
@@ -1224,6 +1433,13 @@ public void handleButtonPress(MouseEvent click) {
 	
 	//return
 	if(click.getSource().equals(_return)) {
+		if(_character1.getLives() > 0){
+			_savedx = _character1.getX();
+			_savedy = _character1.getY();
+		} else {
+			_savedy = 400;
+		}
+		_buttonsremoved = false;
 		_backdrops.clear();
 		_charpicked = false;
 		_bosspicked = false;
@@ -1280,7 +1496,7 @@ public void handleButtonPress(MouseEvent click) {
 				_beatlaser = "t";
 			}
 			if(_boss.getID().equals("rockboss2")){
-				if(_beatlaser.equals("f")){
+				if(_beatcrunch.equals("f")){
 					_gotpower = true;
 					_power = "crunch";
 					_newskin = "rock2";
@@ -1327,6 +1543,15 @@ public void handleButtonPress(MouseEvent click) {
 				}
 				_beatnero = "t";
 			}
+			if(_boss.getID().equals("ultimoboss")){
+				if(_beattoot4.equals("t") && _beatultimo2.equals("f")){
+					_gotpower = true;
+					_power = "ultimo";
+					_newskin = "ult";
+					_beatultimo2 = "t";
+				}
+				
+			}
 			if(_gotpower) {
 				try {
 					_player.stop();
@@ -1352,6 +1577,12 @@ public void handleButtonPress(MouseEvent click) {
 			write(writer, _beatnero);
 			write(writer, _1stultimo);
 			write(writer, _beatultimo);
+			write(writer, _beattoot2);
+			write(writer, _beattoot3);
+			write(writer, _beattoot4);
+			write(writer, _beatultimo);
+			write(writer, _beatultimo2);
+			write(writer, _beattoot5);
 			writer.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -1360,12 +1591,16 @@ public void handleButtonPress(MouseEvent click) {
 		
 		
 		}
-		_boss = null;
-		_attacks.clear();
-		_bossspawned = false;
+		if((!_boss.getID().equals("tootboss3") && !_boss.getID().equals("tootboss4"))){
+			_attacks.clear();
+			_bossspawned = false;
+			_boss = null;
+		} 
 		stopText();
 		_root1.getChildren().remove(_return);
 	}
+	
+	
 }
 
 static public void setText(Image img) {
@@ -1432,11 +1667,26 @@ public static void writeData() {
 		write(writer, _beatnero);
 		write(writer, _1stultimo);
 		write(writer, _beatultimo);
+		write(writer, _beattoot2);
+		write(writer, _beattoot3);
+		write(writer, _beattoot4);
+		write(writer, _beatultimo2);
+		write(writer, _beattoot5);
 		writer.close();
 	} catch (IOException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
+}
+
+public static void addReset() {
+	_reset.setLayoutX(797);
+	_reset.setLayoutY(493);
+	_reset.setMinWidth(86);
+	_reset.setMinHeight(19);
+	
+	
+	_root1.getChildren().add(_reset);
 }
 
 }

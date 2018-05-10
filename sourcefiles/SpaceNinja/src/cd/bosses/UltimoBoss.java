@@ -48,6 +48,7 @@ public class UltimoBoss extends Boss {
 	private int _text = 1;
 	private boolean _over;
 	private boolean _songstopped;
+	private boolean _scrollsetback;
 	
 	public UltimoBoss(String b) {
 		super(900, 600, "ultimoboss");
@@ -89,6 +90,20 @@ public class UltimoBoss extends Boss {
 		super.render(gc);
 		if(TheGame._character1.getLives()<=0) {
 			_won = true;
+		}
+		if(_health == 0) {
+			_dead = true;
+			_attack1 = false;
+			_attack2 = false;
+			_gattack1 = false;
+			_gattack2 = false;
+			_rattack1 = false;
+			_rattack2 = false;
+			_yattack1 = false;
+			_yattack2 = false;
+			_yvelocity = 5;
+			_rate2 = 3;
+			TheGame.setText(new Image("ultimoboss/text/lose.png"));
 		}
 		if(_1sttime) {
 			TheGame._character1.setCanAct(false);
@@ -228,7 +243,7 @@ public class UltimoBoss extends Boss {
 		if(_won) {
 			TheGame.setText(new Image("ultimoboss/text/won.png"));
 		}
-		if(_counter3 == 90 && !_won && !_1sttime && !_over) {
+		if(_counter3 == 90 && !_won && !_1sttime && !_over && !_dead) {
 			Random r = new Random();
 			int i = r.nextInt(3);
 			_counter3 = 0;
@@ -995,7 +1010,7 @@ public class UltimoBoss extends Boss {
 	@Override
 	public void hit(Hitbox h) {
 		super.hit(h);
-		if(_health <= 0 && !_over) {
+		if(_health <= 0 && !_over && TheGame._beattoot4.equals("f")) {
 			_health = 1;
 			_over = true;
 			_immune = true;
@@ -1009,6 +1024,10 @@ public class UltimoBoss extends Boss {
 	public void executeOver() {
 		if(_health == 0) {
 			_yvelocity = 5;
+			if(!_scrollsetback){
+			TheGame.setScroll(new Image("scroll/space.png"));
+			_scrollsetback = true;
+			}
 		}
 		if(_counter2 == 3) {
 			TheGame.setText(new Image("ultimoboss/text/end1.png"));

@@ -19,6 +19,7 @@ public abstract class CDCharacter extends CharacterImpl {
 	// saves the image for attackboost
 	protected Image _savedim;
 	protected boolean _dying;
+	protected boolean _attack2;
 	
 	public CDCharacter(String ID) {
 		super(ID);
@@ -39,7 +40,16 @@ public abstract class CDCharacter extends CharacterImpl {
 
 	@Override
 	public void hit(Hitbox h) {
-		if(!_attackboost && !_immune && !h.isFreeze() && !h.isHarmless()){
+		if((TheGame._boss.getID().equals("tootboss3") || TheGame._boss.getID().equals("tootboss4")) && !_immune){
+			_lives = 0;
+			_dying = true;
+			_canact = false;
+			_xvelocity = 0;
+			return;
+		}
+		if(TheGame._beattoot2.equals("t") && TheGame._boss.getID().equals("tootboss") && _lives > 1) {
+			_lives--;
+		} else if(!_attackboost && !_immune && !h.isFreeze() && !h.isHarmless()){
 		if(_lives > 1){
 		_lives--;
 		_attackboost = true;
@@ -47,7 +57,9 @@ public abstract class CDCharacter extends CharacterImpl {
 		_abcounter = 0;
 		_savedim = _image;
 		_frozen = false;
+		if(!_attack2){
 		_canact = true;
+		}
 		} else {
 			_lives--;
 			_dying = true;
@@ -57,6 +69,7 @@ public abstract class CDCharacter extends CharacterImpl {
 		} else if(h.isFreeze()) {
 			freeze();
 		}
+		
 	}
 	
 	public void executeAttackBoost() {
