@@ -49,6 +49,9 @@ public class TootBoss4 extends Boss {
 		_spin.add(new Image("tootboss2/spin/18.png"));
 		_spin.add(new Image("tootboss2/spin/19.png"));
 		_spin.add(new Image("tootboss2/spin/20.png"));
+		if(TheGame._character1.getSkin().equals("ult")) {
+			TheGame.setText(new Image("tootboss3/text/2/1.png"));
+		}
 	}
 
 	@Override
@@ -76,9 +79,7 @@ public class TootBoss4 extends Boss {
 	
 	@Override
 	public void spawn() {
-		if(TheGame._character1.getSkin().equals("ult")) {
-			TheGame.setText(new Image("tootboss3/text/2/1.png"));
-		}
+		
 		
 	}
 	
@@ -160,7 +161,8 @@ public class TootBoss4 extends Boss {
 				_changed5 = true;
 			}
 		}
-		if(_health < -34000) {
+		if(_health < -34000 && _changed5 && !TheGame._closed) {
+			System.out.println("hererere");
 			TheGame._beattoot5 = "t";
 			TheGame.writeData();
 			TheGame._closed = true;
@@ -182,6 +184,7 @@ public class TootBoss4 extends Boss {
 		TheGame._frontdrops.add(new Backdrop(new Image("ultimoboss/flash.png"), 0, 0, 900, 600));
 		_counter2 = 0;
 		TheGame.playStageSong("/songs/toot4.mp3");
+		TheGame.playSound("/ultimoboss/sounds/flash.wav");
 	}
 	
 	public void executeFlash() {

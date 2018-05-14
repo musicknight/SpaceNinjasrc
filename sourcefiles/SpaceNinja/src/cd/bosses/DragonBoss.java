@@ -24,6 +24,7 @@ public class DragonBoss extends Boss {
 	private Hitbox _body = new CharLinkedHitbox("dragbody", this, 0, 1);
 	private Hitbox _tail = null;
 	private Hitbox _tail2 = null;
+	private Image _neck = new Image("dragonboss/neck.png");
 	private Random _random = new Random();
 	private boolean _unlocked;
 	private boolean _locked;
@@ -43,7 +44,7 @@ public class DragonBoss extends Boss {
 	
 	@Override
 	public void render(GraphicsContext gc) {
-		gc.drawImage(new Image("dragonboss/neck1.png"), _x+206, _y+60);
+		gc.drawImage(_neck, _x+206, _y+60);
 		if(TheGame._character1.getLives() <= 0) {
 			_won = true;
 		}
@@ -333,6 +334,7 @@ public class DragonBoss extends Boss {
 	public void attack2() {
 		_attack2 = true;
 		_counter4 = 0;
+		_neck = new Image("dragonboss/neck1.png");
 	}
 	public void executeAttack2() {
 		if(_counter4 > 20 && !_locked && !_unlocked) {
@@ -396,6 +398,7 @@ public class DragonBoss extends Boss {
 		if(_counter1 > 140 && _y <= 110) {
 			_y=110;
 			_x = 506;
+			_neck = new Image("dragonboss/neck.png");
 			_yvelocity = 0;
 			_unlocked = false;
 			_locked = false;

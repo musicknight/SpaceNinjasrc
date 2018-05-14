@@ -20,6 +20,8 @@ import java.util.Set;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineEvent;
+import javax.sound.sampled.LineListener;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
@@ -134,7 +136,7 @@ public class TheGame extends Application {
 	public static Image _scroll = new Image("scroll/space.png");
 	public static int _scrollc;
 	public static int _scrollr = 10;
-	private boolean _charpicked = false;
+	private boolean _charpicked;
 	private boolean _bosspicked = false;
 	public static boolean _closed = false;
 	private boolean _buttonsremoved;
@@ -153,6 +155,8 @@ public class TheGame extends Application {
 	private boolean _menusongstarted= false;
 	private boolean _titlesongstarted = false;
 	private boolean _gamestarted = false;
+	
+	
 	
 	private Button _white = new Button("select");
 	private Button _red= new Button("select");
@@ -212,12 +216,16 @@ public class TheGame extends Application {
 	private String _newskin;
 	private int _savedx;
 	private int _savedy = 400;
+	private boolean _paused;
 	
 	public static boolean _vertscroll;
 
 	public static double _gravity = 0.8;
 	
 	public static BasicPlayer _player = new BasicPlayer();
+	public static String _song;
+	
+	
 
 	public void start(Stage stage1) {
 		FXMLLoader loader = new
@@ -241,6 +249,7 @@ public class TheGame extends Application {
 		_platforms.add(p);
 		String file ="data.txt";
 		FileReader f = null;
+		
 		try {
 			f = new FileReader(file);
 		} catch (FileNotFoundException e1) {
@@ -350,10 +359,10 @@ public class TheGame extends Application {
 
 			private long _last = 0;
 			
-			
 
 			public void handle(long currentNanoTime) {
 				long t = (currentNanoTime - _last);
+				
 				if (t > 50 ) {
 					_last = currentNanoTime;
 				
@@ -375,6 +384,7 @@ public class TheGame extends Application {
 					playStageSong("/songs/theme.mp3");
 					_songplaying = true;
 					}
+					
 					if(_beatultimo2.equals("f") || _beattoot5.equals("t")){
 					_gc.drawImage(new Image("text/charscreen.png"), 0, 0);
 					} else {
@@ -804,6 +814,7 @@ if(!_beatcandm.equals("t")){
 					_character1.setYVelocity(_character1.getYVelocity() + _gravity);
 				}
 				_scene.setOnKeyPressed(m::handleKeyPress);
+				
 				_scene.setOnKeyReleased(m::handleKeyRelease);
 				List<Hitbox> attackstoremove = new ArrayList<Hitbox>();
 				for (Hitbox a : _attacks) {
@@ -966,168 +977,35 @@ public void handleKeyRelease(KeyEvent event) {
 		// System.out.println("moving left");
 	}
 	if (event.getCode().toString().equals("ESCAPE")) {
-		if(_character1.getLives() > 0){
-		_savedx = _character1.getX();
-		_savedy = _character1.getY();
-		}
-		if(_bosspicked) {
+		if(_bosspicked && !_paused){
+		_animationTimer.stop();
+		_paused = true;
+		_return.setMinWidth(100);
+		_return.setMinHeight(50);
+		_return.setLayoutX(388);
+		_return.setLayoutY(290);
+		_root1.getChildren().add(_return);
+		
+		_return.setOnMousePressed(this::handleButtonPress);
 		try {
-			_player.stop();
-		} catch (BasicPlayerException e1) {
+			_player.pause();
+		} catch (BasicPlayerException e) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			e.printStackTrace();
 		}
-		_buttonsremoved = false;
-		_backdrops.clear();
-		_songplaying = false;
-		_vsongplaying = false;
-		_charpicked = false;
-		_bosspicked = false;
-		_character1 = null;
-		_scroll = new Image("scroll/space.png");
-		if(_boss.isDead()){
-		if(_boss.getID().equals("tootboss")){
-			if(_beattoot.equals("f")){
-				_gotpower = true;
-				_power = "toot";
-				_newskin = "yellow";
-			}
-			_beattoot = "t";
+		return;
 		}
-		if(_boss.getID().equals("ghostboss")){
-			if(_beatswurli.equals("f")){
-				_gotpower = true;
-				_power = "swurli";
-				_newskin = "black";
-			}
-			_beatswurli = "t";
-		}
-		if(_boss.getID().equals("rockboss")){
-			if(_beatcrush.equals("f")){
-				_gotpower = true;
-				_power = "crush";
-				_newskin = "rock";
-			}
-			_beatcrush = "t";
-		}
-		if(_boss.getID().equals("spikeboss")){
-			if(_beatspiball.equals("f")){
-				_gotpower = true;
-				_power = "spiball";
-				_newskin = "spike";
-			}
-			_beatspiball = "t";
-		}
-		if(_boss.getID().equals("botboss")){
-			if(_beatlaser.equals("f")){
-				_gotpower = true;
-				_power = "laser";
-				_newskin = "laser";
-			}
-			_beatlaser = "t";
-		}
-		if(_boss.getID().equals("rockboss2")){
-			if(_beatcrunch.equals("f")){
-				_gotpower = true;
-				_power = "crunch";
-				_newskin = "rock2";
-			}
-			_beatcrunch = "t";
-		}
-		if(_boss.getID().equals("dragonboss")){
-			if(_beatdroth.equals("f")){
-				_gotpower = true;
-				_power = "droth";
-				_newskin = "dragon";
-			}
-			_beatdroth = "t";
-		}
-		if(_boss.getID().equals("skullboss")){
-			if(_beatcranius.equals("f")){
-				_gotpower = true;
-				_power = "cranium";
-				_newskin = "skull";
-			}
-			_beatcranius = "t";
-		}
-		if(_boss.getID().equals("twinsboss")){
-			if(_beatcandm.equals("f")){
-				_gotpower = true;
-				_power = "candm";
-				_newskin = "twins";
-			}
-			_beatcandm = "t";
-		}
-		if(_boss.getID().equals("spikeboss2")){
-			if(_beatspiball2.equals("f")){
-				_gotpower = true;
-				_power = "spiball2";
-				_newskin = "spike2";
-			}
-			_beatspiball2 = "t";
-		}
-		if(_boss.getID().equals("demonboss")){
-			if(_beatnero.equals("f")){
-				_gotpower = true;
-				_power = "nero";
-				_newskin = "demon";
-			}
-			_beatnero = "t";
-		}
-		if(_boss.getID().equals("ultimoboss")){
-			if(_beattoot4.equals("t") && _beatultimo2.equals("f")){
-				_gotpower = true;
-				_power = "ultimo";
-				_newskin = "ult";
-				_beatultimo2 = "t";
-			}
-			
-		}
-		if(_gotpower) {
+		if(_bosspicked && _paused) {
+			_animationTimer.start();
+			_paused = false;
+			_root1.getChildren().remove(_return);
 			try {
-				_player.stop();
+				_player.resume();
 			} catch (BasicPlayerException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			playStageSong("/songs/power.mp3");
-		}
-		}
-		BufferedWriter writer = null;
-		try {
-			writer = new BufferedWriter(new FileWriter("data.txt"));
-			write(writer, _beattoot);
-			write(writer, _beatswurli);
-			write(writer, _beatcrush);
-			write(writer, _beatspiball);
-			write(writer, _beatlaser);
-			write(writer, _beatcrunch);
-			write(writer, _beatdroth);
-			write(writer, _beatcranius);
-			write(writer, _beatcandm);
-			write(writer, _beatspiball2);
-			write(writer, _beatnero);
-			write(writer, _1stultimo);
-			write(writer, _beatultimo);
-			write(writer, _beattoot2);
-			write(writer, _beattoot3);
-			write(writer, _beattoot4);
-			write(writer, _beatultimo2);
-			write(writer, _beattoot5);
-			writer.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		if((!_boss.getID().equals("tootboss3") && !_boss.getID().equals("tootboss4"))){
-			_attacks.clear();
-			_bossspawned = false;
-			_boss = null;
-		} 
-		
-		stopText();
-		_root1.getChildren().remove(_return);
+			return;
 		}
 	}
 	
@@ -1137,6 +1015,7 @@ public void handleKeyRelease(KeyEvent event) {
 }
 
 public void closeWindow(WindowEvent w) {
+	writeData();
 	_closed = true;
 	try {
 		_player.stop();
@@ -1178,22 +1057,32 @@ public static int getPlayerState() {
 public static boolean getClosed() {
  return _closed;
 }
-public static synchronized void playSound(final String url) {
-  new Thread(new Runnable() {
+public static  void playSound(final String url) {
+  
   // The wrapper thread is unnecessary, unless it blocks on the
   // Clip finishing; see comments.
-    public void run() {
+    
       try {
-        Clip clip = AudioSystem.getClip();
+       
         AudioInputStream inputStream = AudioSystem.getAudioInputStream(
           TheGame.class.getResource(url));
-        clip.open(inputStream);
-        clip.start(); 
+          Clip clip = AudioSystem.getClip();
+    	   
+    				   
+    	   clip.open(inputStream);
+    	   clip.start(); 
+    	   clip.addLineListener(new LineListener() {
+    		   public void update(LineEvent myLineEvent) {
+    			      if (myLineEvent.getType() == LineEvent.Type.STOP)
+    			        clip.close();
+    			    }
+    	   });
+      
       } catch (Exception e) {
         System.err.println(e.getMessage());
       }
-    }
-  }).start();
+    
+  
 }
 
 public void handleButtonPress(MouseEvent click) {
@@ -1235,7 +1124,8 @@ public void handleButtonPress(MouseEvent click) {
 		_closed = true;
 		_stage.close();
 	}
-	if(_beattoot3.equals("t") && _charpicked && _beattoot4.equals("f")) {
+	
+	if(_beattoot3.equals("t") && _charpicked && _beattoot4.equals("f") && !click.getSource().equals(_return)) {
 		
 		if(_boss == null){
 		_boss = new TootBoss3();
@@ -1243,6 +1133,7 @@ public void handleButtonPress(MouseEvent click) {
 		_character1.setX(5);
 		_character1.setY(400);
 		} else {
+			
 			_character1.setX(_savedx);
 			_character1.setY(_savedy);
 		}
@@ -1251,68 +1142,87 @@ public void handleButtonPress(MouseEvent click) {
 		_bosspicked = true;
 		return;
 	}
+	if(!click.getSource().equals(_toot)) {
+		_attacks.clear();
+	}
 	
 	
 	
 	if(click.getSource().equals(_white)) {
 		_skin = "sprites";
 		_charpicked = true;
+		_character1 = null;
 	}
 	if(click.getSource().equals(_red)) {
 		_skin = "red";
 		_charpicked = true;
+		_character1 = null;
 	}
 	if(click.getSource().equals(_green)) {
 		_skin = "green";
 		_charpicked = true;
+		_character1 = null;
 	}
 	if(click.getSource().equals(_yellow)) {
 		_skin = "yellow";
 		_charpicked = true;
+		_character1 = null;
 	}
 	if(click.getSource().equals(_rock)) {
 		_skin = "rock";
 		_charpicked = true;
+		_character1 = null;
 	}
 	if(click.getSource().equals(_black)) {
 		_skin = "black";
 		_charpicked = true;
+		_character1 = null;
 	}
 	if(click.getSource().equals(_spike)) {
 		_skin = "spike";
 		_charpicked = true;
+		_character1 = null;
 	}
 	if(click.getSource().equals(_lasers)) {
 		_skin = "laser";
 		_charpicked = true;
+		_character1 = null;
 	}
 	if(click.getSource().equals(_rock2)) {
 		_skin = "rock2";
 		_charpicked = true;
+		_character1 = null;
 	}
 	if(click.getSource().equals(_dragon)) {
 		_skin = "dragon";
 		_charpicked = true;
+		_character1 = null;
 	}
 	if(click.getSource().equals(_skull)) {
 		_skin = "skull";
 		_charpicked = true;
+		_character1 = null;
 	}
 	if(click.getSource().equals(_twins)) {
 		_skin = "twins";
 		_charpicked = true;
+		_character1 = null;
 	}
 	if(click.getSource().equals(_spike2)) {
 		_skin = "spike2";
 		_charpicked = true;
+		_character1 = null;
 	}
 	if(click.getSource().equals(_demon)) {
 		_skin = "demon";
 		_charpicked = true;
+		_character1 = null;
 	}
 	if(click.getSource().equals(_ult)) {
+		
 		_skin = "ult";
 		_charpicked = true;
+		_character1 = null;
 	}
 	
 	if(_character1 == null) {
@@ -1339,6 +1249,7 @@ public void handleButtonPress(MouseEvent click) {
 			playStageSong("/songs/toot3.mp3");
 			_bosspicked = true;
 			_character1.setX(400);
+			_character1.setY(400);
 		} else {
 			_boss = new NullBoss();
 			try {
@@ -1356,63 +1267,76 @@ public void handleButtonPress(MouseEvent click) {
 		_boss = new GhostBoss();
 		_bosspicked = true;
 		playStageSong("/songs/swurli.mp3");
+		_song = "swurli";
 	}
 	if(click.getSource().equals(_crush)) {
 		_boss = new RockBoss();
 		_bosspicked = true;
 		playStageSong("/songs/crush.mp3");
+		_song = "crush";
 	}
 	if(click.getSource().equals(_spiball)) {
 		_boss = new SpikeBoss();
 		_bosspicked = true;
 		playStageSong("/songs/spiball.mp3");
+		_song = "spiball";
 	}
 	if(click.getSource().equals(_laser)) {
 		_boss = new BotBoss();
 		_bosspicked = true;
 		playStageSong("/songs/laser.mp3");
+		_song = "laser";
 	}
 	if(click.getSource().equals(_crunch)) {
 		_boss = new RockBoss2();
 		_bosspicked = true;
 		playStageSong("/songs/crunch.mp3");
+		_song = "crunch";
 	}
 	if(click.getSource().equals(_droth)) {
 		_boss = new DragonBoss();
 		_bosspicked = true;
 		playStageSong("/songs/droth.mp3");
+		_song = "droth";
 	}
 	if(click.getSource().equals(_cranius)) {
 		_boss = new SkullBoss();
 		_bosspicked = true;
 		playStageSong("/songs/cranius.mp3");
+		_song = "droth";
 	}
 	if(click.getSource().equals(_candm)) {
 		_boss = new TwinsBoss();
 		_bosspicked = true;
 		playStageSong("/songs/candm.mp3");
+		_song = "candm";
 	}
 	if(click.getSource().equals(_spiball2)) {
 		_boss = new SpikeBoss2();
 		_bosspicked = true;
 		playStageSong("/songs/spiball2.mp3");
+		_song = "spiball2";
 	}
 	if(click.getSource().equals(_nero)) {
 		_boss = new DemonBoss();
 		_bosspicked = true;
 		playStageSong("/songs/nero.mp3");
+		_song = "nero";
 	}
 	if(click.getSource().equals(_ultimo)) {
 		if(!_beatultimo.equals("t") || _beattoot4.equals("t")){
 		_boss = new UltimoBoss(_1stultimo);
 		if(_1stultimo.equals("f")){
 			playStageSong("/songs/ultimointro.mp3");
+			_song = "ultimointro";
 			} else {
 			playStageSong("/songs/ultimo.mp3");
+			_song = "ultimo";
 			}
 		} else {
 		_boss = new TootBoss2();
 		playStageSong("/songs/toot2.mp3");
+		_song = "toot2";
 		}
 		_bosspicked = true;
 		
@@ -1433,11 +1357,18 @@ public void handleButtonPress(MouseEvent click) {
 	
 	//return
 	if(click.getSource().equals(_return)) {
+		
+		
 		if(_character1.getLives() > 0){
 			_savedx = _character1.getX();
 			_savedy = _character1.getY();
 		} else {
 			_savedy = 400;
+		}
+		if(_paused) {
+			_animationTimer.start();
+			_paused = false;
+			
 		}
 		_buttonsremoved = false;
 		_backdrops.clear();
@@ -1591,11 +1522,16 @@ public void handleButtonPress(MouseEvent click) {
 		
 		
 		}
-		if((!_boss.getID().equals("tootboss3") && !_boss.getID().equals("tootboss4"))){
+		if((!_boss.getID().equals("tootboss3"))){
+			if(!_boss.getID().equals("tootboss4")){
 			_attacks.clear();
-			_bossspawned = false;
 			_boss = null;
+			}
+			_bossspawned = false;
+			
+			
 		} 
+		
 		stopText();
 		_root1.getChildren().remove(_return);
 	}

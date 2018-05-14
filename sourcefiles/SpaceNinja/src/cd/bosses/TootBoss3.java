@@ -12,7 +12,7 @@ import javazoom.jlgui.basicplayer.BasicPlayerException;
 
 public class TootBoss3 extends Boss {
 
-	private int _text = 1;
+	private int _text = 22;
 	private List<Image> _spin = new ArrayList<Image>();
 	private int _phase;
 	private boolean _ending;
@@ -58,7 +58,10 @@ public class TootBoss3 extends Boss {
 		if(_ending) {
 			executeEnd();
 		}
-		System.out.println(_x + ", " + _y);
+		if(_counter2 < 280 && TheGame._character1.isCanAct()) {
+			TheGame._character1.setCanAct(false);
+		}
+		
 	}
 	
 	

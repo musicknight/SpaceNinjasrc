@@ -90,6 +90,7 @@ public class TootBoss2 extends Boss{
 		if(!TheGame._attacks.contains(_body)) {
 			TheGame._attacks.add(_body);
 		}
+		
 		if(_counter2 == 0 && !_dead) {
 			if(_end) {
 				TheGame._beattoot2 = "t";
@@ -113,7 +114,7 @@ public class TootBoss2 extends Boss{
 			} 
 			
 		}
-		if(_counter2 == 150) {
+		if(_counter2 == 150 && !_spawning) {
 			TheGame.stopText();
 			_counter2 = -500;
 		}
@@ -281,6 +282,7 @@ public class TootBoss2 extends Boss{
 	public void executeSpawn() {
 		if(_counter2 == 50) {
 			_xvelocity = 0;
+			
 			if(TheGame._beatultimo.equals("t") && _rate == 1) {
 				_counter2 = 270;
 			}
@@ -299,11 +301,13 @@ public class TootBoss2 extends Boss{
 		}
 		if(_counter2 == 240) {
 			TheGame.stopText();
+			System.out.println("here");
 		}
 		if(_counter2 == 260 && _text1 < 16) {
 			TheGame.setText(new Image("tootboss2/text/intro" +  _text1 + ".png"));
 			_text1++;
 			_counter2 = 1;
+			System.out.println("there");
 		}
 		if(_counter2 == 259 && _text1 == 15) {
 			_staticimage = null;
@@ -338,6 +342,7 @@ public class TootBoss2 extends Boss{
 		}
 		if(_counter2 == 280) {
 			TheGame._frontdrops.add(_flash);
+			TheGame.playSound("/ultimoboss/sounds/flash.wav");
 		}
 		if(_counter2 == 283) {
 			_width = 150;
@@ -393,6 +398,7 @@ public class TootBoss2 extends Boss{
 			a.setCircle(true);
 			a.setDissappearOnHit(false);
 			TheGame._attacks.add(a);
+			TheGame.playSound("/ultimoboss/sounds/shot.wav");
 		}
 		if(_counter4 >= 80 && _counter4 < 141 && _counter4 % 2 == 0) {
 			_atk1speed -=1;
@@ -424,6 +430,7 @@ public class TootBoss2 extends Boss{
 		}
 		if(_counter4 == 30) {
 			_xvelocity = 4;
+			TheGame.playSound("/spikeboss/sounds/dash.wav");
 		}
 		if(_counter4 == 45) {
 			_xvelocity = -90;
@@ -461,6 +468,7 @@ public class TootBoss2 extends Boss{
 			a.setCircle(true);
 			a.setDissappearOnHit(false);
 			TheGame._attacks.add(a);
+			TheGame.playSound("/ultimoboss/sounds/shot.wav");
 		}
 		if(_counter4 == 24) {
 			_yvelocity = -20;
@@ -471,6 +479,7 @@ public class TootBoss2 extends Boss{
 			a.setCircle(true);
 			a.setDissappearOnHit(false);
 			TheGame._attacks.add(a);
+			TheGame.playSound("/ultimoboss/sounds/shot.wav");
 		}
 		if(_counter4 == 44 && _atk3count < 4) {
 			_yvelocity = 20;
@@ -531,6 +540,7 @@ public class TootBoss2 extends Boss{
 			 if(_attack4var == 1) {
 				 _big2.setYVelocity(0); 
 			 }
+			 TheGame.playSound("/rockboss/sounds/slam.wav");
 		 }
 		 if(_counter4 == 85) {
 			 _big1.setYVelocity(-25);

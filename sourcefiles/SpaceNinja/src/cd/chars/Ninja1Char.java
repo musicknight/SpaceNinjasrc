@@ -134,7 +134,7 @@ public class Ninja1Char extends CDCharacter {
 			if(_pressingd && !_pressingu && _canact) {
 				_yvelocity = 6 * _speedfactor;
 			}
-			if(_counter3 % 5 == 0) {
+			if(_counter3 % 9 == 0) {
 				String s;
 				if(_atk1count == 0) {
 					s = "r";
@@ -147,9 +147,10 @@ public class Ninja1Char extends CDCharacter {
 					_atk1count = 0;
 				}
 				Image i = new Image("ultimoboss/shots/" + s + ".png");
-				Hitbox a = new HitboxImpl("uball", this, false, _x+56, _y+13, 24, 24, 15, 0, 0, 50, i);
+				Hitbox a = new HitboxImpl("uball", this, false, _x+56, _y+13, 24, 24, 15, 0, 0, 90, i);
 				a.setCircle(true);
 				TheGame._attacks.add(a);
+				TheGame.playSound("/ultimoboss/sounds/shot.wav");
 			}
 		}
 		
