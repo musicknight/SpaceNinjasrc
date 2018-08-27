@@ -149,7 +149,7 @@ public class ZeroChar extends CharacterImpl {
 			Hitbox attack = new OffsetHitbox("zslice1", this, x, 0, 54, 48, 5, 3.5, _clear);
 			attack.setSetKnockback(true);
 			TheGame._attacks.add(attack);
-			TheGame.playSound("/zero/sounds/zero1.wav");
+			GameSounds.playSound("/zero/sounds/zero1.wav");
 		}
 		if(_attack1stage == 2 && _counter >= 8) {
 			_getxleft = true;
@@ -169,7 +169,7 @@ public class ZeroChar extends CharacterImpl {
 			_width = 105;
 			_height = 57;
 			_xtumbling = true;
-			TheGame.playSound("/zero/sounds/zero1.wav");
+			GameSounds.playSound("/zero/sounds/zero1.wav");
 		}
 		}
 	}
@@ -207,7 +207,7 @@ public class ZeroChar extends CharacterImpl {
 			} else {
 				_image = new Image("zero/attack1/slash3left.gif");
 			}
-			TheGame.playSound("/zero/sounds/zero1.wav");
+			GameSounds.playSound("/zero/sounds/zero1.wav");
 		}
 		if(_counter == 6) {
 			//slash happens here
@@ -470,7 +470,7 @@ public class ZeroChar extends CharacterImpl {
 		_y-=3;
 		_height = 63;
 		}
-		TheGame.playSound("/zero/sounds/zero2.wav");
+		GameSounds.playSound("/zero/sounds/zero2.wav");
 	}
 	
 	public void executeAttack2() {
@@ -627,7 +627,7 @@ public class ZeroChar extends CharacterImpl {
 			_height = 99;
 			_y-=45;
 			TheGame._attacks.add(new OffsetHitbox("zjump1", this, x, 0, 51, 99, 15, 20, _clear));
-			TheGame.playSound("/zero/sounds/zero3.wav");
+			GameSounds.playSound("/zero/sounds/zero3.wav");
 		}
 		if(_counter == 7) {
 			if(_facing.equals("right")) {
@@ -711,7 +711,7 @@ public class ZeroChar extends CharacterImpl {
 		if(_counter == 19) {
 			_image = new Image("zero/attacku/spin2.gif");
 			TheGame._attacks.add(new OffsetHitbox("zult", this, 30, 30, 75, 75, 30, 30, _clear));
-			TheGame.playSound("/zero/sounds/zero1.wav");
+			GameSounds.playSound("/zero/sounds/zero1.wav");
 		}
 		if(_counter == 21) {
 			_image = new Image("zero/attacku/spin3.gif");
@@ -735,7 +735,7 @@ public class ZeroChar extends CharacterImpl {
 			_image = new Image("zero/attacku/spin6.gif");
 			TheGame.clearHitboxes("zult", this);
 			TheGame._attacks.add(new OffsetHitbox("zult", this, 30, 30, 75, 75, 30, 30, _clear));
-			TheGame.playSound("/zero/sounds/zero1.wav");
+			GameSounds.playSound("/zero/sounds/zero1.wav");
 		}
 		if(_counter == 29) {
 			_image = new Image("zero/attacku/spin7.gif");
@@ -870,7 +870,7 @@ public class ZeroChar extends CharacterImpl {
 			} else {
 				_image = new Image("zero/intro/intro2left.png");	
 			}
-			TheGame.playSound("/frank/sounds/intro.wav");
+			GameSounds.playSound("/frank/sounds/intro.wav");
 		}
 		if(_counter == 4) {
 			if(_facing.equals("right")) {

@@ -156,8 +156,8 @@ public class NarutoChar extends CharacterImpl {
 				attack.setForceLeft(true);
 			}
 			TheGame._attacks.add(attack);
-			TheGame.playSound("/naruto/sounds/throw.wav");
-			TheGame.playSound("/naruto/sounds/throwvoice.wav");
+			GameSounds.playSound("/naruto/sounds/throw.wav");
+			GameSounds.playSound("/naruto/sounds/throwvoice.wav");
 		}
 		if(_counter == 11) {
 			_width = (int)(53*1.2);
@@ -243,8 +243,8 @@ public class NarutoChar extends CharacterImpl {
 				attack.setForceLeft(true);
 			}
 			TheGame._attacks.add(attack);
-			TheGame.playSound("/naruto/sounds/throw.wav");
-			TheGame.playSound("/naruto/sounds/throwvoice.wav");
+			GameSounds.playSound("/naruto/sounds/throw.wav");
+			GameSounds.playSound("/naruto/sounds/throwvoice.wav");
 	
 		}
 		if(_counter == 12) {
@@ -296,8 +296,8 @@ public class NarutoChar extends CharacterImpl {
 				_image = new Image("naruto/attack2/punch2left.png");
 				_xvelocity = -15;
 			}
-			TheGame.playSound("/naruto/sounds/hit1.wav");
-			TheGame.playSound("/naruto/sounds/hit.wav");
+			GameSounds.playSound("/naruto/sounds/hit1.wav");
+			GameSounds.playSound("/naruto/sounds/hit.wav");
 			_xtumbling = true;
 		}
 		if(_counter == 9) {
@@ -361,8 +361,8 @@ public class NarutoChar extends CharacterImpl {
 				attack.setForceLeft(true);
 			}
 			TheGame._attacks.add(attack);
-			TheGame.playSound("/naruto/sounds/hit2.wav");
-			TheGame.playSound("/naruto/sounds/hit.wav");
+			GameSounds.playSound("/naruto/sounds/hit2.wav");
+			GameSounds.playSound("/naruto/sounds/hit.wav");
 		}
 		if(_counter == 24) {
 			_width = (int)(56*1.2);
@@ -415,7 +415,7 @@ public class NarutoChar extends CharacterImpl {
 				attack.setForceLeft(true);
 			}
 			TheGame._attacks.add(attack);
-			TheGame.playSound("/naruto/sounds/hit3.wav");
+			GameSounds.playSound("/naruto/sounds/hit3.wav");
 		}
 		if(_counter == 38) {
 			_width = (int)(57*1.2);
@@ -436,7 +436,7 @@ public class NarutoChar extends CharacterImpl {
 				_image = new Image("naruto/attack2/slam4left.png");
 			}
 			TheGame.clearHitboxes("naslam", this);
-			TheGame.playSound("/naruto/sounds/hit.wav");
+			GameSounds.playSound("/naruto/sounds/hit.wav");
 		}
 		if(_counter == 55) {
 			_attack2 = false;
@@ -460,7 +460,7 @@ public class NarutoChar extends CharacterImpl {
 		} else {
 			_image = new Image("naruto/attack3/shot1left.png");
 		}
-		TheGame.playSound("/naruto/sounds/chargevoice.wav");
+		GameSounds.playSound("/naruto/sounds/chargevoice.wav");
 		}
 	}
 	
@@ -475,7 +475,7 @@ public class NarutoChar extends CharacterImpl {
 			} else {
 				_image = new Image("naruto/attack3/shot2left.png");
 			}
-			TheGame.playSound("/naruto/sounds/charge.wav");
+			GameSounds.playSound("/naruto/sounds/charge.wav");
 			
 		}
 		if(_counter == 4) {
@@ -614,7 +614,7 @@ public class NarutoChar extends CharacterImpl {
 				attack.setForceLeft(true);
 			}
 			TheGame._attacks.add(attack);
-			TheGame.playSound("/naruto/sounds/ball.wav");
+			GameSounds.playSound("/naruto/sounds/ball.wav");
 			
 		}
 		if(_counter == 26) {
@@ -660,7 +660,7 @@ public class NarutoChar extends CharacterImpl {
 		} else {
 			_image = new Image("naruto/ult/ultleft.png");
 		}
-		TheGame.playSound("/naruto/sounds/ultvoice.wav");
+		GameSounds.playSound("/naruto/sounds/ultvoice.wav");
 		}
 	}
 	
@@ -711,7 +711,7 @@ public class NarutoChar extends CharacterImpl {
 		}
 		if(_ultcounter == 15){
 
-			TheGame.playSound("/naruto/sounds/charge.wav");
+			GameSounds.playSound("/naruto/sounds/charge.wav");
 		}
 		if(_ultcounter == 25) {
 			_canact = true;
@@ -724,7 +724,7 @@ public class NarutoChar extends CharacterImpl {
 		}
 		if(_ultcounter == 300){
 
-			TheGame.playSound("/naruto/sounds/charge.wav");
+			GameSounds.playSound("/naruto/sounds/charge.wav");
 		}
 		if(_ultcounter == 301) {
 			_clones.clear();
@@ -791,7 +791,7 @@ public class NarutoChar extends CharacterImpl {
 			} else {
 				_image = new Image("naruto/intro/intro2left.png");
 			}
-			TheGame.playSound("/naruto/sounds/hit1.wav");
+			GameSounds.playSound("/naruto/sounds/hit1.wav");
 		}
 		if(_counter == 8) {
 			if (_facing.equals("right")) {
@@ -806,7 +806,7 @@ public class NarutoChar extends CharacterImpl {
 			} else {
 				_image = new Image("naruto/intro/intro4left.png");
 			}
-			TheGame.playSound("/naruto/sounds/hit.wav");
+			GameSounds.playSound("/naruto/sounds/hit.wav");
 		}
 		if(_counter == 16) {
 			if (_facing.equals("right")) {

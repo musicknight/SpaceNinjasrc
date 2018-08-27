@@ -113,7 +113,7 @@ public class PhantomChar extends CharacterImpl {
 				_image = new Image("phantom/attack1/throw4left.png");
 				_x+=6;
 			}
-			TheGame.playSound("/phantom/sounds/throw1.wav");
+			GameSounds.playSound("/phantom/sounds/throw1.wav");
 		}
 		if(_counter == 8) {
 			_width = (int)(42*1.5);
@@ -188,7 +188,7 @@ public class PhantomChar extends CharacterImpl {
 				attack.setForceLeft(true);
 			}
 			TheGame._attacks.add(attack);
-			TheGame.playSound("/phantom/sounds/throw2.wav");
+			GameSounds.playSound("/phantom/sounds/throw2.wav");
 		}
 		if(_counter == 29) {
 			_width = (int)(45*1.5);
@@ -227,7 +227,7 @@ public class PhantomChar extends CharacterImpl {
 		}
 		_yvelocity = -9;
 		_xtumbling = true;
-		TheGame.playSound("/phantom/sounds/slash.wav");
+		GameSounds.playSound("/phantom/sounds/slash.wav");
 		}
 		
 	}
@@ -312,7 +312,7 @@ public class PhantomChar extends CharacterImpl {
 		_height = (int)(48*1.5);
 		_image = new Image("phantom/jump1.png");
 		_yvelocity = -15;
-		TheGame.playSound("/phantom/sounds/jump1.wav");
+		GameSounds.playSound("/phantom/sounds/jump1.wav");
 		}
 		
 		
@@ -331,7 +331,7 @@ public class PhantomChar extends CharacterImpl {
 			TheGame._attacks.add(attack1);
 			TheGame._attacks.add(attack2);
 			TheGame._attacks.add(attack3);
-			TheGame.playSound("/phantom/sounds/jump2.wav");
+			GameSounds.playSound("/phantom/sounds/jump2.wav");
 		}
 		
 		if(_counter == 6){
@@ -383,7 +383,7 @@ public class PhantomChar extends CharacterImpl {
 			if(_facing.equals("left")) {
 				_x-=16;
 			}
-			TheGame.playSound("/phantom/sounds/slash.wav");
+			GameSounds.playSound("/phantom/sounds/slash.wav");
 		}
 		if(_counter == 8) {
 			_image = new Image("phantom/ult/ult5.png");
@@ -406,7 +406,7 @@ public class PhantomChar extends CharacterImpl {
 		}
 		if(_counter == 18) {
 			_yvelocity = -35;
-			TheGame.playSound("/phantom/sounds/ult2.wav");
+			GameSounds.playSound("/phantom/sounds/ult2.wav");
 		}
 		if(_counter == 60) {
 			_yvelocity = 0;
@@ -432,7 +432,7 @@ public class PhantomChar extends CharacterImpl {
 			
 		}
 		if(_counter >= 60 && _counter % 5 == 0 && _counter < 250) {
-			TheGame.playSound("/phantom/sounds/ultthrow.wav");
+			GameSounds.playSound("/phantom/sounds/ultthrow.wav");
 		}
 		if(_counter == 270) {
 			_gravity = true;
@@ -497,7 +497,7 @@ public class PhantomChar extends CharacterImpl {
 			} else {
 				_image = new Image("phantom/intro/intro4left.gif");
 			}
-			TheGame.playSound("/phantom/sounds/slash.wav");
+			GameSounds.playSound("/phantom/sounds/slash.wav");
 		}
 		if(_counter == 12) {
 			if(_facing.equals("right")) {

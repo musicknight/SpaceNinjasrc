@@ -132,8 +132,8 @@ public class BuuChar extends CharacterImpl {
 				_image = new Image("buu/attack1/shot2left.png");
 				_x-=8;
 			}
-			TheGame.playSound("/buu/sounds/shotcharge.wav");
-			TheGame.playSound("/buu/sounds/chargevoice.wav");
+			GameSounds.playSound("/buu/sounds/shotcharge.wav");
+			GameSounds.playSound("/buu/sounds/chargevoice.wav");
 		}
 		if(_counter == 6) {
 			_width = (int)(29*1.5);
@@ -180,8 +180,8 @@ public class BuuChar extends CharacterImpl {
 				attack.setForceLeft(true);
 			}
 			TheGame._attacks.add(attack);
-			TheGame.playSound("/buu/sounds/shot.wav");
-			TheGame.playSound("/buu/sounds/shotvoice.wav");
+			GameSounds.playSound("/buu/sounds/shot.wav");
+			GameSounds.playSound("/buu/sounds/shotvoice.wav");
 		}
 		if(_counter == 21) {
 			if(_facing.equals("right")) {
@@ -250,8 +250,8 @@ public class BuuChar extends CharacterImpl {
 			}
 			TheGame._attacks.add(attack);
 
-			TheGame.playSound("/buu/sounds/slam.wav");
-			TheGame.playSound("/buu/sounds/slamvoice.wav");
+			GameSounds.playSound("/buu/sounds/slam.wav");
+			GameSounds.playSound("/buu/sounds/slamvoice.wav");
 			
 		}
 		if(_counter == 11) {
@@ -346,7 +346,7 @@ public class BuuChar extends CharacterImpl {
 				_image = new Image("buu/attack2/whip3left.png");
 				_x-=6;
 			}
-			TheGame.playSound("/buu/sounds/whipvoice.wav");
+			GameSounds.playSound("/buu/sounds/whipvoice.wav");
 		}
 		if(_counter == 20){
 			_width = (int)(70*1.5);
@@ -375,7 +375,7 @@ public class BuuChar extends CharacterImpl {
 				attack.setForceLeft(true);
 			}
 			TheGame._attacks.add(attack);
-			TheGame.playSound("/buu/sounds/whip.wav");
+			GameSounds.playSound("/buu/sounds/whip.wav");
 		}
 		if(_counter == 24){
 			_width = (int)(75*1.5);
@@ -474,8 +474,8 @@ public class BuuChar extends CharacterImpl {
 				attack.setForceLeft(true);
 			}
 			TheGame._attacks.add(attack);
-			TheGame.playSound("/buu/sounds/kick.wav");
-			TheGame.playSound("/buu/sounds/kickvoice.wav");
+			GameSounds.playSound("/buu/sounds/kick.wav");
+			GameSounds.playSound("/buu/sounds/kickvoice.wav");
 		}
 		if(_counter == 16) {
 			_width = (int)(35*1.5);
@@ -539,7 +539,7 @@ public class BuuChar extends CharacterImpl {
 		if(_counter == 20) {
 			_yvelocity = 0;
 			_gravity = false;
-			TheGame.playSound("/buu/sounds/flash.wav");
+			GameSounds.playSound("/buu/sounds/flash.wav");
 		}
 		if(_counter == 23) {
 			_width = (int)(54*1.5);
@@ -570,8 +570,8 @@ public class BuuChar extends CharacterImpl {
 			TheGame._gc.drawImage(new Image("buu/ult/bomb.png"), _x+x, _y-(int)(145*1.5), (int)(145*1.5), (int)(146*1.5));
 		}
 		if(_counter == 35) {
-			TheGame.playSound("/buu/sounds/ultcharge.wav");
-			TheGame.playSound("/buu/sounds/ultvoice1.wav");
+			GameSounds.playSound("/buu/sounds/ultcharge.wav");
+			GameSounds.playSound("/buu/sounds/ultvoice1.wav");
 		}
 		if(_counter == 55) {
 			int x;
@@ -593,15 +593,15 @@ public class BuuChar extends CharacterImpl {
 				attack.setForceLeft(true);
 			}
 			TheGame._attacks.add(attack);
-			TheGame.playSound("/buu/sounds/ultshot.wav");
-			TheGame.playSound("/buu/sounds/ultvoice2.wav");
+			GameSounds.playSound("/buu/sounds/ultshot.wav");
+			GameSounds.playSound("/buu/sounds/ultvoice2.wav");
 		}
 		if(_counter >= 125 && _counter < 130) {
 			TheGame._gc.setFill(Color.WHITE);
 			TheGame._gc.fillRect(0, 0, 900, 600);
 		}
 		if(_counter == 125) {
-			TheGame.playSound("/buu/sounds/flash.wav");
+			GameSounds.playSound("/buu/sounds/flash.wav");
 		}
 		if(_counter == 127) {
 			_width = (int)(37*1.5);

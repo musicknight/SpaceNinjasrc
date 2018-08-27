@@ -22,7 +22,7 @@ public abstract class CharacterImpl extends EntityImpl implements Character {
 	protected boolean _onplatform = false;
 	protected boolean _canact = true;
 	protected boolean _canjump1 = true;
-	private boolean _canjump2 = true;
+	protected boolean _canjump2 = true;
 	protected String _facing;
 	protected double _damage = 1;
 	protected boolean _xtumbling;
@@ -69,6 +69,7 @@ public abstract class CharacterImpl extends EntityImpl implements Character {
 			protected int _spriteindex = 0;
 			protected int _spritecount = 4;
 	protected boolean _animate = true;
+	protected boolean _canjump3 = true;
 
 	public CharacterImpl(String ID) {
 		super(0, 300, ID);
@@ -102,50 +103,17 @@ public abstract class CharacterImpl extends EntityImpl implements Character {
 		}
 		}
 		gc.drawImage(_image, _x, _y, _width, _height);
-		if(_intro) {
-			doIntro();
-		}
-		if (_immune) {
-
-			if (_spawnimmunecounter == 60) {
-				_immune = false;
-			}
-		}
-		if (_cd != 0) {
-			_canact = false;
-			if (!_xtumbling) {
-				_xvelocity = 0;
-			}
-			if (_xtumbling) {
-				_cd = 0;
-			}
-			if (_counter == _cd) {
-				_canact = true;
-				_cd = 0;
-			}
-		}
+		
+		
+		
 		if(_canmovex && !_dontmove) {
-			_x += _xvelocity;
+			_x += (_xvelocity);
 		}
 		if(_canmovey) {
-			_y+= _yvelocity;
+			_y+= (_yvelocity);
 		}
-		if(_y > 600) {
-			_y+=300;
-			if(_lives >= 1) {
-			if(!_startedrespawning) {
-				_counter = 0;
-				_startedrespawning = true;
-				die();
-				_canact = false;
-				TheGame.playSound("/sounds/death.wav");
-			}
-			if(_counter == 30) {
-				respawn();
-				_startedrespawning = false;
-			}
-		}
-		}
+		
+		
 		if(_canact && _storedxv != 0) {
 			_xvelocity = _storedxv;
 			_storedxv = 0;
@@ -164,76 +132,14 @@ public abstract class CharacterImpl extends EntityImpl implements Character {
 
 	public void move() {
 
-		if (_xtumbling) {
-			if (_xvelocity > 0) {
-				if (_xvelocity < _xvelocity / 10) {
-					_xvelocity = 0;
-
-				} else if (_xvelocity < 3) {
-					if (_xvelocity < 1) {
-						_xvelocity = 0;
-						_xtumbling = false;
-						_canact = true;
-						_xvelocity = _storedxv;
-						_storedxv = 0;
-						if(_xvelocity > 0) {
-							_facing = "right";
-						}
-						if(_xvelocity < 0) {
-							_facing = "left";
-						}
-
-					} else {
-
-						_xvelocity -= .5;
-
-					}
-				} else {
-					_xvelocity -= _xvelocity / 10;
-
-				}
-			} else {
-				double xvelocity = Math.abs(_xvelocity);
-				if (xvelocity < xvelocity / 10) {
-					_xvelocity = 0;
-
-				} else if (xvelocity < 3) {
-					if (xvelocity < 1) {
-						_xvelocity = 0;
-						_xtumbling = false;
-						_canact = true;
-						_xvelocity = _storedxv;
-						_storedxv = 0;
-				        
-						if(_xvelocity > 0) {
-							_facing = "right";
-						}
-						if(_xvelocity < 0) {
-							_facing = "left";
-						}
-					} else {
-
-						_xvelocity += .5;
-
-					}
-				} else {
-					_xvelocity -= _xvelocity / 10;
-
-				}
-
-			}
-		}
+		
 		if(_pressingr && !_pressingl && _canact) {
 			_xvelocity = 5.5 * _speedfactor;
 		}
 		if(_pressingl && !_pressingr && _canact) {
 			_xvelocity = -5.5 * _speedfactor;
 		}
-		if (_ytumbling) {
-			if (_yvelocity == 0) {
-				_ytumbling = false;
-			}
-		}
+		
 		for(Platform p : TheGame.getPlatforms()){
 			if ((_x + _width + _xvelocity < 930 && _x - 3 + _xvelocity > -30)) {
 				if ((_y > p.getY() - _height && (_x + _xvelocity > p.getX() - _width && _x + _xvelocity < (p.getX() + p.getWidth())))) {
@@ -268,6 +174,7 @@ public abstract class CharacterImpl extends EntityImpl implements Character {
 				_yvelocity = 0;
 				_canjump1 = true;
 				_canjump2 = true;
+				_canjump3  = true;
 				_canmovey = false;
 			} else {
 				if(TheGame.getPlatforms().indexOf(p) ==0) {

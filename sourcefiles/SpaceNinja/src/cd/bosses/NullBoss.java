@@ -7,7 +7,7 @@ import cd.TheGame;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
-
+import cd.GameSounds;
 public class NullBoss extends Boss {
 
 	private Button _reset = new Button("reset");
@@ -39,7 +39,7 @@ public class NullBoss extends Boss {
 		
 		if(_counter4 == 680) {
 			TheGame.stopText();
-			TheGame.playStageSong("/songs/theme2.mp3");
+			GameSounds.playStageSong("/songs/theme2.mp3");
 			TheGame._backdrops.add(_1);
 			_bd = _1;
 					

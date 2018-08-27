@@ -198,7 +198,7 @@ public class SpecterChar extends CharacterImpl {
 				attack.setForceLeft(true);
 			}
 			TheGame._attacks.add(attack);
-			TheGame.playSound("/specter/sounds/specter1.wav");
+			GameSounds.playSound("/specter/sounds/specter1.wav");
 		}
 		if(_counter == 20) {
 			_y-=1;
@@ -257,7 +257,7 @@ public class SpecterChar extends CharacterImpl {
 			}
 			Hitbox attack = new OffsetHitbox("specsmash", this, x, 15, (int)(53*1.5), (int)(29*1.5), 30, 30, _clear);
 			TheGame._attacks.add(attack);
-			TheGame.playSound("/specter/sounds/specter2.wav");
+			GameSounds.playSound("/specter/sounds/specter2.wav");
 		}
 		if(_counter == 14) {
 			_width = (int)(82*1.5);
@@ -333,7 +333,7 @@ public class SpecterChar extends CharacterImpl {
 			}
 			Hitbox attack = new OffsetHitbox("specdash1", this, x, 0, (int)(29*1.5), (int)(35*1.5), 10, 13, _clear);
 			TheGame._attacks.add(attack);
-			TheGame.playSound("/specter/sounds/specter3.wav");
+			GameSounds.playSound("/specter/sounds/specter3.wav");
 			_xtumbling = true;
 			_yvelocity = -11;
 		}
@@ -357,7 +357,7 @@ public class SpecterChar extends CharacterImpl {
 			TheGame.clearHitboxes("specdash1", this);
 			Hitbox attack = new OffsetHitbox("specdash1", this, x, 0, (int)(29*1.5), (int)(35*1.5), 10, 13, _clear);
 			TheGame._attacks.add(attack);
-			TheGame.playSound("/specter/sounds/specter3.wav");
+			GameSounds.playSound("/specter/sounds/specter3.wav");
 		}
 	}
 	
@@ -428,7 +428,7 @@ public class SpecterChar extends CharacterImpl {
 		_xvelocity = 0;
 		_canact = false;
 		_immune = true;
-		TheGame.playSound("/specter/sounds/specter6.wav");
+		GameSounds.playSound("/specter/sounds/specter6.wav");
 		}
 	}
 	
@@ -475,7 +475,7 @@ public class SpecterChar extends CharacterImpl {
 			_xvelocity = 0;
 			_yvelocity = 0;
 			_image = new Image("/specter/ultvanish1.png");
-			TheGame.playSound("/specter/sounds/specter3.wav");
+			GameSounds.playSound("/specter/sounds/specter3.wav");
 		}
 		if(_counter == 302) {
 			_image = new Image("/specter/ultvanish2.png");
@@ -511,7 +511,7 @@ public class SpecterChar extends CharacterImpl {
 			_width = (int)(49*1.5);
 			_height = (int)(45*1.5);
 			_image = new Image("/specter/appear1.png");
-			TheGame.playSound("/specter/sounds/specter3.wav");
+			GameSounds.playSound("/specter/sounds/specter3.wav");
 		}
 		if(_counter == 352) {
 			_image = new Image("/specter/appear2.png");
@@ -551,7 +551,7 @@ public class SpecterChar extends CharacterImpl {
 				_image = new Image(_skin + "ultslash1left.png");
 				_x-=(int)(85*1.5);
 			}
-			TheGame.playSound("/specter/sounds/specter4.wav");
+			GameSounds.playSound("/specter/sounds/specter4.wav");
 		}
 		if(_ultattackcounter == 16) {
 			int x;
@@ -564,7 +564,7 @@ public class SpecterChar extends CharacterImpl {
 			}
 			Hitbox attack = new OffsetHitbox("ultslash", this, x, 36, (int)(84*1.5), (int)(48*1.5), 40, 40, _clear);
 			TheGame._attacks.add(attack);
-			TheGame.playSound("/specter/sounds/specter5.wav");
+			GameSounds.playSound("/specter/sounds/specter5.wav");
 		}
 		if(_ultattackcounter == 19) {
 			if(_ultfacing.equals("right")) {
@@ -725,7 +725,7 @@ public class SpecterChar extends CharacterImpl {
 			} else {
 				_image = new Image(_skin + "intro/intro1left.png");
 			}
-			TheGame.playSound("/specter/sounds/specter6.wav");
+			GameSounds.playSound("/specter/sounds/specter6.wav");
 		}
 		if(_counter == 3) {
 		if(_facing.equals("right")) {

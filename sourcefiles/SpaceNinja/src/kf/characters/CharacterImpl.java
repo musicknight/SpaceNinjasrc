@@ -126,7 +126,7 @@ public abstract class CharacterImpl extends EntityImpl implements Character {
 				_startedrespawning = true;
 				die();
 				_canact = false;
-				TheGame.playSound("/sounds/death.wav");
+				GameSounds.playSound("/sounds/death.wav");
 			}
 			if(_counter == 30) {
 				respawn();

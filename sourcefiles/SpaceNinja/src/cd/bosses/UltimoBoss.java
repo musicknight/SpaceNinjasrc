@@ -13,7 +13,7 @@ import cd.TheGame;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javazoom.jlgui.basicplayer.BasicPlayerException;
-
+import cd.GameSounds;
 public class UltimoBoss extends Boss {
 
 	private List<Image> _balls = new ArrayList<Image>();
@@ -57,7 +57,7 @@ public class UltimoBoss extends Boss {
 		} else {
 			_1sttime = true;
 		}
-		_health = 20;
+		_health = 2000;
 		_width = 150;
 		_height = 150;
 		_staticimage = new Image("ultimoboss/1.png");
@@ -111,13 +111,7 @@ public class UltimoBoss extends Boss {
 				if(_text == 11) {
 					_counter3 = 0;
 					_1sttime = false;
-					try {
-						TheGame._player.stop();
-					} catch (BasicPlayerException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					TheGame.playStageSong("/songs/ultimo.mp3");
+					GameSounds.playStageSong("/songs/ultimo.mp3");
 					TheGame._character1.setCanAct(true);
 					TheGame.endUDialogue();
 				} else {
@@ -213,12 +207,7 @@ public class UltimoBoss extends Boss {
 		if(_over) {
 				executeOver();
 				if(!_songstopped) {
-					try {
-						TheGame._player.stop();
-					} catch (BasicPlayerException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+					GameSounds.stopPlayer();
 					_counter2 = 0;
 					TheGame.stopText();
 					_songstopped = true;
@@ -325,7 +314,7 @@ public class UltimoBoss extends Boss {
 			a.setDissappearOnHit(false);
 			a.setCircle(true);
 			TheGame._attacks.add(a);
-			TheGame.playSound("/ultimoboss/sounds/shot.wav");
+			GameSounds.playSound("/ultimoboss/sounds/shot.wav");
 		}
 		if(_counter4 == 150) {
 			_yvelocity = -13;
@@ -359,7 +348,7 @@ public class UltimoBoss extends Boss {
 			c.setCircle(true);
 			c.setDissappearOnHit(false);
 			TheGame._attacks.add(c);
-			TheGame.playSound("/ultimoboss/sounds/shot.wav");
+			GameSounds.playSound("/ultimoboss/sounds/shot.wav");
 		}
 		if(_counter4 == 70) {
 			_xvelocity = -18;
@@ -398,7 +387,7 @@ public class UltimoBoss extends Boss {
 			a.setDissappearOnHit(false);
 			a.setCircle(true);
 			TheGame._attacks.add(a);
-			TheGame.playSound("/ultimoboss/sounds/shot.wav");
+			GameSounds.playSound("/ultimoboss/sounds/shot.wav");
 		}
 		if(_counter4 == 40) {
 			_yvelocity = -14;
@@ -411,7 +400,7 @@ public class UltimoBoss extends Boss {
 			a.setDissappearOnHit(false);
 			a.setCircle(true);
 			TheGame._attacks.add(a);
-			TheGame.playSound("/ultimoboss/sounds/shot.wav");
+			GameSounds.playSound("/ultimoboss/sounds/shot.wav");
 		}
 		if(_counter4 == 65) {
 			_yvelocity = 14;
@@ -457,7 +446,7 @@ public class UltimoBoss extends Boss {
 			_gdrop.setY(442-200);
 			_gdrop.setYVelocity(0);
 			_gdrop.setGravity(false);
-			TheGame.playSound("/rockboss/sounds/slam.wav");
+			GameSounds.playSound("/rockboss/sounds/slam.wav");
 			if(TheGame._character1.getY() == 392) {
 				TheGame._character1.setCanAct(false);
 				TheGame._character1.setXVelocity(0);
@@ -478,7 +467,7 @@ public class UltimoBoss extends Boss {
 			a.setDissappearOnHit(false);
 			a.setCircle(true);
 			TheGame._attacks.add(a);
-			TheGame.playSound("/ultimoboss/sounds/shot.wav");
+			GameSounds.playSound("/ultimoboss/sounds/shot.wav");
 		}
 		if(_counter4 == 90) {
 			_yvelocity = 0;
@@ -614,7 +603,7 @@ public class UltimoBoss extends Boss {
 			 a.setCircle(true);
 			 a.setDissappearOnHit(false);
 			 TheGame._attacks.add(a);
-			 TheGame.playSound("/ultimoboss/sounds/shot.wav");
+			 GameSounds.playSound("/ultimoboss/sounds/shot.wav");
 			} else if(_counter4 >= 100) {
 				Hitbox a = new HitboxImpl("uball", this, false, _x+37, _y+37, 75, 75, 10, 6, 0, 1, new Image("ultimoboss/shots/r.png"));
 				 a.setCircle(true);
@@ -648,7 +637,7 @@ public class UltimoBoss extends Boss {
 				 a.setCircle(true);
 				 a.setDissappearOnHit(false);
 				 TheGame._attacks.add(a);
-				 TheGame.playSound("/ultimoboss/sounds/shot.wav");
+				 GameSounds.playSound("/ultimoboss/sounds/shot.wav");
 			}
 		}
 		if(_counter4 == 126 && _ratk2count < 2) {
@@ -687,14 +676,14 @@ public class UltimoBoss extends Boss {
 			
 		}
 		if(_counter4 >= 20) {
-			makeVLaser(_counter4-20, 0, "laser");
-			makeVLaser(_counter4-20, 225, "laser");
-			makeVLaser(_counter4-20, 450, "laser");
-			makeVLaser(_counter4-20, 675, "laser");
+			makeVLaser(_counter4-20, 0, "laser", true);
+			makeVLaser(_counter4-20, 225, "laser", false);
+			makeVLaser(_counter4-20, 450, "laser", false);
+			makeVLaser(_counter4-20, 675, "laser", false);
 		}
 		if(_counter4 == 60) {
 			_xvelocity = 7;
-			TheGame.playSound("/spikeboss/sounds/dash.wav");
+			GameSounds.playSound("/spikeboss/sounds/dash.wav");
 		}
 		if(_counter4 == 70){
 			_xvelocity = -30;
@@ -710,7 +699,7 @@ public class UltimoBoss extends Boss {
 			a.setCircle(true);
 			a.setDissappearOnHit(false);
 			TheGame._attacks.add(a);
-			TheGame.playSound("/ultimoboss/sounds/shot.wav");
+			GameSounds.playSound("/ultimoboss/sounds/shot.wav");
 		}
 		if(_counter4 == 225) {
 			_rate2 = 3;
@@ -745,36 +734,36 @@ public class UltimoBoss extends Boss {
 			a.setCircle(true);
 			a.setDissappearOnHit(false);
 			TheGame._attacks.add(a);
-			TheGame.playSound("/ultimoboss/sounds/shot.wav");
+			GameSounds.playSound("/ultimoboss/sounds/shot.wav");
 		}
 		if(_counter4 >= 15) {
-			makeHLaser( _counter4 - 15, 420, "laser");
-			makeHLaser( _counter4 - 15, 380, "laser");
-			makeHLaser( _counter4 - 15, 340, "laser");
+			makeHLaser( _counter4 - 15, 420, "laser", true);
+			makeHLaser( _counter4 - 15, 380, "laser", false);
+			makeHLaser( _counter4 - 15, 340, "laser", false);
 		}
 		if(_counter4 == 85) {
 			TheGame.clearHitboxes("laser", this);
 		}
 		if(_counter4 >= 115) {
-			makeHLaser( _counter4 - 115, 420, "laser");
-			makeHLaser( _counter4 - 115, 380, "laser");
-			makeHLaser( _counter4 - 115, 340, "laser");
+			makeHLaser( _counter4 - 115, 420, "laser", true);
+			makeHLaser( _counter4 - 115, 380, "laser", false);
+			makeHLaser( _counter4 - 115, 340, "laser", false);
 		}
 		if(_counter4 == 185) {
 			TheGame.clearHitboxes("laser", this);
 		}
 		if(_counter4 >= 215) {
-			makeHLaser( _counter4 - 215, 420, "laser");
-			makeHLaser( _counter4 - 215, 380, "laser");
-			makeHLaser( _counter4 - 215, 340, "laser");
+			makeHLaser( _counter4 - 215, 420, "laser", true);
+			makeHLaser( _counter4 - 215, 380, "laser", false);
+			makeHLaser( _counter4 - 215, 340, "laser", false);
 		}
 		if(_counter4 == 285) {
 			TheGame.clearHitboxes("laser", this);
 		}
 		if(_counter4 >= 315) {
-			makeHLaser( _counter4 - 315, 420, "laser");
-			makeHLaser( _counter4 - 315, 380, "laser");
-			makeHLaser( _counter4 - 315, 340, "laser");
+			makeHLaser( _counter4 - 315, 420, "laser", true);
+			makeHLaser( _counter4 - 315, 380, "laser", false);
+			makeHLaser( _counter4 - 315, 340, "laser", false);
 		}
 		if(_counter4 == 385) {
 			TheGame.clearHitboxes("laser", this);
@@ -790,11 +779,11 @@ public class UltimoBoss extends Boss {
 	private void changeform0() {
 		if(_counter4 == 1) {
 			_rate2 = 1;
-			TheGame.playSound("/spikeboss/sounds/dash.wav");
+			GameSounds.playSound("/spikeboss/sounds/dash.wav");
 		}
 		if(_counter4 == 20) {
 			TheGame._frontdrops.add(_flash);
-			TheGame.playSound("/ultimoboss/sounds/flash.wav");
+			GameSounds.playSound("/ultimoboss/sounds/flash.wav");
 		}
 		if(_counter4 == 22) {
 			_balls.clear();
@@ -836,11 +825,11 @@ public class UltimoBoss extends Boss {
 	private void changeform3() {
 		if(_counter4 == 1) {
 			_rate2 = 1;
-			TheGame.playSound("/spikeboss/sounds/dash.wav");
+			GameSounds.playSound("/spikeboss/sounds/dash.wav");
 		}
 		if(_counter4 == 20) {
 			TheGame._frontdrops.add(_flash);
-			TheGame.playSound("/ultimoboss/sounds/flash.wav");
+			GameSounds.playSound("/ultimoboss/sounds/flash.wav");
 		}
 		if(_counter4 == 22) {
 			_balls.clear();
@@ -881,11 +870,11 @@ public class UltimoBoss extends Boss {
 	private void changeform2() {
 		if(_counter4 == 1) {
 			_rate2 = 1;
-			TheGame.playSound("/spikeboss/sounds/dash.wav");
+			GameSounds.playSound("/spikeboss/sounds/dash.wav");
 		}
 		if(_counter4 == 20) {
 			TheGame._frontdrops.add(_flash);
-			TheGame.playSound("/ultimoboss/sounds/flash.wav");
+			GameSounds.playSound("/ultimoboss/sounds/flash.wav");
 		}
 		if(_counter4 == 22) {
 			_balls.clear();
@@ -926,11 +915,11 @@ public class UltimoBoss extends Boss {
 	private void changeform1() {
 		if(_counter4 == 1) {
 			_rate2 = 1;
-			TheGame.playSound("/spikeboss/sounds/dash.wav");
+			GameSounds.playSound("/spikeboss/sounds/dash.wav");
 		}
 		if(_counter4 == 20) {
 			TheGame._frontdrops.add(_flash);
-			TheGame.playSound("/ultimoboss/sounds/flash.wav");
+			GameSounds.playSound("/ultimoboss/sounds/flash.wav");
 		}
 		if(_counter4 == 22) {
 			_balls.clear();
@@ -984,9 +973,9 @@ public class UltimoBoss extends Boss {
 		}
 	}
 	
-	private void makeHLaser(int c, int y, String s) {
-		if(c == 0) {
-			TheGame.playSound("/botboss/sounds/charge.wav");
+	private void makeHLaser(int c, int y, String s, boolean b) {
+		if(c == 0 && b) {
+			GameSounds.playSound("/botboss/sounds/charge.wav");
 		}
 		if(c < 60) {
 			TheGame._gc.drawImage(new Image("ultimoboss/lasers/hpre.png"), 0, y, 900, 22);
@@ -995,9 +984,9 @@ public class UltimoBoss extends Boss {
 			Hitbox a = new MeleeHitbox(s, this, 0, y, 900, 22, 0, 1, new Image("ultimoboss/lasers/h1.png"));
 			a.setDissappearOnHit(false);
 			TheGame._attacks.add(a);
-			TheGame.playSound("/botboss/sounds/shot.wav");
-			if(!_lasershot){
-				TheGame.playSound("/botboss/sounds/shot.wav");
+			
+			if(!_lasershot && b){
+				GameSounds.playSound("/botboss/sounds/shot.wav");
 				_lasershot = true;
 				}
 		}
@@ -1005,10 +994,12 @@ public class UltimoBoss extends Boss {
 			_lasershot = false;
 		}
 	}
-	private void makeVLaser(int c, int x, String s) {
+	private void makeVLaser(int c, int x, String s, boolean b) {
 		
 		if(c == 0) {
-			TheGame.playSound("/botboss/sounds/charge.wav");
+			if(b){
+			GameSounds.playSound("/botboss/sounds/charge.wav");
+			}
 		}
 		if(c < 60) {
 			TheGame._gc.drawImage(new Image("ultimoboss/lasers/vpre.png"), x, 60, 22, 900);
@@ -1017,8 +1008,8 @@ public class UltimoBoss extends Boss {
 			Hitbox a = new MeleeHitbox(s, this, x, 60, 22, 900, 0, 1, new Image("ultimoboss/lasers/v1.png"));
 			a.setDissappearOnHit(false);
 			TheGame._attacks.add(a);
-			if(!_lasershot){
-			TheGame.playSound("/botboss/sounds/shot.wav");
+			if(!_lasershot && b){
+			GameSounds.playSound("/botboss/sounds/shot.wav");
 			_lasershot = true;
 			}
 		}
@@ -1069,7 +1060,7 @@ public class UltimoBoss extends Boss {
 			Hitbox a = new HitboxImpl("shot", TheGame._character1, false, 899, _y+40, 20, 20, -7, 0, 0, 1, new Image("tootboss/shot.png"));
 			a.setCircle(true);
 			TheGame._attacks.add(a);
-			TheGame.playSound("/tootboss/sounds/shot.wav");
+			GameSounds.playSound("/tootboss/sounds/shot.wav");
 		}
 		if(_counter2 == 760) {
 			TheGame.stopText();

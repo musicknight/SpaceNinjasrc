@@ -13,7 +13,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.stage.WindowEvent;
 import javazoom.jlgui.basicplayer.BasicPlayerException;
-
+import cd.GameSounds;
 public class TootBoss2 extends Boss{
 	
 	private List<Image> _balls = new ArrayList<Image>();
@@ -40,6 +40,7 @@ public class TootBoss2 extends Boss{
 	private boolean _negative;
 	private boolean _end;
 	private boolean _change2;
+	private int _attack1var;
 	
 	public TootBoss2() {
 		super(900, 600, "tootboss2");
@@ -96,14 +97,7 @@ public class TootBoss2 extends Boss{
 				TheGame._beattoot2 = "t";
 				TheGame.writeData();
 				TheGame._closed = true;
-				try {
-					TheGame._player.stop();
-					
-				} catch (BasicPlayerException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
+				GameSounds.stopPlayer();
 				TheGame._stage.close();
 			}
 			 if(!_dead && !_spawning) {
@@ -197,6 +191,12 @@ public class TootBoss2 extends Boss{
 				}
 				if(i == 0) {
 					attack1();
+					_attack1var = _random.nextInt(2);
+					if(_attack1var == 0) {
+						_atk1speed = -20;
+					} else {
+						_atk1speed = -40;
+					}
 					_repeat1++;
 					_repeat2 = 0;
 					_repeat3 = 0;
@@ -289,13 +289,8 @@ public class TootBoss2 extends Boss{
 			TheGame._beatultimo = "t";
 			TheGame.writeData();
 			if(!_intsongstarted && _rate != 1){
-			try {
-				TheGame._player.stop();
-			} catch (BasicPlayerException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			TheGame.playStageSong("/songs/tootcreepy.mp3");
+			
+			GameSounds.playStageSong("/songs/tootcreepy.mp3");
 			_intsongstarted = true;
 			}
 		}
@@ -332,17 +327,12 @@ public class TootBoss2 extends Boss{
 			_sprites.add(new Image("tootboss2/spin/19.png"));
 			_sprites.add(new Image("tootboss2/spin/20.png"));
 			_rate = 1;
-			try {
-				TheGame._player.stop();
-			} catch (BasicPlayerException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			TheGame.playStageSong("/songs/toot2.mp3");
+			
+			GameSounds.playStageSong("/songs/toot2.mp3");
 		}
 		if(_counter2 == 280) {
 			TheGame._frontdrops.add(_flash);
-			TheGame.playSound("/ultimoboss/sounds/flash.wav");
+			GameSounds.playSound("/ultimoboss/sounds/flash.wav");
 		}
 		if(_counter2 == 283) {
 			_width = 150;
@@ -372,7 +362,7 @@ public class TootBoss2 extends Boss{
 		}
 		if(_counter2 == 285) {
 			TheGame._frontdrops.remove(_flash);
-			_health = 1000;
+			_health = 500;
 			_spawning = false;
 			
 			_counter3 = 0;
@@ -386,25 +376,34 @@ public class TootBoss2 extends Boss{
 		_xvelocity = 15;
 		_attack1 = true;
 		_counter4 = 0;
+		
 	}
 	
 	public void executeAttack1() {
 		if(_counter4 == 25) {
 			_xvelocity = 0;
 		}
-		if(_counter4 >= 25 && _counter4 % 4 == 0 && _counter4 < 250) {
+		if(_counter4 >= 25 && _counter4 % 5 == 0 && _counter4 < 250) {
 			Hitbox a = new AnimatedHitbox("smile", this, true, 900, 60, 75, 75, _atk1speed, 20, 0, 1, _spin, 2);
 			a.setBounces(true);
 			a.setCircle(true);
 			a.setDissappearOnHit(false);
 			TheGame._attacks.add(a);
-			TheGame.playSound("/ultimoboss/sounds/shot.wav");
+			GameSounds.playSound("/ultimoboss/sounds/shot.wav");
 		}
 		if(_counter4 >= 80 && _counter4 < 141 && _counter4 % 2 == 0) {
+			if(_attack1var == 0){
 			_atk1speed -=1;
+			} else {
+				_atk1speed +=1;
+			}
 		}
 		if(_counter4 >= 141 && _counter4 < 220 && _counter4 % 2 == 0){
-			_atk1speed +=1;
+			if(_attack1var == 0){
+				_atk1speed +=1;
+				} else {
+					_atk1speed +=2;
+				}
 		}
 		if(_counter4 == 240) {
 			_xvelocity = -15;
@@ -430,7 +429,7 @@ public class TootBoss2 extends Boss{
 		}
 		if(_counter4 == 30) {
 			_xvelocity = 4;
-			TheGame.playSound("/spikeboss/sounds/dash.wav");
+			GameSounds.playSound("/spikeboss/sounds/dash.wav");
 		}
 		if(_counter4 == 45) {
 			_xvelocity = -90;
@@ -457,29 +456,34 @@ public class TootBoss2 extends Boss{
 	
 	public void attack3() {
 		_yvelocity = 20;
-		_counter4 = 0;
+		_counter4 = -20;
 		_attack3 = true;
+		GameSounds.playSound("/botboss/sounds/charge.wav");
 	}
 	
 	public void executeAttack3() {
-		if(_counter4 == 9) {
+		if(_counter4 == -11) {
 			_yvelocity = 0;
-			Hitbox a = new AnimatedHitbox("smile", this, false, _x, _y+((_width-60)/2), 75, 75, -20, 0, 0, 1, _spin, 2);
+		}
+		
+		if(_counter4 == 9 ) {
+			_yvelocity = 0;
+			Hitbox a = new AnimatedHitbox("smile", this, false, _x, _y+((_width-60)/2), 75, 75, -17, 0, 0, 1, _spin, 2);
 			a.setCircle(true);
 			a.setDissappearOnHit(false);
 			TheGame._attacks.add(a);
-			TheGame.playSound("/ultimoboss/sounds/shot.wav");
+			GameSounds.playSound("/ultimoboss/sounds/shot.wav");
 		}
 		if(_counter4 == 24) {
 			_yvelocity = -20;
 		}
 		if(_counter4 == 29) {
 			_yvelocity = 0;
-			Hitbox a = new AnimatedHitbox("smile", this, false, _x, _y+((_width-60)/2), 75, 75, -20, 0, 0, 1, _spin, 2);
+			Hitbox a = new AnimatedHitbox("smile", this, false, _x, _y+((_width-60)/2), 75, 75, -17, 0, 0, 1, _spin, 2);
 			a.setCircle(true);
 			a.setDissappearOnHit(false);
 			TheGame._attacks.add(a);
-			TheGame.playSound("/ultimoboss/sounds/shot.wav");
+			GameSounds.playSound("/ultimoboss/sounds/shot.wav");
 		}
 		if(_counter4 == 44 && _atk3count < 4) {
 			_yvelocity = 20;
@@ -540,7 +544,7 @@ public class TootBoss2 extends Boss{
 			 if(_attack4var == 1) {
 				 _big2.setYVelocity(0); 
 			 }
-			 TheGame.playSound("/rockboss/sounds/slam.wav");
+			 GameSounds.playSound("/rockboss/sounds/slam.wav");
 		 }
 		 if(_counter4 == 85) {
 			 _big1.setYVelocity(-25);

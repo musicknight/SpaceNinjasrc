@@ -67,7 +67,7 @@ public class SansChar extends CharacterImpl {
 			}
 		}
 		TheGame._attacks.add(attack);
-		TheGame.playSound("/sounds/sans1.wav");
+		GameSounds.playSound("/sounds/sans1.wav");
 				
 
 	}
@@ -123,7 +123,7 @@ public class SansChar extends CharacterImpl {
 			if (_counter == 10) {
 				// TheGame._preattacks.clear();
 				TheGame._attacks.add(attack);
-				TheGame.playSound("/sounds/sans2.wav");
+				GameSounds.playSound("/sounds/sans2.wav");
 
 			}
 			if (_counter == 14) {
@@ -147,7 +147,7 @@ public class SansChar extends CharacterImpl {
 		_counter = 0;
 		_attack3 = true;
 		_image = new Image("charge.png");
-		TheGame.playSound("/sounds/sans3.wav");
+		GameSounds.playSound("/sounds/sans3.wav");
 
 	}
 
@@ -248,7 +248,7 @@ public class SansChar extends CharacterImpl {
 			} else {
 				_image = new Image("gasterleft.png");
 			}
-			TheGame.playSound("/sounds/sans3.wav");
+			GameSounds.playSound("/sounds/sans3.wav");
 		}
 
 	}

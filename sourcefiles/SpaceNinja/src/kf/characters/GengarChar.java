@@ -69,7 +69,7 @@ public class GengarChar extends CharacterImpl {
 			_gunk.explode();
 			_gunkex = false;
 			_gunkcounter = 0;
-			TheGame.playSound("/gengar/sounds/gengar1.wav");
+			GameSounds.playSound("/gengar/sounds/gengar1.wav");
 		}
 		}
 		}
@@ -131,7 +131,7 @@ public class GengarChar extends CharacterImpl {
 			}
 			TheGame._attacks.add(attack);
 			_charge = 0;
-			TheGame.playSound("/gengar/sounds/gengar1.wav");
+			GameSounds.playSound("/gengar/sounds/gengar1.wav");
 		}else if ( _charge < 17) {
 			_attack1 = false;
 			_canact = true;
@@ -143,7 +143,7 @@ public class GengarChar extends CharacterImpl {
 			}
 			TheGame._attacks.add(attack);
 			_charge = 0;
-			TheGame.playSound("/gengar/sounds/gengar1.wav");
+			GameSounds.playSound("/gengar/sounds/gengar1.wav");
 		}else {
 			_attack1 = false;
 			_canact = true;
@@ -157,7 +157,7 @@ public class GengarChar extends CharacterImpl {
 			}
 			TheGame._attacks.add(attack);
 			_charge = 0;
-			TheGame.playSound("/gengar/sounds/gengar1.wav");
+			GameSounds.playSound("/gengar/sounds/gengar1.wav");
 		}
 		}
 		
@@ -192,7 +192,7 @@ public class GengarChar extends CharacterImpl {
 			}
 			TheGame._attacks.add(attack);
 			_charge = 0;
-			TheGame.playSound("/gengar/sounds/gengar1.wav");
+			GameSounds.playSound("/gengar/sounds/gengar1.wav");
 		}
 		
 	
@@ -221,7 +221,7 @@ public class GengarChar extends CharacterImpl {
 			} else {
 				TheGame._attacks.add(new MeleeHitbox("lick", this, _x - 32, _y+58, 32, 32, 15, 10, new Image("gengar/lick1.png") ));
 			}
-			TheGame.playSound("/gengar/sounds/gengar2.wav");
+			GameSounds.playSound("/gengar/sounds/gengar2.wav");
 			
 		}
 		if(_counter == 6) {
@@ -351,7 +351,7 @@ public class GengarChar extends CharacterImpl {
 			_canact = true;
 			_attack3 = false;
 			_gunkex = true;
-			TheGame.playSound("/gengar/sounds/gengar3.wav");
+			GameSounds.playSound("/gengar/sounds/gengar3.wav");
 		}
 		
 		
@@ -394,7 +394,7 @@ public class GengarChar extends CharacterImpl {
 		}
 		if(_counter == 0) {
 			TheGame._gc.drawImage(new Image("whitebox.jpg"), 0, 0, 1000, 1000);
-			TheGame.playSound("/gengar/sounds/gengar5.wav");
+			GameSounds.playSound("/gengar/sounds/gengar5.wav");
 		}
 		if (_counter >= 1 && _counter < 31) {
 			TheGame._gc.setFill(Color.BLACK);
@@ -418,7 +418,7 @@ public class GengarChar extends CharacterImpl {
 			_width = 80;
 			_height = 90;
 			_otherchar.setCanAct(true);
-			TheGame.playSound("/gengar/sounds/gengar5.wav");
+			GameSounds.playSound("/gengar/sounds/gengar5.wav");
 		}
 		if(_counter > 31  && _counter < 400) {
 			TheGame._gc.setFill(Color.BLACK);
@@ -427,7 +427,7 @@ public class GengarChar extends CharacterImpl {
 			
 		}
 		if(_counter == 60) {
-			TheGame.playSound("/gengar/sounds/gengar4.wav");
+			GameSounds.playSound("/gengar/sounds/gengar4.wav");
 		}
 		if(_counter >= 60 && _counter < 90) {
 			TheGame._attacks.add(new HitboxImpl("ultball", this, false, x, _ulty, 80, 40, v, 0, 0, 5, i));

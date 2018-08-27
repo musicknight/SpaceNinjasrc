@@ -1,10 +1,12 @@
 package cd.chars;
 
+import cd.GameSounds;
 import cd.Hitbox;
 import cd.TheGame;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import javazoom.jlgui.basicplayer.BasicPlayerException;
 
 public abstract class CDCharacter extends CharacterImpl {
 
@@ -20,6 +22,8 @@ public abstract class CDCharacter extends CharacterImpl {
 	protected Image _savedim;
 	protected boolean _dying;
 	protected boolean _attack2;
+	private boolean _vsongplaying;
+	private boolean _psongplaying;
 	
 	public CDCharacter(String ID) {
 		super(ID);
@@ -36,6 +40,14 @@ public abstract class CDCharacter extends CharacterImpl {
 		if(_frozen) {
 			executeFreeze();
 		}
+		if(_lives <= 0 && !_vsongplaying) {
+			
+			GameSounds.playStageSong("/songs/lose.mp3");
+			_vsongplaying = true;
+		}
+		
+		
+		
 	}
 
 	@Override
@@ -153,6 +165,22 @@ public abstract class CDCharacter extends CharacterImpl {
 		if(_counter3 == 70) {
 			_frozen = false;
 			_canact = true;
+		}
+	}
+	public void drawLives(GraphicsContext _gc) {
+		if(_lives > 0) {
+			_gc.drawImage(new Image("heart.png"), 74, 13, 30, 30);
+			if(_lives > 1) {
+				_gc.drawImage(new Image("heart.png"), 114, 13, 30, 30);
+				if(_lives > 2) {
+					_gc.drawImage(new Image("heart.png"), 154, 13, 30, 30);
+					if(_lives > 3) {
+						_gc.drawImage(new Image("heart.png"), 194, 13, 30, 30);
+					}
+				}
+			}
+		} else {
+			_gc.drawImage(new Image("text/lose.png"), 297, 215);
 		}
 	}
 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cd.EntityImpl;
+import cd.GameSounds;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javazoom.jlgui.basicplayer.BasicPlayerException;
@@ -64,13 +65,18 @@ abstract public class Boss extends EntityImpl {
 			gc.drawImage(_staticimage, _x, _y, _width, _height);
 		}
 		if(_dead && !_songstopped) {
-			try {
-				TheGame._player.stop();
-			} catch (BasicPlayerException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			
 			_songstopped = true;
+			if(!_ID.equals("tootboss2")){
+				GameSounds.playStageSong("/songs/victory.mp3");
+			} else {
+				GameSounds.stopPlayer();
+			}
+		}
+		if(TheGame._character1.getLives() <= 0 && !_immune) {
+			
+			_immune = true;
+			
 		}
 		
 		_x += _xvelocity;

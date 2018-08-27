@@ -116,7 +116,7 @@ public class CloudChar extends CharacterImpl {
 				}
 			}
 			TheGame._attacks.add(attack);
-			TheGame.playSound("/cloud/sounds/cloud1.wav");
+			GameSounds.playSound("/cloud/sounds/cloud1.wav");
 		}
 		if (_counter == 17) {
 			_y -= 41;
@@ -173,7 +173,7 @@ public class CloudChar extends CharacterImpl {
 			_xtumbling = true;
 			Hitbox attack = new OffsetHitbox("clouddash1", this, 20, 5, 44, 31, 20, 20, _clear);
 			TheGame._attacks.add(attack);
-			TheGame.playSound("/cloud/sounds/cloud2.wav");
+			GameSounds.playSound("/cloud/sounds/cloud2.wav");
 			
 		}
 		if (_counter == 22) {
@@ -245,7 +245,7 @@ public class CloudChar extends CharacterImpl {
 			_image = new Image("cloud/cloudjump1left.png");
 			_x+=20;
 		}
-		TheGame.playSound("/cloud/sounds/cloud3.wav");
+		GameSounds.playSound("/cloud/sounds/cloud3.wav");
 
 	}
 
@@ -307,7 +307,7 @@ public class CloudChar extends CharacterImpl {
 
 			_yvelocity = 10;
 			_diving = true;
-			TheGame.playSound("/cloud/sounds/cloud4.wav");
+			GameSounds.playSound("/cloud/sounds/cloud4.wav");
 		}
 
 	}
@@ -327,7 +327,7 @@ public class CloudChar extends CharacterImpl {
 			} else {
 				_image = new Image("cloud/cloudpreultleft.png");
 			}
-			TheGame.playSound("/cloud/sounds/cloud5.wav");
+			GameSounds.playSound("/cloud/sounds/cloud5.wav");
 		}
 
 	}
@@ -351,42 +351,42 @@ public class CloudChar extends CharacterImpl {
 		if (_counter == 20) {
 
 			TheGame._attacks.add(attack);
-			TheGame.playSound("/cloud/sounds/cloud5.wav");
+			GameSounds.playSound("/cloud/sounds/cloud5.wav");
 		}
 		if (_counter == 30) {
 
 			TheGame._attacks.add(attack);
-			TheGame.playSound("/cloud/sounds/cloud5.wav");
+			GameSounds.playSound("/cloud/sounds/cloud5.wav");
 		}
 		if (_counter == 40) {
 
 			TheGame._attacks.add(attack);
-			TheGame.playSound("/cloud/sounds/cloud5.wav");
+			GameSounds.playSound("/cloud/sounds/cloud5.wav");
 		}
 		if (_counter == 50) {
 
 			TheGame._attacks.add(attack);
-			TheGame.playSound("/cloud/sounds/cloud5.wav");
+			GameSounds.playSound("/cloud/sounds/cloud5.wav");
 		}
 		if (_counter == 60) {
 
 			TheGame._attacks.add(attack);
-			TheGame.playSound("/cloud/sounds/cloud5.wav");
+			GameSounds.playSound("/cloud/sounds/cloud5.wav");
 		}
 		if (_counter == 70) {
 
 			TheGame._attacks.add(attack);
-			TheGame.playSound("/cloud/sounds/cloud5.wav");
+			GameSounds.playSound("/cloud/sounds/cloud5.wav");
 		}
 		if (_counter == 80) {
 
 			TheGame._attacks.add(attack);
-			TheGame.playSound("/cloud/sounds/cloud5.wav");
+			GameSounds.playSound("/cloud/sounds/cloud5.wav");
 		}
 		if (_counter == 90) {
 
 			TheGame._attacks.add(attack);
-			TheGame.playSound("/cloud/sounds/cloud5.wav");
+			GameSounds.playSound("/cloud/sounds/cloud5.wav");
 		}
 		if (_counter == 115) {
 			_attacku = false;

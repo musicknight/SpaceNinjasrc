@@ -10,7 +10,7 @@ import cd.TheGame;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javazoom.jlgui.basicplayer.BasicPlayerException;
-
+import cd.GameSounds;
 public class TootBoss4 extends Boss {
 
 	private boolean _hurt;
@@ -162,17 +162,11 @@ public class TootBoss4 extends Boss {
 			}
 		}
 		if(_health < -34000 && _changed5 && !TheGame._closed) {
-			System.out.println("hererere");
+				
 			TheGame._beattoot5 = "t";
 			TheGame.writeData();
 			TheGame._closed = true;
-			try {
-				TheGame._player.stop();
-				
-			} catch (BasicPlayerException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			GameSounds.stopPlayer();
 			
 			TheGame._stage.close();
 		}
@@ -183,8 +177,9 @@ public class TootBoss4 extends Boss {
 		_flash = true;
 		TheGame._frontdrops.add(new Backdrop(new Image("ultimoboss/flash.png"), 0, 0, 900, 600));
 		_counter2 = 0;
-		TheGame.playStageSong("/songs/toot4.mp3");
-		TheGame.playSound("/ultimoboss/sounds/flash.wav");
+		GameSounds.stopPlayer();
+		GameSounds.playStageSong("/songs/toot4.mp3");
+		GameSounds.playSound("/ultimoboss/sounds/flash.wav");
 	}
 	
 	public void executeFlash() {

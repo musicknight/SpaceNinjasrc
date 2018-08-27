@@ -111,7 +111,7 @@ public class ShovelChar extends CharacterImpl {
 				}
 			}
 			TheGame._attacks.add(attack);
-			TheGame.playSound("/sounds/shovel1.wav");
+			GameSounds.playSound("/sounds/shovel1.wav");
 		}
 
 	}
@@ -139,7 +139,7 @@ public class ShovelChar extends CharacterImpl {
 				_y = _otherchar.getY() - _height;
 				_yvelocity = -17;
 				TheGame._attacks.add(attack);
-				TheGame.playSound("/sounds/shovel2.wav");
+				GameSounds.playSound("/sounds/shovel2.wav");
 			}
 		}
 		if (_onplatform) {
@@ -218,7 +218,7 @@ public class ShovelChar extends CharacterImpl {
 					attack.setForceLeft(true);
 				}
 				TheGame._attacks.add(attack);
-				TheGame.playSound("/sounds/shovel3.wav");
+				GameSounds.playSound("/sounds/shovel3.wav");
 				
 			}
 			if(_counter == 20) {
@@ -287,76 +287,76 @@ public class ShovelChar extends CharacterImpl {
 			Hitbox a = (new HitboxImpl("shieldknight,", this, false, 0, 325, 75, 75, 23, 0, 25, 25, r));
 			a.setHOrientation(true);
 			TheGame._attacks.add(a);
-			TheGame.playSound("/sounds/shovel4.wav");
+			GameSounds.playSound("/sounds/shovel4.wav");
 		}
 
 		if (_counter == 18) {
 			Hitbox a = (new HitboxImpl("shieldknight,", this, false, 874, 325, 75, 75, -23, 0, 25, 25, l));
 			a.setHOrientation(true);
 			TheGame._attacks.add(a);
-			TheGame.playSound("/sounds/shovel4.wav");
+			GameSounds.playSound("/sounds/shovel4.wav");
 		}
 		if (_counter == 28) {
 			Hitbox a = (new HitboxImpl("shieldknight,", this, false, 1, 1, 75, 75, 23, 23, 25, 25, r));
 			a.setHOrientation(true);
 			TheGame._attacks.add(a);
-			TheGame.playSound("/sounds/shovel4.wav");
+			GameSounds.playSound("/sounds/shovel4.wav");
 		}
 		if (_counter == 38) {
 			Hitbox a = (new HitboxImpl("shieldknight,", this, false, 874, 0, 75, 75, -23, 23, 25, 25, l));
 			a.setHOrientation(true);
 			TheGame._attacks.add(a);
-			TheGame.playSound("/sounds/shovel4.wav");
+			GameSounds.playSound("/sounds/shovel4.wav");
 		}
 		if (_counter == 48) {
 			Hitbox a = (new HitboxImpl("shieldknight,", this, false, 874, 599, 75, 75, -23, -23, 25, 25, l));
 			a.setHOrientation(true);
 			TheGame._attacks.add(a);
-			TheGame.playSound("/sounds/shovel4.wav");
+			GameSounds.playSound("/sounds/shovel4.wav");
 		}
 		if (_counter == 58) {
 			Hitbox a = (new HitboxImpl("shieldknight,", this, false, 0, 599, 75, 75, 23, -23, 25, 25, r));
 			a.setHOrientation(true);
 			TheGame._attacks.add(a);
-			TheGame.playSound("/sounds/shovel4.wav");
+			GameSounds.playSound("/sounds/shovel4.wav");
 		}
 		if (_counter == 68) {
 
 			Hitbox a = (new HitboxImpl("shieldknight,", this, false, 0, 325, 75, 75, 23, 0, 25, 25, r));
 			a.setHOrientation(true);
 			TheGame._attacks.add(a);
-			TheGame.playSound("/sounds/shovel4.wav");
+			GameSounds.playSound("/sounds/shovel4.wav");
 		}
 
 		if (_counter == 78) {
 			Hitbox a = (new HitboxImpl("shieldknight,", this, false, 874, 325, 75, 75, -23, 0, 25, 25, l));
 			a.setHOrientation(true);
 			TheGame._attacks.add(a);
-			TheGame.playSound("/sounds/shovel4.wav");
+			GameSounds.playSound("/sounds/shovel4.wav");
 		}
 		if (_counter == 88) {
 			Hitbox a = (new HitboxImpl("shieldknight,", this, false, 1, 1, 75, 75, 23, 23, 25, 25, r));
 			a.setHOrientation(true);
 			TheGame._attacks.add(a);
-			TheGame.playSound("/sounds/shovel4.wav");
+			GameSounds.playSound("/sounds/shovel4.wav");
 		}
 		if (_counter == 98) {
 			Hitbox a = (new HitboxImpl("shieldknight,", this, false, 874, 0, 75, 75, -23, 23, 25, 25, l));
 			a.setHOrientation(true);
 			TheGame._attacks.add(a);
-			TheGame.playSound("/sounds/shovel4.wav");
+			GameSounds.playSound("/sounds/shovel4.wav");
 		}
 		if (_counter == 108) {
 			Hitbox a = (new HitboxImpl("shieldknight,", this, false, 874, 599, 75, 75, -23, -23, 25, 25, l));
 			a.setHOrientation(true);
 			TheGame._attacks.add(a);
-			TheGame.playSound("/sounds/shovel4.wav");
+			GameSounds.playSound("/sounds/shovel4.wav");
 		}
 		if (_counter == 118) {
 			Hitbox a = (new HitboxImpl("shieldknight,", this, false, 0, 599, 75, 75, 23, -23, 25, 25, r));
 			a.setHOrientation(true);
 			TheGame._attacks.add(a);
-			TheGame.playSound("/sounds/shovel4.wav");
+			GameSounds.playSound("/sounds/shovel4.wav");
 		}
 
 		if (_counter == 130) {
@@ -389,7 +389,7 @@ public class ShovelChar extends CharacterImpl {
 			} else {
 				_image = new Image("shovel/sintro1left.png");
 			}
-			TheGame.playSound("/sounds/sintro.wav");
+			GameSounds.playSound("/sounds/sintro.wav");
 		}
 		if(_counter == 5){
 			if (_facing.equals("right")) {

@@ -200,7 +200,7 @@ public class MetaChar extends CharacterImpl {
 				attack.setForceLeft(true);
 			}
 			TheGame._attacks.add(attack);
-			TheGame.playSound("/metaknight/sounds/slash.wav");
+			GameSounds.playSound("/metaknight/sounds/slash.wav");
 		}
 		if(_counter == 18){
 			_width = (int)(35*1.5);
@@ -242,7 +242,7 @@ public class MetaChar extends CharacterImpl {
 				attack.setForceLeft(true);
 			}
 			TheGame._attacks.add(attack);
-			TheGame.playSound("/metaknight/sounds/slash.wav");
+			GameSounds.playSound("/metaknight/sounds/slash.wav");
 		}
 		if(_counter == 26){
 			_width = (int)(42*1.5);
@@ -276,7 +276,7 @@ public class MetaChar extends CharacterImpl {
 				i = new Image("metaknight/attack1/swordleft.png");
 			}
 			TheGame._attacks.add(new HitboxImpl("metaswordbolt", this, false,_x+x, _y+5, (int)(42*1.5), (int)(15*1.5), v, 0, 20, 12, i));
-			TheGame.playSound("/metaknight/sounds/swordbolt.wav");
+			GameSounds.playSound("/metaknight/sounds/swordbolt.wav");
 		}
 		
 		if(_counter == 42) {
@@ -333,7 +333,7 @@ public class MetaChar extends CharacterImpl {
 				x = _width - (int)(73*1.5);
 				
 			}
-			TheGame.playSound("/metaknight/sounds/wind.wav");
+			GameSounds.playSound("/metaknight/sounds/wind.wav");
 		}
 		if(_counter >= 12 && _counter < 14) {
 			if(_facing.equals("right")){
@@ -362,7 +362,7 @@ public class MetaChar extends CharacterImpl {
 				attack.setForceLeft(true);
 			}
 			TheGame._attacks.add(attack);
-			TheGame.playSound("/metaknight/sounds/strike.wav");
+			GameSounds.playSound("/metaknight/sounds/strike.wav");
 		}
 		
 		if(_counter == 16) {
@@ -468,7 +468,7 @@ public class MetaChar extends CharacterImpl {
 				_x-=18;
 				
 			}
-			TheGame.playSound("/metaknight/sounds/slash.wav");
+			GameSounds.playSound("/metaknight/sounds/slash.wav");
 		}
 		if(_counter == 8){
 			_y-=4;
@@ -606,7 +606,7 @@ public class MetaChar extends CharacterImpl {
 				attack.setForceLeft(true);
 			}
 			TheGame._attacks.add(attack);
-			TheGame.playSound("/metaknight/sounds/ult.wav");
+			GameSounds.playSound("/metaknight/sounds/ult.wav");
 		}
 		if(_counter == 14) {
 			_width = (int)(62*1.5);
@@ -691,7 +691,7 @@ public class MetaChar extends CharacterImpl {
 				_x-=7;
 			}
 			_y+=(int)(7*1.5);
-			TheGame.playSound("/metaknight/sounds/flap.wav");
+			GameSounds.playSound("/metaknight/sounds/flap.wav");
 		}
 		if(_flycounter == 4) {
 			_width = (int)(50*1.5);
@@ -785,7 +785,7 @@ public class MetaChar extends CharacterImpl {
 		}
 		if(_counter == 7) {
 				_image = new Image("metaknight/intro/intro2.png");
-				TheGame.playSound("/metaknight/sounds/flap.wav");
+				GameSounds.playSound("/metaknight/sounds/flap.wav");
 		}
 		if(_counter == 9) {
 				_image = new Image("metaknight/intro/intro3.png");

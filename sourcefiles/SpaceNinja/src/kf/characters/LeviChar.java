@@ -151,7 +151,7 @@ public class LeviChar extends CharacterImpl {
 			} else {
 				_image = new Image("levi/attack1/shot2left.gif");
 			}
-			TheGame.playSound("/levi/sounds/shot.wav");
+			GameSounds.playSound("/levi/sounds/shot.wav");
 			
 		}
 		
@@ -224,7 +224,7 @@ public class LeviChar extends CharacterImpl {
 				attack.setForceLeft(true);
 			}
 			TheGame._attacks.add(attack);
-			TheGame.playSound("/levi/sounds/drag.wav");
+			GameSounds.playSound("/levi/sounds/drag.wav");
 			
 			
 		}
@@ -252,7 +252,7 @@ public class LeviChar extends CharacterImpl {
 			_image = new Image("levi/attack2/dash1left.gif");
 			_xvelocity = -16;
 		}
-	    TheGame.playSound("/levi/sounds/dash.wav");
+	    GameSounds.playSound("/levi/sounds/dash.wav");
 		}
 	}
 	
@@ -299,7 +299,7 @@ public class LeviChar extends CharacterImpl {
 		} else {
 			_image = new Image("levi/attack3/jump1left.gif");
 		}
-		TheGame.playSound("/levi/sounds/jump.wav");
+		GameSounds.playSound("/levi/sounds/jump.wav");
 		}
 	}
 	
@@ -393,7 +393,7 @@ public class LeviChar extends CharacterImpl {
 		_width = (int)(43*1.5);
 		_height = (int)(56*1.5);
 		_immune = true;
-		TheGame.playSound("/levi/sounds/ult1.wav");
+		GameSounds.playSound("/levi/sounds/ult1.wav");
 		if(_ultdirection.equals("right")) {
 			_ultd = _ult;
 			_shotd = _ultshots;
@@ -425,7 +425,7 @@ public class LeviChar extends CharacterImpl {
 				attack.setXVelocity(-13);
 			}
 			TheGame._attacks.add(attack);
-			TheGame.playSound("/levi/sounds/ult.wav");
+			GameSounds.playSound("/levi/sounds/ult.wav");
 		}
 		if(_counter == 300) {
 			_attacku = false;
@@ -471,7 +471,7 @@ public class LeviChar extends CharacterImpl {
 			} else {
 				_image = new Image("levi/attack1/shot2left.gif");
 			}
-			TheGame.playSound("/levi/sounds/shot.wav");
+			GameSounds.playSound("/levi/sounds/shot.wav");
 			
 		}
 		

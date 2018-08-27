@@ -9,7 +9,7 @@ import cd.HitboxImpl;
 import cd.TheGame;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-
+import cd.GameSounds;
 public class TwinsBoss extends Boss {
 
 	private Hitbox _body = new CharLinkedHitbox("twin1bod", this, 0, 1);
@@ -225,7 +225,7 @@ public class TwinsBoss extends Boss {
 		_subboss.attack1();
 		_counter4 = 0;
 		_staticimage = new Image("twinsboss/a3.png");
-		TheGame.playSound("/botboss/sounds/charge.wav");
+		GameSounds.playSound("/botboss/sounds/charge.wav");
 	}
 	
 	public void executeAttack1() {
@@ -234,7 +234,7 @@ public class TwinsBoss extends Boss {
 			a.setCircle(true);
 			a.setDissappearOnHit(false);
 			TheGame._attacks.add(a);
-			TheGame.playSound("/twinsboss/sounds/shot.wav");
+			GameSounds.playSound("/twinsboss/sounds/shot.wav");
 		}
 		if(_counter4 == 350) {
 			_attack1 = false;
@@ -250,7 +250,7 @@ public class TwinsBoss extends Boss {
 		_staticimage = new Image("twinsboss/a3.png");
 		}
 		_subboss.attack2(_attack2var);
-		TheGame.playSound("/botboss/sounds/charge.wav");
+		GameSounds.playSound("/botboss/sounds/charge.wav");
 	}
 	
 	public void executeAttack2() {
@@ -260,7 +260,7 @@ public class TwinsBoss extends Boss {
 			_bounce.setCircle(true);
 			_bounce.setDissappearOnHit(false);
 			TheGame._attacks.add(_bounce);
-			TheGame.playSound("/twinsboss/sounds/shot.wav");
+			GameSounds.playSound("/twinsboss/sounds/shot.wav");
 		}
 		if(_counter4 == 25) {
 			_yvelocity = -20;
@@ -271,12 +271,12 @@ public class TwinsBoss extends Boss {
 		if(_counter4 == 55) {
 			_bounce.setXVelocity(18);
 			_bounce.setYVelocity(-3);
-			TheGame.playSound("/twinsboss/sounds/shot.wav");
+			GameSounds.playSound("/twinsboss/sounds/shot.wav");
 		}
 		if(_counter4 == 95) {
 			_bounce.setYVelocity(0);
 			_bounce.setXVelocity(-20);
-			TheGame.playSound("/twinsboss/sounds/shot.wav");
+			GameSounds.playSound("/twinsboss/sounds/shot.wav");
 		}
 		if(_counter4 == 100) {
 			_yvelocity = 20;
@@ -287,16 +287,16 @@ public class TwinsBoss extends Boss {
 		if(_counter4 == 130) {
 			_bounce.setXVelocity(18);
 			_bounce.setYVelocity(3);
-			TheGame.playSound("/twinsboss/sounds/shot.wav");
+			GameSounds.playSound("/twinsboss/sounds/shot.wav");
 		}
 		if(_counter4 == 170) {
 			_bounce.setXVelocity(-20);
 			_bounce.setYVelocity(0);
-			TheGame.playSound("/twinsboss/sounds/shot.wav");
+			GameSounds.playSound("/twinsboss/sounds/shot.wav");
 		}
 		if(_counter4 == 205) {
 			_bounce.setXVelocity(20);
-			TheGame.playSound("/twinsboss/sounds/shot.wav");
+			GameSounds.playSound("/twinsboss/sounds/shot.wav");
 		}
 		if(_counter4 == 235) {
 			_yvelocity = -20;
@@ -319,13 +319,13 @@ public class TwinsBoss extends Boss {
 				_bounce.setCircle(true);
 				_bounce.setDissappearOnHit(false);
 				TheGame._attacks.add(_bounce);
-				TheGame.playSound("/twinsboss/sounds/shot.wav");
+				GameSounds.playSound("/twinsboss/sounds/shot.wav");
 			}
 			if(_counter4 == 55) {
 				_bounce.setXVelocity(-18);
 				_bounce.setYVelocity(-3);
 				_staticimage = new Image("twinsboss/a3.png");
-				TheGame.playSound("/twinsboss/sounds/shot.wav");
+				GameSounds.playSound("/twinsboss/sounds/shot.wav");
 			}
 			if(_counter4 == 60) {
 				_yvelocity = -20;
@@ -336,13 +336,13 @@ public class TwinsBoss extends Boss {
 			if(_counter4 == 95) {
 				_bounce.setYVelocity(0);
 				_bounce.setXVelocity(20);
-				TheGame.playSound("/twinsboss/sounds/shot.wav");
+				GameSounds.playSound("/twinsboss/sounds/shot.wav");
 			}
 			
 			if(_counter4 == 130) {
 				_bounce.setXVelocity(-18);
 				_bounce.setYVelocity(3);
-				TheGame.playSound("/twinsboss/sounds/shot.wav");
+				GameSounds.playSound("/twinsboss/sounds/shot.wav");
 			}
 			if(_counter4 == 135) {
 				_yvelocity = 20;
@@ -353,11 +353,11 @@ public class TwinsBoss extends Boss {
 			if(_counter4 == 170) {
 				_bounce.setXVelocity(20);
 				_bounce.setYVelocity(0);
-				TheGame.playSound("/twinsboss/sounds/shot.wav");
+				GameSounds.playSound("/twinsboss/sounds/shot.wav");
 			}
 			if(_counter4 == 205) {
 				_bounce.setXVelocity(-20);
-				TheGame.playSound("/twinsboss/sounds/shot.wav");
+				GameSounds.playSound("/twinsboss/sounds/shot.wav");
 			}
 			
 			if(_counter4 == 250) {
@@ -375,7 +375,7 @@ public class TwinsBoss extends Boss {
 		_attack3 = true;
 		_counter4 = 0;
 		_subboss.attack3(_attack3var);
-		TheGame.playSound("/botboss/sounds/charge.wav");
+		GameSounds.playSound("/botboss/sounds/charge.wav");
 	}
 	
 	public void executeAttack3() {
@@ -397,7 +397,7 @@ public class TwinsBoss extends Boss {
 				b.setDissappearOnHit(false);
 				TheGame._attacks.add(a);
 				TheGame._attacks.add(b);
-				TheGame.playSound("/twinsboss/sounds/shot.wav");
+				GameSounds.playSound("/twinsboss/sounds/shot.wav");
 			}
 			if(_counter4 == 90) {
 				_yvelocity = 20;
@@ -426,7 +426,7 @@ public class TwinsBoss extends Boss {
 				b.setDissappearOnHit(false);
 				TheGame._attacks.add(a);
 				TheGame._attacks.add(b);
-				TheGame.playSound("/twinsboss/sounds/shot.wav");
+				GameSounds.playSound("/twinsboss/sounds/shot.wav");
 			}
 			if(_counter4 == 101) {
 				_attack3 = false;
@@ -476,7 +476,7 @@ public class TwinsBoss extends Boss {
 		_attack4 = true;
 		_counter4 = 0;
 		_staticimage = new Image("twinsboss/b4.png");
-		TheGame.playSound("/botboss/sounds/charge.wav");
+		GameSounds.playSound("/botboss/sounds/charge.wav");
 	}
 	
 	public void executeAttack4() {
@@ -486,7 +486,7 @@ public class TwinsBoss extends Boss {
 			b.setCircle(true);
 			b.setDissappearOnHit(false);
 			TheGame._attacks.add(b);
-			TheGame.playSound("/twinsboss/sounds/shot.wav");
+			GameSounds.playSound("/twinsboss/sounds/shot.wav");
 		}
 		if(_counter4 == 90) {
 			_staticimage = null;
@@ -499,7 +499,7 @@ public class TwinsBoss extends Boss {
 		_attack5 = true;
 		_counter4 = 0;
 		_yvelocity = -20;
-		TheGame.playSound("/botboss/sounds/charge.wav");
+		GameSounds.playSound("/botboss/sounds/charge.wav");
 	}
 	
 	public void executeAttack5() {
@@ -518,7 +518,7 @@ public class TwinsBoss extends Boss {
 			b.setCircle(true);
 			b.setDissappearOnHit(false);
 			TheGame._attacks.add(b);
-			TheGame.playSound("/twinsboss/sounds/shot.wav");
+			GameSounds.playSound("/twinsboss/sounds/shot.wav");
 		}
 		if(_counter4 == 90) {
 			_yvelocity = 20;

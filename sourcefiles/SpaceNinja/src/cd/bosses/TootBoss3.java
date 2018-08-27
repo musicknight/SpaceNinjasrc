@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cd.AnimatedHitbox;
+import cd.GameSounds;
 import cd.Hitbox;
 import cd.TheGame;
 import javafx.scene.canvas.GraphicsContext;
@@ -12,7 +13,7 @@ import javazoom.jlgui.basicplayer.BasicPlayerException;
 
 public class TootBoss3 extends Boss {
 
-	private int _text = 22;
+	private int _text = 1;
 	private List<Image> _spin = new ArrayList<Image>();
 	private int _phase;
 	private boolean _ending;
@@ -201,13 +202,7 @@ public class TootBoss3 extends Boss {
 				
 				TheGame.writeData();
 				TheGame._closed = true;
-				try {
-					TheGame._player.stop();
-					
-				} catch (BasicPlayerException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				GameSounds.stopPlayer();
 				
 				TheGame._stage.close();
 			

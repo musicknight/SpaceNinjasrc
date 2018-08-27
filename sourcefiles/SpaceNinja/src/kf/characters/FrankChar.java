@@ -95,7 +95,7 @@ public class FrankChar extends CharacterImpl {
 				v = -19;
 			}
 			TheGame._attacks.add(new HitboxImpl("pellet", this, false, _x+d, _y + 20, 16, 12, v, 0, 5,4, new Image("frank/pellet.png")));
-			TheGame.playSound("/frank/sounds/frank1.wav");
+			GameSounds.playSound("/frank/sounds/frank1.wav");
 		}
 	}
 	
@@ -148,7 +148,7 @@ public class FrankChar extends CharacterImpl {
 			}
 			TheGame._attacks.add(attack1);
 			TheGame._attacks.add(attack2);
-			TheGame.playSound("/frank/sounds/frank2.wav");
+			GameSounds.playSound("/frank/sounds/frank2.wav");
 			
 		}
 		if(_counter == 32) {
@@ -184,7 +184,7 @@ public class FrankChar extends CharacterImpl {
 		} else {
 			_image = new Image("frank/jump1left.gif");
 		}
-		TheGame.playSound("/frank/sounds/frank3.wav");
+		GameSounds.playSound("/frank/sounds/frank3.wav");
 		}
 	
 		
@@ -210,7 +210,7 @@ public class FrankChar extends CharacterImpl {
 				d = 3;
 			}
 			TheGame._attacks.add(new HitboxImpl("skybolt", this, false, _x + d, _y + 50, 28, 28, 0, 15, 15, 15, new Image("frank/skybolt.png")));
-			TheGame.playSound("/frank/sounds/frank1.wav");
+			GameSounds.playSound("/frank/sounds/frank1.wav");
 		}
 		
 		if(_counter == 15) {
@@ -228,7 +228,7 @@ public class FrankChar extends CharacterImpl {
 				v = -5;
 			}
 			TheGame._attacks.add(new HitboxImpl("skybolt", this, false, _x + d, _y + 40, 28, 28, v, 15, 15, 15, new Image("frank/skybolt.png")));
-			TheGame.playSound("/frank/sounds/frank1.wav");
+			GameSounds.playSound("/frank/sounds/frank1.wav");
 			_canattack3 = false;
 		}
 		if(_counter == 18) {
@@ -246,7 +246,7 @@ public class FrankChar extends CharacterImpl {
 				v = -10;
 			}
 			TheGame._attacks.add(new HitboxImpl("skybolt", this, false, _x + d, _y + 30, 28, 28, v, 15, 15, 15, new Image("frank/skybolt.png")));
-			TheGame.playSound("/frank/sounds/frank1.wav");
+			GameSounds.playSound("/frank/sounds/frank1.wav");
 		}
 		if(_counter == 21) {
 			
@@ -263,7 +263,7 @@ public class FrankChar extends CharacterImpl {
 				v = -15;
 			}
 			TheGame._attacks.add(new HitboxImpl("skybolt", this, false, _x + d, _y + 20, 28, 28, v, 15, 15, 15, new Image("frank/skybolt.png")));
-			TheGame.playSound("/frank/sounds/frank1.wav");
+			GameSounds.playSound("/frank/sounds/frank1.wav");
 		}
 		if(_counter == 24) {
 			
@@ -280,7 +280,7 @@ public class FrankChar extends CharacterImpl {
 				v = -20;
 			}
 			TheGame._attacks.add(new HitboxImpl("skybolt", this, false, _x + d, _y + 10, 28, 28, v, 0, 15, 15, new Image("frank/skybolt.png")));
-			TheGame.playSound("/frank/sounds/frank1.wav");
+			GameSounds.playSound("/frank/sounds/frank1.wav");
 		}
 		if(_counter == 28) {
 			_attack3 = false;
@@ -332,7 +332,7 @@ public class FrankChar extends CharacterImpl {
 			Hitbox attack = new HitboxImpl("skybolt", this, false, _x + d, _y + 50, 28, 28, 0, 15, 15, 15, new Image("frank/skybolt.png"));
 			attack.setHOrientation(true);
 			TheGame._attacks.add(attack);
-			TheGame.playSound("/frank/sounds/frank1.wav");
+			GameSounds.playSound("/frank/sounds/frank1.wav");
 		}
 		if(_counter == 200) {
 			_immune = false;
@@ -384,7 +384,7 @@ public class FrankChar extends CharacterImpl {
 			_height = 100;
 			_y+=300;
 			_image = new Image("frank/intro2.gif");
-			TheGame.playSound("/frank/sounds/intro.wav");
+			GameSounds.playSound("/frank/sounds/intro.wav");
 			
 		}
 		if(_counter == 8) {

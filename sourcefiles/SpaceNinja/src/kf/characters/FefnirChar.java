@@ -107,7 +107,7 @@ public class FefnirChar extends CharacterImpl {
 				_gunk1.explode();
 				_gunk1counter = 0;
 				_gunk1ex = false;
-				TheGame.playSound("/fefnir/explode1.wav");
+				GameSounds.playSound("/fefnir/explode1.wav");
 			}
 			}
 			}
@@ -119,7 +119,7 @@ public class FefnirChar extends CharacterImpl {
 				_gunk2.explode();
 				_gunk2counter = 0;
 				_gunk2ex = false;
-				TheGame.playSound("/fefnir/explode1.wav");
+				GameSounds.playSound("/fefnir/explode1.wav");
 			}
 			}
 			}
@@ -131,7 +131,7 @@ public class FefnirChar extends CharacterImpl {
 				_gunk3.explode();
 				_gunk3counter = 0;
 				_gunk3ex = false;
-				TheGame.playSound("/fefnir/explode1.wav");
+				GameSounds.playSound("/fefnir/explode1.wav");
 			}
 			}
 			}
@@ -143,7 +143,7 @@ public class FefnirChar extends CharacterImpl {
 				_gunk4.explode();
 				_gunk4counter = 0;
 				_gunk4ex = false;
-				TheGame.playSound("/fefnir/explode.wav");
+				GameSounds.playSound("/fefnir/explode.wav");
 			}
 			}
 			}
@@ -186,7 +186,7 @@ public class FefnirChar extends CharacterImpl {
 		} else {
 			_image = new Image("fefnir/shot1left.png");
 		}
-		TheGame.playSound("/fefnir/charge.wav");
+		GameSounds.playSound("/fefnir/charge.wav");
 		}
 	}
 	
@@ -230,7 +230,7 @@ public class FefnirChar extends CharacterImpl {
 			Hitbox attack = new HitboxImpl("fefireball", this, false, _x+x, _y, (int)(32*1.6), (int)(28*1.6), v, 0, 16, 16, i);
 
 			TheGame._attacks.add(attack);
-			TheGame.playSound("/fefnir/shot.wav");
+			GameSounds.playSound("/fefnir/shot.wav");
 		}
 		if(_counter == 25) {
 			_width = (int)(53*1.6);
@@ -265,7 +265,7 @@ public class FefnirChar extends CharacterImpl {
 			Hitbox attack = new HitboxImpl("fefireball", this, false, _x+x, _y, (int)(32*1.6), (int)(28*1.6), v, 0, 16, 16, i);
 		
 			TheGame._attacks.add(attack);
-			TheGame.playSound("/fefnir/shot.wav");
+			GameSounds.playSound("/fefnir/shot.wav");
 		}
 		if(_counter == 32) {
 			_width = (int)(50*1.6);
@@ -308,7 +308,7 @@ public class FefnirChar extends CharacterImpl {
 			_image = new Image("fefnir/dash1left.png");
 			_x-=4;
 		}
-		TheGame.playSound("/fefnir/claw.wav");
+		GameSounds.playSound("/fefnir/claw.wav");
 	}
 	
 	public void executeAttack2() {
@@ -352,7 +352,7 @@ public class FefnirChar extends CharacterImpl {
 			}
 			_xtumbling = true;
 			TheGame._attacks.add(new OffsetHitbox("fefdash", this, x, 0, (int)(20*1.6), (int)(22*1.6), 28, 22, _clear));
-			TheGame.playSound("/fefnir/dash.wav");
+			GameSounds.playSound("/fefnir/dash.wav");
 		}
 		if(_counter == 38) {
 			_width = (int)(63*1.6);
@@ -410,7 +410,7 @@ public class FefnirChar extends CharacterImpl {
 				_image = new Image("fefnir/jump2left.png");
 				_x+=16;
 			}
-			TheGame.playSound("/fefnir/jump.wav");
+			GameSounds.playSound("/fefnir/jump.wav");
 		}
 		if(_counter == 20) {
 			_yvelocity = 0;
@@ -432,7 +432,7 @@ public class FefnirChar extends CharacterImpl {
 			//pgunk.setHOrientation(true);
 			_gunk1 = new ExplodingHitbox("fefbomb1", this, true, _x+d, _y + (int)(43*1.6), 18, 12, v, 2, 0, 0, new Image("fefnir/bomb.png"), pgunk);
 			TheGame._attacks.add(_gunk1);
-			TheGame.playSound("/fefnir/lob.wav");
+			GameSounds.playSound("/fefnir/lob.wav");
 		}
 		if(_counter == 29) {
 			int d;
@@ -454,7 +454,7 @@ public class FefnirChar extends CharacterImpl {
 			//pgunk.setHOrientation(true);
 			_gunk2 = new ExplodingHitbox("fefbomb2", this, true, _x+d, _y + (int)(43*1.6), 18, 12, v, 2, 0, 0, new Image("fefnir/bomb.png"), pgunk);
 			TheGame._attacks.add(_gunk2);
-			TheGame.playSound("/fefnir/lob.wav");
+			GameSounds.playSound("/fefnir/lob.wav");
 		}
 		if(_counter == 32) {
 			_width = (int)(49*1.6);
@@ -475,7 +475,7 @@ public class FefnirChar extends CharacterImpl {
 			//pgunk.setHOrientation(true);
 			_gunk3 = new ExplodingHitbox("fefbomb3", this, true, _x+d, _y + (int)(43*1.6), 18, 12, v, 2, 0, 0, new Image("fefnir/bomb.png"), pgunk);
 			TheGame._attacks.add(_gunk3);
-			TheGame.playSound("/fefnir/lob.wav");
+			GameSounds.playSound("/fefnir/lob.wav");
 		}
 		if(_counter == 35) {
 			_width = (int)(49*1.6);
@@ -496,7 +496,7 @@ public class FefnirChar extends CharacterImpl {
 			//pgunk.setHOrientation(true);
 			_gunk4 = new ExplodingHitbox("fefbomb4", this, true, _x+d, _y + (int)(43*1.6), 18, 12, v, 2, 0, 0, new Image("fefnir/bomb.png"), pgunk);
 			TheGame._attacks.add(_gunk4);
-			TheGame.playSound("/fefnir/lob.wav");
+			GameSounds.playSound("/fefnir/lob.wav");
 		}
 		if(_counter == 40) {
 			_gravity = true;
@@ -517,7 +517,7 @@ public class FefnirChar extends CharacterImpl {
 		_width = (int)(40*1.6);
 		_height = (int)(41*1.6);
 		_image = new Image("fefnir/ult/1.png");
-		TheGame.playSound("/fefnir/ult/sound1.wav");
+		GameSounds.playSound("/fefnir/ult/sound1.wav");
 		}
 	}
 	
@@ -552,7 +552,7 @@ public class FefnirChar extends CharacterImpl {
 			_width = (int)(48*1.6);
 			_height = (int)(43*1.6);
 			_image = new Image("fefnir/ult/9.png");
-			TheGame.playSound("/fefnir/ult/sound2.wav");
+			GameSounds.playSound("/fefnir/ult/sound2.wav");
 		}
 		if(_counter == 27) {
 			_width = (int)(51*1.6);
@@ -576,7 +576,7 @@ public class FefnirChar extends CharacterImpl {
 			_image = new Image("fefnir/ult/13.png");
 		}
 		if(_counter >36 && _counter % 5 == 0) {
-			TheGame.playSound("/fefnir/ult/shot.wav");
+			GameSounds.playSound("/fefnir/ult/shot.wav");
 		}
 		if(_counter == 39) {
 			_width = (int)(37*1.6);
@@ -755,7 +755,7 @@ public class FefnirChar extends CharacterImpl {
 			} else {
 				_image = new Image("fefnir/intro3left.png");
 			}
-			TheGame.playSound("/fefnir/claw.wav");
+			GameSounds.playSound("/fefnir/claw.wav");
 		}
 		if(_counter == 18) {
 			if(_facing.equals("right")) {

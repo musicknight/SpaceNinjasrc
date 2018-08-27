@@ -1,6 +1,7 @@
 package cd.bosses;
 
 import java.util.Random;
+import cd.GameSounds;
 
 import cd.Backdrop;
 import cd.CharLinkedHitbox;
@@ -144,10 +145,10 @@ public class SkullBoss extends Boss {
 					i = 2;
 				}
 				if(_repeat2 == 2) {
-					i = 1;
+					i = 0;
 				}
 				if(_repeat3 == 2) {
-					i = 0;
+					i = 1;
 				}
 				
 				if(_repeatno1 == 4) {
@@ -244,7 +245,7 @@ public class SkullBoss extends Boss {
 			_line = new HitboxImpl("line", this, false, 0, 442, 700, 125, 0, -10, 0, 1, new Image("skullboss/bone/line.png"));
 			_line.setDissappearOnHit(false);
 			TheGame._attacks.add(_line);
-			TheGame.playSound("/spikeboss/sounds/1spin.wav");
+			GameSounds.playSound("/spikeboss/sounds/1spin.wav");
 		}
 		if(_counter4 == 55) {
 			_line.setYVelocity(0);
@@ -323,7 +324,7 @@ public class SkullBoss extends Boss {
 			b.setDissappearOnHit(false);
 			TheGame._attacks.add(a);
 			TheGame._attacks.add(b);
-			TheGame.playSound("/spikeboss/sounds/1spin.wav");
+			GameSounds.playSound("/spikeboss/sounds/1spin.wav");
 		}
 		if(_counter4 == 300) {
 			_yvelocity = -10;	
@@ -365,7 +366,7 @@ public class SkullBoss extends Boss {
 				Hitbox a = new HitboxImpl("bone", this, true, 150, -90, 750, 150, 0, 0, 0, 1, new Image("skullboss/bone/750.png"));
 				a.setDissappearOnHit(false);
 				TheGame._attacks.add(a);
-				TheGame.playSound("/spikeboss/sounds/1spin.wav");
+				GameSounds.playSound("/spikeboss/sounds/1spin.wav");
 			} else if(_attack3var == 2) {
 				Hitbox a = new HitboxImpl("bone", this, true, 0, -90, 300, 150, 0, 0, 0, 1, new Image("skullboss/bone/300.png"));
 				a.setDissappearOnHit(false);
@@ -373,7 +374,7 @@ public class SkullBoss extends Boss {
 				a = new HitboxImpl("bone", this, true, 450, -90, 450, 150, 0, 0, 0, 1, new Image("skullboss/bone/450.png"));
 				a.setDissappearOnHit(false);
 				TheGame._attacks.add(a);
-				TheGame.playSound("/spikeboss/sounds/1spin.wav");
+				GameSounds.playSound("/spikeboss/sounds/1spin.wav");
 			} else if(_attack3var == 3) {
 				Hitbox a = new HitboxImpl("bone", this, true, 0, -90, 450, 150, 0, 0, 0, 1, new Image("skullboss/bone/450.png"));
 				a.setDissappearOnHit(false);
@@ -381,7 +382,7 @@ public class SkullBoss extends Boss {
 				a = new HitboxImpl("bone", this, true, 600, -90, 300, 150, 0, 0, 0, 1, new Image("skullboss/bone/300.png"));
 				a.setDissappearOnHit(false);
 				TheGame._attacks.add(a);
-				TheGame.playSound("/spikeboss/sounds/1spin.wav");
+				GameSounds.playSound("/spikeboss/sounds/1spin.wav");
 			}
 		}
 		if(_counter4 == 85) {
@@ -444,7 +445,7 @@ public class SkullBoss extends Boss {
 		}
 		if(_counter4 == 28) {
 			_yvelocity= 0;
-			TheGame.playSound("/rockboss/sounds/slam.wav");
+			GameSounds.playSound("/rockboss/sounds/slam.wav");
 			if(TheGame._character1.getY() == 392) {
 				TheGame._character1.setCanAct(false);
 				TheGame._character1.setXVelocity(0);

@@ -8,7 +8,7 @@ import cd.HitboxImpl;
 import cd.TheGame;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-
+import cd.GameSounds;
 public class DemonBoss extends Boss {
 
 	private int _repeat1;
@@ -31,7 +31,7 @@ public class DemonBoss extends Boss {
 		super(900, 600, "demonboss");
 		_width = (int)(263*(0.8));
 		_height = (int)(268*(0.8));
-		_health = 1332;
+		_health = 1500;
 		_staticimage = new Image("demonboss/1.png");
 		_circle = true;
 		_body = new CharLinkedHitbox("demonbody", this, 0, 1);
@@ -452,7 +452,7 @@ public class DemonBoss extends Boss {
 				 a.setDissappearOnHit(false);
 				 TheGame._attacks.add(a);
 			}
-			TheGame.playSound("/demonboss/sounds/drum.wav");
+			GameSounds.playSound("/demonboss/sounds/drum.wav");
 		}
 		if(_counter4 == 60) {
 			Hitbox a = new HitboxImpl("pentagram", this, true, 180, 443, 180, 180, 0, -37, 0, 1, new Image("demonboss/big/1.png"));
@@ -463,7 +463,7 @@ public class DemonBoss extends Boss {
 			 a.setCircle(true);
 			 a.setDissappearOnHit(false);
 			 TheGame._attacks.add(a);
-			 TheGame.playSound("/demonboss/sounds/drum.wav");
+			 GameSounds.playSound("/demonboss/sounds/drum.wav");
 			
 		}
 		if(_counter4 == 90) {
@@ -483,7 +483,7 @@ public class DemonBoss extends Boss {
 				 a.setDissappearOnHit(false);
 				 TheGame._attacks.add(a);
 			}
-			TheGame.playSound("/demonboss/sounds/drum.wav");
+			GameSounds.playSound("/demonboss/sounds/drum.wav");
 		}
 		if(_counter4 == 120) {
 			_attack2 = false;
@@ -500,7 +500,7 @@ public class DemonBoss extends Boss {
 		int x = TheGame._character1.getX();
 		int y = TheGame._character1.getY();
 		if(_counter4 == 1) {
-			TheGame.playSound("/demonboss/sounds/drum.wav");
+			GameSounds.playSound("/demonboss/sounds/drum.wav");
 		}
 		if(_counter4 < 30) {
 			TheGame._gc.drawImage(new Image("demonboss/big/pre2.png"), x-65, y-65);
@@ -508,17 +508,18 @@ public class DemonBoss extends Boss {
 		if(_counter4 == 30) {
 			_charx = x;
 			_chary = y;
-			TheGame.playSound("/demonboss/sounds/drum.wav");
+			GameSounds.playSound("/demonboss/sounds/drum.wav");
 		}
 		if(_counter4 >= 30 && _counter4 < 50) {
 			TheGame._gc.drawImage(new Image("demonboss/big/pre1.png"), _charx-65, _chary-65);
 		}
 		if(_counter4 == 50) {
+			TheGame.clearHitboxes("pentagram", this);
 			Hitbox a = new HitboxImpl("pentagram", this, false, _charx-65, _chary-65, 180, 180, 0, 0, 0, 1, new Image("demonboss/big/1.png"));
 			 a.setCircle(true);
 			 a.setDissappearOnHit(false);
 			 TheGame._attacks.add(a);
-			 TheGame.playSound("/demonboss/sounds/drum.wav");
+			 GameSounds.playSound("/demonboss/sounds/drum.wav");
 		}
 		if(_counter4 == 57 && _a3count == 5) {
 			TheGame.clearHitboxes("pentagram", this);
@@ -571,7 +572,7 @@ public class DemonBoss extends Boss {
 				if(a.getID().equals("pentagram2")) {
 					a.setXVelocity(20);
 				}
-				TheGame.playSound("/spikeboss/sounds/1spin.wav");
+				GameSounds.playSound("/spikeboss/sounds/1spin.wav");
 			}
 		}
 		if(_counter4 == 60) {

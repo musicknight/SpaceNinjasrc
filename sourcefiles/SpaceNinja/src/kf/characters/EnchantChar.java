@@ -135,7 +135,7 @@ public class EnchantChar extends CharacterImpl {
 			} else {
 				_image = new Image("enchantress/shot1left.png");
 			}
-			TheGame.playSound("/enchantress/sounds/charge.wav");
+			GameSounds.playSound("/enchantress/sounds/charge.wav");
 		}
 		
 	}
@@ -216,7 +216,7 @@ public class EnchantChar extends CharacterImpl {
 			}
 			Hitbox attack = new HitboxImpl("enchantbolt", this, false, _x+x, _y+(int)(18*1.3), (int)(25*1.3), (int)(25*1.3), v, 0, 18, 18, new Image("enchantress/ball.png"));
 			TheGame._attacks.add(attack);
-			TheGame.playSound("/enchantress/sounds/shot.wav");
+			GameSounds.playSound("/enchantress/sounds/shot.wav");
 		}
 		if(_counter == 27) {
 			if(_facing.equals("right")) {
@@ -289,7 +289,7 @@ public class EnchantChar extends CharacterImpl {
 				attack.setForceLeft(true);
 			}
 			TheGame._attacks.add(attack);
-			TheGame.playSound("/enchantress/sounds/dash.wav");
+			GameSounds.playSound("/enchantress/sounds/dash.wav");
 			
 		}
 		if(_counter == 26){
@@ -335,7 +335,7 @@ public class EnchantChar extends CharacterImpl {
 			} else {
 				_image = new Image("enchantress/shot1left.png");
 			}
-			TheGame.playSound("/enchantress/sounds/charge.wav");
+			GameSounds.playSound("/enchantress/sounds/charge.wav");
 		}
 	}
 	
@@ -391,7 +391,7 @@ public class EnchantChar extends CharacterImpl {
 			}
 			attack.setHOrientation(true);
 			TheGame._attacks.add(attack);
-			TheGame.playSound("/enchantress/sounds/up.wav");
+			GameSounds.playSound("/enchantress/sounds/up.wav");
 		}
 		if(_counter == 16) {
 			int x;
@@ -458,7 +458,7 @@ public class EnchantChar extends CharacterImpl {
 			_width = (int)(43*1.3);
 			_height = (int)(63*1.3);
 			_haspriority = true;
-			TheGame.playSound("/enchantress/sounds/ult1.wav");
+			GameSounds.playSound("/enchantress/sounds/ult1.wav");
 		}
 	}
 	
@@ -487,7 +487,7 @@ public class EnchantChar extends CharacterImpl {
 		}
 		if(_counter == 80) {
 
-			TheGame.playSound("/enchantress/sounds/flash.wav");
+			GameSounds.playSound("/enchantress/sounds/flash.wav");
 		}
 		if(_counter > 80 &&  _counter < 90) {
 			TheGame._gc.setFill(Color.WHITE);
@@ -540,11 +540,11 @@ public class EnchantChar extends CharacterImpl {
 			attack.setHOrientation(true);
 			TheGame._attacks.add(attack);
 			if(_counter % 5 == 0) {
-				TheGame.playSound("/enchantress/sounds/ultshot.wav");
+				GameSounds.playSound("/enchantress/sounds/ultshot.wav");
 			}
 		}
 		if(_counter == 580) {
-			TheGame.playSound("/enchantress/sounds/flash.wav");
+			GameSounds.playSound("/enchantress/sounds/flash.wav");
 		}
 		if(_counter > 580 && _counter < 590) {
 			TheGame._gc.setFill(Color.WHITE);
@@ -600,7 +600,7 @@ public class EnchantChar extends CharacterImpl {
 			} else {
 				_image = new Image("enchantress/intro1left.png");
 			}
-			TheGame.playSound("/enchantress/sounds/intro.wav");
+			GameSounds.playSound("/enchantress/sounds/intro.wav");
 		}
 		if(_counter == 4) {
 			if(_facing.equals("right")) {

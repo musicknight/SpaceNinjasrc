@@ -42,7 +42,7 @@ public class DarkMindStage extends Place{
 		_lasercounter++;
 		if(_lasercounter == 500) {
 
-			TheGame.playSound("/darkmind/sound.wav");
+			GameSounds.playSound("/darkmind/sound.wav");
 		}
 		if(_lasercounter >= 500 && _lasercounter < 504) {
 			Hitbox laser1 = new MeleeHitbox("stagelaser1", _c1, 432, 224, 46, 272, 20, 20, new Image("darkmind/laser1.png"));

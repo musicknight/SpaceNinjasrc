@@ -46,7 +46,7 @@ public abstract class Place {
 				
 			}
 			if(_counter == 0) {
-				TheGame.playSound("/sounds/ready.wav");
+				GameSounds.playSound("/sounds/ready.wav");
 			}
 			if(_counter >= 40 && _counter < 50 ) {
 				gc.setFill(Color.RED);
@@ -55,16 +55,16 @@ public abstract class Place {
 				
 			}
 			if(_counter == 40) {
-				TheGame.playSound("/sounds/go.wav");
+				GameSounds.playSound("/sounds/go.wav");
 
-				TheGame.playStageSong(_song);
+				GameSounds.playStageSong(_song);
 			}
 			if(_counter == 50){
 				_c1.stopIntro();
 				_c2.stopIntro();
 			}
 			if(_counter > 40 && TheGame.getPlayerState() != 0 && !TheGame.getClosed()) {
-				//TheGame.playStageSong(_song);
+				//GameSounds.playStageSong(_song);
 			}
 		}
 		_counter++;

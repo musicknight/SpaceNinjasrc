@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cd.AnimatedHitbox;
+import cd.GameSounds;
 import cd.Hitbox;
 import cd.HitboxImpl;
 import cd.MeleeHitbox;
@@ -150,7 +151,7 @@ public class Ninja1Char extends CDCharacter {
 				Hitbox a = new HitboxImpl("uball", this, false, _x+56, _y+13, 24, 24, 15, 0, 0, 90, i);
 				a.setCircle(true);
 				TheGame._attacks.add(a);
-				TheGame.playSound("/ultimoboss/sounds/shot.wav");
+				GameSounds.playSound("/ultimoboss/sounds/shot.wav");
 			}
 		}
 		
@@ -179,7 +180,7 @@ public class Ninja1Char extends CDCharacter {
 				i.add(new Image("ninja/" + _skin + "/star2.png"));
 				_star = new AnimatedHitbox("shuriken", this, false, _x+45, _y+25, 21, 21, 16, 0, 0, 10, i, 3);
 				_attack1 = false;
-				TheGame.playSound("/ninja/sounds/throw.wav");
+				GameSounds.playSound("/ninja/sounds/throw.wav");
 			}
 			if(_skin.equals("red")){
 				List<Image> i = new ArrayList<Image>();
@@ -187,7 +188,7 @@ public class Ninja1Char extends CDCharacter {
 				i.add(new Image("ninja/" + _skin + "/star2.png"));
 				_star = new AnimatedHitbox("shuriken", this, false, _x+45, _y+5, 42, 42, 9, 0, 0, 18, i, 4);
 				_attack1 = false;
-				TheGame.playSound("/ninja/sounds/throw.wav");
+				GameSounds.playSound("/ninja/sounds/throw.wav");
 			}
 			if(_skin.equals("green")){
 				List<Image> i = new ArrayList<Image>();
@@ -195,24 +196,24 @@ public class Ninja1Char extends CDCharacter {
 				i.add(new Image("ninja/" + _skin + "/star2.png"));
 				_star = new AnimatedHitbox("shuriken", this, false, _x+45, _y+25, 21, 21, 16, 0, 0, 7, i, 3);
 				_attack1 = false;
-				TheGame.playSound("/ninja/sounds/throw.wav");
+				GameSounds.playSound("/ninja/sounds/throw.wav");
 			}
 			if(_skin.equals("rock")) {
 				_star = new HitboxImpl("shuriken", this, true, _x+45, _y+5, 40, 40, 8, -15, 0, 12, new Image("ninja/rock/star1.png"));
 				_star.setBounces(true);
 				_attack1 = false;
-				TheGame.playSound("/rockboss/sounds/shot.wav");
+				GameSounds.playSound("/rockboss/sounds/shot.wav");
 			}
 			if(_skin.equals("rock2")) {
 				_star = new HitboxImpl("shuriken", this, true, _x+45, _y+5, 40, 40, 10, -20, 0, 13, new Image("ninja/rock2/star1.png"));
 				_star.setBounces(true);
 				_attack1 = false;
-				TheGame.playSound("/rockboss/sounds/shot.wav");
+				GameSounds.playSound("/rockboss/sounds/shot.wav");
 			}
 			if(_skin.equals("dragon")){
 				_star = new HitboxImpl("shuriken", this, false, _x+45, _y-6, 62, 50, 9, 0, 0, 20, new Image("dragonboss/beam/shot2.png"));
 				_attack1 = false;
-				TheGame.playSound("/dragonboss/sounds/ball.wav");
+				GameSounds.playSound("/dragonboss/sounds/ball.wav");
 			}
 			if(_skin.equals("twins")) {
 				_star = new HitboxImpl("shuriken", this, false, _x+45, _y+18, 21, 21, 16, 0, 0, 10, new Image("ninja/twins/star1.png"));
@@ -221,19 +222,19 @@ public class Ninja1Char extends CDCharacter {
 				a.setCircle(true);
 				TheGame._attacks.add(a);
 				_attack1 = false;
-				TheGame.playSound("/ninja/sounds/throw.wav");
+				GameSounds.playSound("/ninja/sounds/throw.wav");
 			}
 			if(_skin.equals("skull") && _lives == 1){
 				_star = new HitboxImpl("shuriken", this, false, _x+45, _y+3, 30, 42, 16, 0, 0, 23, new Image("ninja/skull/star3.png"));
 				_attack1 = false;
-				TheGame.playSound("/ninja/sounds/throw.wav");
+				GameSounds.playSound("/ninja/sounds/throw.wav");
 			}
 			if(_skin.equals("spike2")){
 				_star = new HitboxImpl("shuriken", this, false, _x+45, _y+1, 37, 48, 15, 0, 0, 7, new Image("spikeboss2/spikes/right.png"));
 				Hitbox a = new HitboxImpl("shuriken", this, false, _x+45, _y+1, 44, 44, 10, -10, 0, 7, new Image("spikeboss2/spikes/upr.png"));
 				Hitbox b = new HitboxImpl("shuriken", this, false, _x+45, _y+1, 44, 44, 10, 10, 0, 7, new Image("spikeboss2/spikes/downr.png"));
 				_attack1 = false;
-				TheGame.playSound("/spikeboss/sounds/shot.wav");
+				GameSounds.playSound("/spikeboss/sounds/shot.wav");
 				TheGame._attacks.add(a);
 				TheGame._attacks.add(b);
 			}
@@ -244,7 +245,7 @@ public class Ninja1Char extends CDCharacter {
 		}
 		if(_skin.equals("spike") &&  _counter % 5 == 0) {
 			TheGame._attacks.add(new HitboxImpl("shuriken", this, false, _x+45, _y+1, 37, 48, 15, 0, 0, 12, new Image("spikeboss/spikes/right.png")));
-			TheGame.playSound("/spikeboss/sounds/shot.wav");
+			GameSounds.playSound("/spikeboss/sounds/shot.wav");
 		}
 		if(_counter == 10 && _skin.equals("spike")) {
 			_attack1 = false;
@@ -345,7 +346,7 @@ public class Ninja1Char extends CDCharacter {
 	}
 	private void makeHLaser(int c, String s) {
 		if(c == 0) {
-			TheGame.playSound("/botboss/sounds/charge1.wav");
+			GameSounds.playSound("/botboss/sounds/charge1.wav");
 		}
 		if(c < 20) {
 			TheGame._gc.drawImage(new Image("botboss/lasers/hpre.png"), _x+26, _y-2, 900, 22);
@@ -354,7 +355,7 @@ public class Ninja1Char extends CDCharacter {
 			Hitbox a = new OffsetHitbox(s, this, 26, -2, 900, 22, 0, 3, new Image("botboss/lasers/h1.png"));
 			a.setDissappearOnHit(false);
 			TheGame._attacks.add(a);
-			TheGame.playSound("/botboss/sounds/shot.wav");
+			GameSounds.playSound("/botboss/sounds/shot.wav");
 		}
 		if(c == 33) {
 			TheGame.clearHitboxes(s, this);
@@ -379,22 +380,36 @@ public void executeAttackBoost() {
 		} else {
 			_image = _savedim;
 		}
-		if(!_skin.equals("demon")){
+		
 		if(_abcounter == 50) {
 			_immune = false;
 			_attackboost = false;
 			_image = _savedim;
 		}
-		} else {
-			if(_abcounter == 85) {
-				_immune = false;
-				_attackboost = false;
-				_image = _savedim;
-			}
-		}
+		
 	}
 
+@Override
+public void pressJump() {
+	if(!_skin.equals("ult")) {
+		if(_canact) {
+			if (_canjump1) {
+				jump1();
+			} else if(_canjump2){
+				jump2();
+			} else if(_skin.equals("demon") && _canjump3){
+				jump3();
+			}
+			}
+	}
+}
 
+public void jump3() {
+	if(_canjump3) {
+		_yvelocity = -13;
+	}
+	_canjump3 = false;
+}
 
 @Override
 public void pressDown() {

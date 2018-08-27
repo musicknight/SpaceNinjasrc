@@ -6,7 +6,7 @@ import cd.TheGame;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javazoom.jlgui.basicplayer.BasicPlayerException;
-
+import cd.GameSounds;
 public class TootBoss extends Boss {
 
 	private boolean _fightstarted;
@@ -106,7 +106,7 @@ public class TootBoss extends Boss {
 		_attack1 = true;
 		_counter4 = 0;
 		_yvelocity = 5;
-		TheGame.playSound("/tootboss/sounds/drop.wav");
+		GameSounds.playSound("/tootboss/sounds/drop.wav");
 		
 	}
 	
@@ -128,14 +128,14 @@ public class TootBoss extends Boss {
 			Hitbox a = new HitboxImpl("shot", this, false, _x, _y+40, 20, 20, -7, 0, 0, 1, new Image("tootboss/shot.png"));
 			a.setCircle(true);
 			TheGame._attacks.add(a);
-			TheGame.playSound("/tootboss/sounds/shot.wav");
+			GameSounds.playSound("/tootboss/sounds/shot.wav");
 		}
 		if(_raged) {
 			if(_counter4 > 45 && _counter % 5 == 0 && _counter4 < 85) {
 				Hitbox a = new HitboxImpl("shot", this, false, _x, _y+40, 20, 20, -7, 0, 0, 1, new Image("tootboss/shot.png"));
 				a.setCircle(true);
 				TheGame._attacks.add(a);
-				TheGame.playSound("/tootboss/sounds/shot.wav");
+				GameSounds.playSound("/tootboss/sounds/shot.wav");
 			}
 		}
 		if(_counter4 == 70) {
@@ -155,24 +155,24 @@ public class TootBoss extends Boss {
 		_attack2 = true;
 		_counter4 = 0;
 		_yvelocity = 5;
-		TheGame.playSound("/tootboss/sounds/drop.wav");
+		GameSounds.playSound("/tootboss/sounds/drop.wav");
 	}
 	
 	public void executeAttack2() {
 		if(_counter4 == 30) {
 			_yvelocity = 0;
 		}
-		if(_counter4 > 45 && _counter % 5 == 0 && _counter4 < 600) {
+		if(_counter4 > 45 && _counter % 8 == 0 && _counter4 < 600) {
 			Hitbox a = new HitboxImpl("shot", this, false, _x, _y+40, 20, 20, -7, 0, 0, 1, new Image("tootboss/shot.png"));
 			a.setCircle(true);
 			TheGame._attacks.add(a);
-			TheGame.playSound("/tootboss/sounds/shot.wav");
+			GameSounds.playSound("/tootboss/sounds/shot.wav");
 		}
-		if(_counter4 > 650 && _counter % 5 == 0 && _counter4 < 800 && !(TheGame._character1.getLives()<=0)) {
+		if(_counter4 > 650 && _counter % 8 == 0 && _counter4 < 800 && !(TheGame._character1.getLives()<=0)) {
 			Hitbox a = new HitboxImpl("shot", this, false, _x+_width, _y+40, 20, 20, 7, 0, 0, 1, new Image("tootboss/shot.png"));
 			a.setCircle(true);
 			TheGame._attacks.add(a);
-			TheGame.playSound("/tootboss/sounds/shot.wav");
+			GameSounds.playSound("/tootboss/sounds/shot.wav");
 		}
 		if(TheGame._character1.getLives()<=0) {
 			_staticimage = new Image("tootboss/dead.png");
@@ -187,13 +187,7 @@ public class TootBoss extends Boss {
 			TheGame._beattoot3 = "t";
 			TheGame.writeData();
 			TheGame._closed = true;
-			try {
-				TheGame._player.stop();
-				
-			} catch (BasicPlayerException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			GameSounds.stopPlayer();
 			
 			TheGame._stage.close();
 		}

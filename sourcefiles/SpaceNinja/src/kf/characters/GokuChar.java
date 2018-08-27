@@ -116,7 +116,7 @@ public class GokuChar extends CharacterImpl {
 					_image = new Image("goku/ukick1left.png");
 				}
 			}
-			TheGame.playSound("/goku/sounds/goku1.wav");
+			GameSounds.playSound("/goku/sounds/goku1.wav");
 		}
 
 	}
@@ -185,7 +185,7 @@ public class GokuChar extends CharacterImpl {
 			
 		}
 		if(_counter == 12) {
-			TheGame.playSound("/goku/sounds/goku2.wav");
+			GameSounds.playSound("/goku/sounds/goku2.wav");
 		}
 		
 		
@@ -209,7 +209,7 @@ public class GokuChar extends CharacterImpl {
 			_cd3 = 45;
 			_image = new Image("goku/vanish1.png");
 			_cd2 = 140;
-			TheGame.playSound("/goku/sounds/goku3.wav");
+			GameSounds.playSound("/goku/sounds/goku3.wav");
 		}
 
 	}
@@ -251,7 +251,7 @@ public class GokuChar extends CharacterImpl {
 					_image = new Image("goku/ucharge1left.png");
 				}
 			}
-			TheGame.playSound("/goku/sounds/goku4.wav");
+			GameSounds.playSound("/goku/sounds/goku4.wav");
 		}
 
 	}
@@ -483,7 +483,7 @@ public class GokuChar extends CharacterImpl {
 			} else {
 				_image = new Image("goku/ultleft.png");
 			}
-			TheGame.playSound("/goku/sounds/gokuu.wav");
+			GameSounds.playSound("/goku/sounds/gokuu.wav");
 		}
 	}
 
