@@ -31,6 +31,7 @@ public class RockBoss extends Boss {
 		_width = 278;
 		_height = 132;
 		_health = 1000;
+		_maxhealth = 1000;
 		_body = new CharLinkedHitbox("rockbody", this, 0, 1);
 		_staticimage = new Image("rockboss/sprites/1.png");
 	}

@@ -28,6 +28,9 @@ public class TootBoss4 extends Boss {
 		_width = 150;
 		_height = 150;
 		_health = -1300;
+		_maxhealth = -1300;
+		_startx = -10;
+		_starty = 75;
 		_staticimage = new Image("tootboss2/4.png");
 		_spin.add(new Image("tootboss2/spin/1.png"));
 		_spin.add(new Image("tootboss2/spin/2.png"));

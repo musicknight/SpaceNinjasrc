@@ -10,6 +10,8 @@ import java.io.IOException;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import java.io.InputStream;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -27,6 +29,8 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 import cd.bosses.Boss;
 import cd.bosses.BotBoss;
+import cd.bosses.BotBoss2;
+import cd.bosses.ClockBoss;
 import cd.bosses.CometBoss;
 import cd.bosses.DemonBoss;
 import cd.bosses.DragonBoss;
@@ -152,6 +156,7 @@ public class TheGame extends Application {
 	private Button _start = new Button("start");
 	
 	private Button _return = new Button("back to main menu");
+	private Button _retry = new Button("try again?");
 	
 	private Button _continue = new Button("continue");
 	private static Button _reset = new Button("reset");
@@ -162,7 +167,7 @@ public class TheGame extends Application {
 	private boolean _menusongstarted= false;
 	private boolean _titlesongstarted = false;
 	private boolean _gamestarted = false;
-	
+	private String _bossclass;
 	
 	
 	private Button _white = new Button("select");
@@ -179,6 +184,8 @@ public class TheGame extends Application {
 	private Button _twins = new Button("select");
 	private Button _spike2 = new Button("select");
 	private Button _demon = new Button("select");
+	private Button _clock = new Button("select");
+	private Button _laser2 = new Button("select");
 	private Button _ult = new Button("select");
 	
 	private Button _toot = new Button("fight!");
@@ -189,9 +196,11 @@ public class TheGame extends Application {
 	private Button _crunch = new Button("fight!");
 	private Button _droth = new Button("fight!");
 	private Button _cranius = new Button("fight!");
-	private Button _candm = new Button("fight");
-	private Button _spiball2 = new Button("fight");
-	private Button _nero = new Button("fight");
+	private Button _candm = new Button("fight!");
+	private Button _spiball2 = new Button("fight!");
+	private Button _nero = new Button("fight!");
+	private Button _cryok = new Button("fight!");
+	private Button _cannon = new Button("fight!");
 	
 	
 	private Button _ultimo = new Button("fight");
@@ -221,6 +230,8 @@ public class TheGame extends Application {
 	public static String _beattoot4;
 	public static String _beatultimo2;
 	public static String _beattoot5;
+	public static String _beatcryok;
+	public static String _beatcannon;
 	
 	private static Image _text;
 	
@@ -231,6 +242,8 @@ public class TheGame extends Application {
 	private int _savedx;
 	private int _savedy = 400;
 	private boolean _paused = false;
+	public static boolean _frozen = false;
+	public static double _timescale = 1;
 	
 	public static boolean _vertscroll;
 
@@ -238,7 +251,7 @@ public class TheGame extends Application {
 	
 	private static  GameSounds _gs = new GameSounds();
 	//public static BasicPlayer _player = _gs.getPlayer();
-	private static String _song;
+	public static String _song;
 	
 	
 	
@@ -290,6 +303,8 @@ public class TheGame extends Application {
 			_beatcandm = read(reader);
 			_beatspiball2 = read(reader);
 			_beatnero = read(reader);
+			_beatcryok = read(reader);
+			_beatcannon = read(reader);
 			_1stultimo = read(reader);
 			_beatultimo = read(reader);
 			_beattoot2 = read(reader);
@@ -297,6 +312,7 @@ public class TheGame extends Application {
 			_beattoot4 = read(reader);
 			_beatultimo2 = read(reader);
 			_beattoot5 = read(reader);
+			
 			reader.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -335,6 +351,12 @@ public class TheGame extends Application {
 		if(_beatnero == null) {
 			_beatnero = "f";
 		}
+		if(_beatcryok == null) {
+			_beatcryok = "f";
+		}
+		if(_beatcannon == null) {
+			_beatcannon = "f";
+		}
 		if(_1stultimo == null) {
 			_1stultimo = "f";
 		}
@@ -356,6 +378,7 @@ public class TheGame extends Application {
 		if(_beattoot5 == null) {
 			_beattoot5 = "f";
 		}
+		
 		writeData();
 		if(_beattoot3.equals("t") && _beattoot4.equals("f")){
 			_stage.setTitle("Toot");
@@ -430,6 +453,12 @@ public class TheGame extends Application {
         	x1 = 900;
         	y1 = 600;
         }
+        if(_beatcannon.equals("f")){
+        	x1 = 162;
+        	y1 = 185;
+        if(_beatcryok.equals("f")){
+        	x1 = 102;
+        	y1 = 185;
         if(_beatnero.equals("f")){
         	y1 = 185;
         if(_beatspiball2.equals("f")){
@@ -463,7 +492,8 @@ public class TheGame extends Application {
         }
         }
         }
-
+        }
+        }
         					_gc.drawImage(new Image("text/black.png"), x, y);
         					_gc.drawImage(new Image("text/black.png"), x1, y1);
         					if(_beatultimo2.equals("f") || _beattoot5.equals("t")){
@@ -597,6 +627,24 @@ public class TheGame extends Application {
 
         						_demon.setOnMousePressed(m::handleButtonPress);
         					}
+        					if (!_root1.getChildren().contains(_clock) && _beatcryok.equals("t")) {
+        						_clock.setMinWidth(45);
+        						_clock.setMinHeight(12);
+        						_clock.setLayoutX(106);
+        						_clock.setLayoutY(235);
+        						_root1.getChildren().add(_clock);
+
+        						_clock.setOnMousePressed(m::handleButtonPress);
+        					}
+        					if (!_root1.getChildren().contains(_laser2) && _beatcannon.equals("t")) {
+        						_laser2.setMinWidth(45);
+        						_laser2.setMinHeight(12);
+        						_laser2.setLayoutX(166);
+        						_laser2.setLayoutY(235);
+        						_root1.getChildren().add(_laser2);
+
+        						_laser2.setOnMousePressed(m::handleButtonPress);
+        					}
         					}
         					if (!_root1.getChildren().contains(_ult) && _beatultimo2.equals("t") && _beattoot5.equals("f")) {
         						_ult.setMinWidth(295);
@@ -635,6 +683,12 @@ public class TheGame extends Application {
         	x1 = 0;
         	y1 = 183;
         }
+        if(!_beatcannon.equals("t")){
+        	x1 = 755;
+        	y1 = 183;
+        if(!_beatcryok.equals("t")){
+        	x1 = 575;
+        	y1 = 183;
         if(!_beatnero.equals("t")){
         	x1 = 475;
         	y1 = 183;
@@ -672,6 +726,8 @@ public class TheGame extends Application {
         		}
         	}
         	}
+        }
+        }
         }
         }
 
@@ -779,7 +835,25 @@ public class TheGame extends Application {
 
         						_nero.setOnMousePressed(m::handleButtonPress);
         					}
-        					if (!_root1.getChildren().contains(_ultimo) && _beatnero.equals("t")) {
+        					if (!_root1.getChildren().contains(_cryok) && _beatnero.equals("t")) {
+        						_cryok.setMinWidth(60);
+        						_cryok.setMinHeight(25);
+        						_cryok.setLayoutX(512);
+        						_cryok.setLayoutY(219);
+        						_root1.getChildren().add(_cryok);
+
+        						_cryok.setOnMousePressed(m::handleButtonPress);
+        					}
+        					if (!_root1.getChildren().contains(_cannon) && _beatcryok.equals("t")) {
+        						_cannon.setMinWidth(60);
+        						_cannon.setMinHeight(25);
+        						_cannon.setLayoutX(642);
+        						_cannon.setLayoutY(219);
+        						_root1.getChildren().add(_cannon);
+
+        						_cannon.setOnMousePressed(m::handleButtonPress);
+        					}
+        					if (!_root1.getChildren().contains(_ultimo) && _beatcannon.equals("t")) {
         						_ultimo.setMinWidth(60);
         						_ultimo.setMinHeight(25);
         						_ultimo.setLayoutX(774);
@@ -837,16 +911,17 @@ public class TheGame extends Application {
         				_character1.move();
         				_character1.incrementCounter();
         				if (!(_character1.isOnPlatform()) && _character1.isGravity()) {
-        					_character1.setYVelocity(_character1.getYVelocity() + _gravity);
+        					_character1.setYVelocity(_character1.getYVelocity() + _gravity*_timescale);
         				}
         				_scene.setOnKeyPressed(m::handleKeyPress);
         				
         				_scene.setOnKeyReleased(m::handleKeyRelease);
         				List<Hitbox> attackstoremove = new ArrayList<Hitbox>();
+        				
         				for (Hitbox a : _attacks) {
         					a.render(_gc);
         					if (a.isAffectedByGravity()) {
-        						a.setYVelocity(a.getYVelocity() + _gravity);
+        						a.setYVelocity(a.getYVelocity() + _gravity*_timescale);
         					}
         					if (a.checkCollide() == true) {
         						
@@ -863,6 +938,7 @@ public class TheGame extends Application {
         						attackstoremove.add(a);
         					}
         				}
+        				
         				
         			
         				for (Hitbox a : attackstoremove) {
@@ -904,6 +980,16 @@ public class TheGame extends Application {
         						_root1.getChildren().add(_return);
 
         						_return.setOnMousePressed(m::handleButtonPress);
+        					}
+        					if (!_root1.getChildren().contains(_retry) && !_boss.isDead()) {
+        						
+        						_retry.setMinWidth(116);
+        						_retry.setMinHeight(50);
+        						_retry.setLayoutX(388);
+        						_retry.setLayoutY(365);
+        						_root1.getChildren().add(_retry);
+
+        						_retry.setOnMousePressed(m::handleButtonPress);
         					}
         				}
         				long n = System.nanoTime();
@@ -1025,6 +1111,12 @@ public void handleKeyRelease(KeyEvent event) {
 		_return.setLayoutY(290);
 		_root1.getChildren().add(_return);
 		
+		_retry.setMinWidth(116);
+		_retry.setMinHeight(50);
+		_retry.setLayoutX(388);
+		_retry.setLayoutY(365);
+		_root1.getChildren().add(_retry);
+		_retry.setOnMousePressed(this::handleButtonPress);
 		_return.setOnMousePressed(this::handleButtonPress);
 		GameSounds.pausePlayer();
 		return;
@@ -1033,6 +1125,7 @@ public void handleKeyRelease(KeyEvent event) {
 			//_animationTimer.start();
 			_paused = false;
 			_root1.getChildren().remove(_return);
+			_root1.getChildren().remove(_retry);
 			GameSounds.resumePlayer();
 			return;
 		}
@@ -1070,6 +1163,9 @@ public void handleButtonPress(MouseEvent click) {
 		BufferedWriter writer = null;
 		try {
 			writer = new BufferedWriter(new FileWriter("data.txt"));
+			write(writer, "f");
+			write(writer, "f");
+			write(writer, "f");
 			write(writer, "f");
 			write(writer, "f");
 			write(writer, "f");
@@ -1187,8 +1283,19 @@ public void handleButtonPress(MouseEvent click) {
 		_charpicked = true;
 		_character1 = null;
 	}
+	
 	if(click.getSource().equals(_demon)) {
 		_skin = "demon";
+		_charpicked = true;
+		_character1 = null;
+	}
+	if(click.getSource().equals(_clock)) {
+		_skin = "clock";
+		_charpicked = true;
+		_character1 = null;
+	}
+	if(click.getSource().equals(_laser2)) {
+		_skin = "laser2";
 		_charpicked = true;
 		_character1 = null;
 	}
@@ -1209,10 +1316,12 @@ public void handleButtonPress(MouseEvent click) {
 	if(click.getSource().equals(_toot)) {
 		if(_beattoot4.equals("f")){
 		_boss = new TootBoss();
+		_bossclass = "TootBoss";
 		_bosspicked = true;
 		GameSounds.playStageSong("/songs/toot.mp3");
 		} else if(_beattoot5.equals("f")){
 			_boss = new TootBoss4();
+			_bossclass = "TootBoss4";
 			GameSounds.playStageSong("/songs/toot3.mp3");
 			_bosspicked = true;
 			_character1.setX(400);
@@ -1227,67 +1336,92 @@ public void handleButtonPress(MouseEvent click) {
 	}
 	if(click.getSource().equals(_swurli)) {
 		_boss = new GhostBoss();
+		_bossclass = "GhostBoss";
 		_bosspicked = true;
 		GameSounds.playStageSong("/songs/swurli.mp3");
 		_song = "swurli";
 	}
 	if(click.getSource().equals(_crush)) {
 		_boss = new RockBoss();
+		_bossclass = "RockBoss";
 		_bosspicked = true;
 		GameSounds.playStageSong("/songs/crush.mp3");
 		_song = "crush";
 	}
 	if(click.getSource().equals(_spiball)) {
 		_boss = new SpikeBoss();
+		_bossclass = "SpikeBoss";
 		_bosspicked = true;
 		GameSounds.playStageSong("/songs/spiball.mp3");
 		_song = "spiball";
 	}
 	if(click.getSource().equals(_laser)) {
 		_boss = new BotBoss();
+		_bossclass = "BotBoss";
 		_bosspicked = true;
 		GameSounds.playStageSong("/songs/laser.mp3");
 		_song = "laser";
 	}
 	if(click.getSource().equals(_crunch)) {
 		_boss = new RockBoss2();
+		_bossclass = "RockBoss2";
 		_bosspicked = true;
 		GameSounds.playStageSong("/songs/crunch.mp3");
 		_song = "crunch";
 	}
 	if(click.getSource().equals(_droth)) {
 		_boss = new DragonBoss();
+		_bossclass = "DragonBoss";
 		_bosspicked = true;
 		GameSounds.playStageSong("/songs/droth.mp3");
 		_song = "droth";
 	}
 	if(click.getSource().equals(_cranius)) {
 		_boss = new SkullBoss();
+		_bossclass = "SkullBoss";
 		_bosspicked = true;
 		GameSounds.playStageSong("/songs/cranius.mp3");
-		_song = "droth";
+		_song = "cranius";
 	}
 	if(click.getSource().equals(_candm)) {
 		_boss = new TwinsBoss();
+		_bossclass = "TwinsBoss";
 		_bosspicked = true;
 		GameSounds.playStageSong("/songs/candm.mp3");
 		_song = "candm";
 	}
 	if(click.getSource().equals(_spiball2)) {
 		_boss = new SpikeBoss2();
+		_bossclass = "SpikeBoss2";
 		_bosspicked = true;
 		GameSounds.playStageSong("/songs/spiball2.mp3");
 		_song = "spiball2";
 	}
 	if(click.getSource().equals(_nero)) {
 		_boss = new DemonBoss();
+		_bossclass = "DemonBoss";
 		_bosspicked = true;
 		GameSounds.playStageSong("/songs/nero.mp3");
 		_song = "nero";
 	}
+	if(click.getSource().equals(_cryok)) {
+		_boss = new ClockBoss();
+		_bossclass = "ClockBoss";
+		_bosspicked = true;
+		GameSounds.playStageSong("/songs/cryok.mp3");
+		_song = "cryok";
+	}
+	if(click.getSource().equals(_cannon)) {
+		_boss = new BotBoss2();
+		_bossclass = "BotBoss2";
+		_bosspicked = true;
+		GameSounds.playStageSong("/songs/cannon.mp3");
+		_song = "cannon";
+	}
 	if(click.getSource().equals(_ultimo)) {
 		if(!_beatultimo.equals("t") || _beattoot4.equals("t")){
 		_boss = new UltimoBoss(_1stultimo);
+		_bossclass = "UltimoBoss";
 		if(_1stultimo.equals("f")){
 			
 			GameSounds.playStageSong("/songs/ultimointro.mp3");
@@ -1299,6 +1433,7 @@ public void handleButtonPress(MouseEvent click) {
 			}
 		} else {
 		_boss = new TootBoss2();
+		_bossclass = "TootBoss2";
 		GameSounds.playStageSong("/songs/toot2.mp3");
 		_song = "toot2";
 		}
@@ -1318,11 +1453,62 @@ public void handleButtonPress(MouseEvent click) {
 		_root1.getChildren().remove(_continue);
 	}
 	
+	//retry
+	if(click.getSource().equals(_retry)) {
+		String c = _character1.getSkin();
+		//String b = _boss.getClass().toString();
+		//System.out.println(b);
+		_root1.getChildren().remove(_return);
+		_root1.getChildren().remove(_retry);
+		_character1 = null;
+		_paused = false;
+		_character1 = new Ninja1Char("one", c);
+		_attacks.clear();
+		_backdrops.clear();
+		_frontdrops.clear();
+		_timescale = 1;
+		_scrollr = 10;
+		GameSounds.playStageSong("/songs/" + _song + ".mp3");
+		try {
+			if(_bossclass != "UltimoBoss"){
+			_boss = (Boss)Class.forName("cd.bosses." + _bossclass).getConstructor().newInstance();
+			} else {
+				_boss = (UltimoBoss)Class.forName("cd.bosses." + _bossclass).getConstructor(String.class).newInstance(_1stultimo);
+			}
+			_boss.spawn();
+		
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
 	
 	//return
 	if(click.getSource().equals(_return)) {
 		
 		_root1.getChildren().remove(_return);
+		_root1.getChildren().remove(_retry);
 		
 		if(_character1.getLives() > 0){
 			_savedx = _character1.getX();
@@ -1337,9 +1523,12 @@ public void handleButtonPress(MouseEvent click) {
 		}
 		_buttonsremoved = false;
 		_backdrops.clear();
+		_frontdrops.clear();
 		_charpicked = false;
 		_bosspicked = false;
 		_character1 = null;
+		_timescale = 1;
+		
 		_scroll = new Image("scroll/space.png");
 		
 		_songplaying = false;
@@ -1434,6 +1623,22 @@ public void handleButtonPress(MouseEvent click) {
 				}
 				_beatnero = "t";
 			}
+			if(_boss.getID().equals("clockboss")){
+				if(_beatcryok.equals("f")){
+					_gotpower = true;
+					_power = "cryok";
+					_newskin = "clock";
+				}
+				_beatcryok = "t";
+			}
+			if(_boss.getID().equals("botboss2")){
+				if(_beatcannon.equals("f")){
+					_gotpower = true;
+					_power = "cannon";
+					_newskin = "laser2";
+				}
+				_beatcannon = "t";
+			}
 			if(_boss.getID().equals("ultimoboss")){
 				if(_beattoot4.equals("t") && _beatultimo2.equals("f")){
 					_gotpower = true;
@@ -1458,6 +1663,8 @@ public void handleButtonPress(MouseEvent click) {
 			write(writer, _beatcandm);
 			write(writer, _beatspiball2);
 			write(writer, _beatnero);
+			write(writer, _beatcryok);
+			write(writer, _beatcannon);
 			write(writer, _1stultimo);
 			write(writer, _beatultimo);
 			write(writer, _beattoot2);
@@ -1557,6 +1764,8 @@ public static void writeData() {
 		write(writer, _beatcandm);
 		write(writer, _beatspiball2);
 		write(writer, _beatnero);
+		write(writer, _beatcryok);
+		write(writer, _beatcannon);
 		write(writer, _1stultimo);
 		write(writer, _beatultimo);
 		write(writer, _beattoot2);

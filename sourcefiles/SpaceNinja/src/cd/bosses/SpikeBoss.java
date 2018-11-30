@@ -32,6 +32,7 @@ public class SpikeBoss extends Boss{
 	public SpikeBoss() {
 		super(900, 600, "spikeboss");
 		_health = 1000;
+		_maxhealth = 1000;
 		_staticimage = null;
 		_circle = true;
 		_sprites = new ArrayList<Image>();

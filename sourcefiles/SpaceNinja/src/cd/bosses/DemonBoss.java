@@ -32,6 +32,7 @@ public class DemonBoss extends Boss {
 		_width = (int)(263*(0.8));
 		_height = (int)(268*(0.8));
 		_health = 1500;
+		_maxhealth = 1500;
 		_staticimage = new Image("demonboss/1.png");
 		_circle = true;
 		_body = new CharLinkedHitbox("demonbody", this, 0, 1);

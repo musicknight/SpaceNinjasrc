@@ -106,18 +106,20 @@ public abstract class CharacterImpl extends EntityImpl implements Character {
 		
 		
 		
-		if(_canmovex && !_dontmove) {
-			_x += (_xvelocity);
-		}
-		if(_canmovey) {
-			_y+= (_yvelocity);
-		}
+		
+			if(_canmovex && !_dontmove) {
+				_x += (_xvelocity*TheGame._timescale);
+			}
+			if(_canmovey) {
+				_y+= (_yvelocity*TheGame._timescale);
+			}
 		
 		
 		if(_canact && _storedxv != 0) {
 			_xvelocity = _storedxv;
 			_storedxv = 0;
 		}
+		
 
 
 	}

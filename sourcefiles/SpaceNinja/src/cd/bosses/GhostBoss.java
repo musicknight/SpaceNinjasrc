@@ -29,6 +29,7 @@ public class GhostBoss extends Boss {
 	public GhostBoss() {
 		super(900, 600, "ghostboss");
 		_health = 1000;
+		_maxhealth = 1000;
 		_width =(int) (145 * 1.5);
 		_height =(int)( 134 * 1.5);
 		_staticimage = new Image("ghostboss/port2.png");

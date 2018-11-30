@@ -17,6 +17,9 @@ public class TootBoss extends Boss {
 	
 	public TootBoss() {
 		super(607, 200, "tootboss");
+		_startx = 607;
+		_starty = 200;
+		_maxhealth = 500;
 		_health = 500;
 		_width = 100;
 		_height = 100;

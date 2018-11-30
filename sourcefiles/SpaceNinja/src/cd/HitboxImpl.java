@@ -125,8 +125,10 @@ public class HitboxImpl extends EntityImpl implements Hitbox {
 		if ((_x + _xvelocity > 900 || _x + _xvelocity + _width < 0) && _autogone) {
 			_gone = true;
 		}
-		_y += _yvelocity;
-		_x += _xvelocity;
+		if(!TheGame._frozen){
+		_y += _yvelocity*TheGame._timescale;
+		_x += _xvelocity*TheGame._timescale;
+		}
 		for(Platform p : TheGame.getPlatforms()){
 		if ((_x > p.getX() && _x < (p.getX()+p.getWidth()) && _y + _yvelocity > p.getY() - _height)) {
 			if (_bounces) {

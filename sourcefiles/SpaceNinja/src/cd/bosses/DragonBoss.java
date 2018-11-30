@@ -37,6 +37,7 @@ public class DragonBoss extends Boss {
 		_width = 240 + 48;
 		_height = 130 + 26;
 		_health = 1000;
+		_maxhealth = 1000;
 		_staticimage = new Image("dragonboss/1.png");
 		_body = new CharLinkedHitbox("dragbody", this, 0, 1);
 		

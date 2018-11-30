@@ -40,6 +40,7 @@ public class BotBoss extends Boss {
 	public BotBoss() {
 		super(900, 600, "botboss");
 		_health = 2000;
+		_maxhealth = 2000;
 		_width = 210;
 		_height = 180;
 		_body = new CharLinkedHitbox("botbody", this, 0, 1);

@@ -33,23 +33,25 @@ public class Ninja1Char extends CDCharacter {
 	
 	public Ninja1Char(String ID, String s) {
 	super(ID);
+	//_immune = true;
 	_width = 50;
 	_height = 50;
 	_skin = s;
 	_speedfactor = 1.1;
 	_damagefactor = 0;
 	_spritecount = 4;
+	_circle = true;
 	_sprites.add(new Image("ninja/" + _skin + "/run1.png"));
 	_sprites.add(new Image("ninja/" + _skin + "/run2.png"));
 	_sprites.add(new Image("ninja/" + _skin + "/run3.png"));
 	_sprites.add(new Image("ninja/" + _skin + "/run4.png"));
-	if(_skin.equals("sprites") || _skin.equals("black") || _skin.equals("twins") || _skin.equals("skull") || _skin.equals("demon")) {
+	if(_skin.equals("sprites") || _skin.equals("black") || _skin.equals("twins") || _skin.equals("skull") || _skin.equals("demon") ) {
 		_starcd = 7;
 	}
 	if(_skin.equals("red")) {
 		_starcd = 14;
 	}
-	if(_skin.equals("green")) {
+	if(_skin.equals("green")|| _skin.equals("clock")) {
 		_starcd = 7;
 		_lives = 4;
 	}
@@ -174,7 +176,7 @@ public class Ninja1Char extends CDCharacter {
 	public void executeAttack1() {
 		if( _counter == 0 && !_skin.equals("spike")){
 			_cd1 = _starcd;
-			if(_skin.equals("sprites") || _skin.equals("yellow") || _skin.equals("black") || (_skin.equals("skull")&&_lives != 1) || _skin.equals("demon")){
+			if(_skin.equals("sprites") || _skin.equals("yellow") || _skin.equals("black") || (_skin.equals("skull")&&_lives != 1) || _skin.equals("demon")|| _skin.equals("clock")){
 				List<Image> i = new ArrayList<Image>();
 				i.add(new Image("ninja/" + _skin + "/star1.png"));
 				i.add(new Image("ninja/" + _skin + "/star2.png"));
@@ -255,6 +257,13 @@ public class Ninja1Char extends CDCharacter {
 			makeHLaser((int)_counter, "laser");
 		}
 		if(_counter == 33 && _skin.equals("laser")){
+			_attack1 = false;
+			_cd1 = _starcd;
+		}
+		if(_counter >= 0 && _skin.equals("laser2")) {
+			makeHLaser2((int)_counter, "laser");
+		}
+		if(_counter == 33 && _skin.equals("laser2")){
 			_attack1 = false;
 			_cd1 = _starcd;
 		}
@@ -353,6 +362,24 @@ public class Ninja1Char extends CDCharacter {
 		}
 		if(c == 20) {
 			Hitbox a = new OffsetHitbox(s, this, 26, -2, 900, 22, 0, 3, new Image("botboss/lasers/h1.png"));
+			a.setDissappearOnHit(false);
+			TheGame._attacks.add(a);
+			GameSounds.playSound("/botboss/sounds/shot.wav");
+		}
+		if(c == 33) {
+			TheGame.clearHitboxes(s, this);
+		}
+	}
+	
+	private void makeHLaser2(int c, String s) {
+		if(c == 0) {
+			GameSounds.playSound("/botboss/sounds/charge1.wav");
+		}
+		if(c < 20) {
+			TheGame._gc.drawImage(new Image("botboss2/lasers/hpre.png"), _x+26, _y-2, 900, 22);
+		}
+		if(c == 20) {
+			Hitbox a = new OffsetHitbox(s, this, 26, -2, 900, 22, 0, 4, new Image("botboss2/lasers/h1.png"));
 			a.setDissappearOnHit(false);
 			TheGame._attacks.add(a);
 			GameSounds.playSound("/botboss/sounds/shot.wav");

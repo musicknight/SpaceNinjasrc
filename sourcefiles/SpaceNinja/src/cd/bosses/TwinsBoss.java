@@ -35,6 +35,9 @@ public class TwinsBoss extends Boss {
 		_width = (int)(86 * 0.6);
 		_height = (int)(192*0.6);
 		_health = 1600;
+		_maxhealth = 1600;
+		_startx = 815;
+		_starty = 328;
 		_sprites = new ArrayList<Image>();
 		_sprites.add(new Image("twinsboss/a1.png"));
 		_sprites.add(new Image("twinsboss/a2.png"));

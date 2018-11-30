@@ -14,6 +14,9 @@ import cd.TheGame;
 abstract public class Boss extends EntityImpl {
 	
 	protected int _health;
+	protected int _maxhealth;
+	protected int _startx = 900;
+	protected int _starty = 600;
 	protected Image _image;
 	protected int _width;
 	protected int _height;
@@ -98,6 +101,25 @@ abstract public class Boss extends EntityImpl {
 		_counter2++;
 		_counter3++;
 		_counter4++;
+	}
+	
+	public void retry() {
+		_attack1 = false;
+		_attack2 = false;
+		_attack3 = false; 
+		_attack4 = false;
+		_attack5 = false;
+		_health = _maxhealth;
+		_x = _startx;
+		_y = _starty;
+		_won = false;
+		_counter1 = 0;
+		_counter2 = 0;
+		_counter3 = 0;
+		_counter4 = 0;
+		_counter = 0;
+		spawn();
+		
 	}
 	
 	public abstract void spawn();

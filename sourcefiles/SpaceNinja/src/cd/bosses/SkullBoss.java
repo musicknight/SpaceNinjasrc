@@ -37,6 +37,7 @@ public class SkullBoss extends Boss {
 		_width = (int)(186*1.3);
 		_height = (int)(121*1.3);
 		_health = 1200;
+		_maxhealth = 1200;
 		_staticimage = new Image("skullboss/1.png");
 		_body = new CharLinkedHitbox("skullbody", this, 0, 1);
 		// TODO Auto-generated constructor stub

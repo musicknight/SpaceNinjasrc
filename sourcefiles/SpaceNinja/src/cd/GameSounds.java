@@ -46,6 +46,7 @@ public  class GameSounds {
 			//String pathToMp3 = System.getProperty("user.dir") + url;
 			
 			_player.open((TheGame.class.getResource(url)));
+			
 			 _player.play();
 			 
 		} catch (BasicPlayerException e) {

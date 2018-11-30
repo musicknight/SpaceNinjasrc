@@ -58,6 +58,7 @@ public class UltimoBoss extends Boss {
 			_1sttime = true;
 		}
 		_health = 2000;
+		_maxhealth = 2000;
 		_width = 150;
 		_height = 150;
 		_staticimage = new Image("ultimoboss/1.png");
@@ -112,6 +113,7 @@ public class UltimoBoss extends Boss {
 					_counter3 = 0;
 					_1sttime = false;
 					GameSounds.playStageSong("/songs/ultimo.mp3");
+					TheGame._song = "ultimo";
 					TheGame._character1.setCanAct(true);
 					TheGame.endUDialogue();
 				} else {

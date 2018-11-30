@@ -46,6 +46,7 @@ public class TootBoss2 extends Boss{
 		super(900, 600, "tootboss2");
 		_width = 100;
 		_height = 100;
+		_maxhealth = 500;
 		_staticimage = new Image("tootboss2/1.png");
 		_body = new CharLinkedHitbox("tootbody", this, 0, 1);
 		if(TheGame._beatultimo.equals("t")) {
@@ -291,6 +292,7 @@ public class TootBoss2 extends Boss{
 			if(!_intsongstarted && _rate != 1){
 			
 			GameSounds.playStageSong("/songs/tootcreepy.mp3");
+			
 			_intsongstarted = true;
 			}
 		}
@@ -327,7 +329,7 @@ public class TootBoss2 extends Boss{
 			_sprites.add(new Image("tootboss2/spin/19.png"));
 			_sprites.add(new Image("tootboss2/spin/20.png"));
 			_rate = 1;
-			
+			TheGame._song = "toot2";
 			GameSounds.playStageSong("/songs/toot2.mp3");
 		}
 		if(_counter2 == 280) {
